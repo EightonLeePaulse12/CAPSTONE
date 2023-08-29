@@ -1,7 +1,7 @@
 const db = require('../config')
 
 class Transactions{
-    recordTransaction(userID, prodID, transactionType, transactionDate){
+    recordTransaction(userID, prodID, transactionType, transactionDate, res){
         const query = `
             INSERT INTO Transactions (userId, prodID, transaction_type, transaction_date) VALUES(?, ?, ?, ?)
         `
