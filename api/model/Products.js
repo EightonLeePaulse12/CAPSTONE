@@ -41,12 +41,12 @@ class Products {
   }
   addProduct(req, res) {
     const query = `
-            INSERT INTO Products (prodName, prodDesc, category, price, seller_id) VALUES (?, ?, ?, ?, ?);
+            INSERT INTO Products (prodName, prodDesc, category, price, prodURL, seller_id) VALUES (?, ?, ?, ?, ?, ?);
         `;
-    const { prodName, prodDesc, category, price } = req.body;
+    const { prodName, prodDesc, category, price, prodURL } = req.body;
     const seller_id = req.params.seller_id;
-    const data = [prodName, prodDesc, category, price, seller_id];
-    if (!prodName || !prodDesc || !category || !price || !seller_id) {
+    const data = [prodName, prodDesc, category, price, prodURL, seller_id];
+    if (!prodName || !prodDesc || !category || !price || !prodURL || !seller_id) {
       return res.status(400).json({
         status: res.statusCode,
         msg: "Missing or invalid data",
@@ -62,6 +62,7 @@ class Products {
         throw (
           err &&
           res.json({
+            err,
             status: res.statusCode,
             msg: "Something went wrong",
           })

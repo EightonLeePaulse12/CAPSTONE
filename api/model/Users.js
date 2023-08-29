@@ -5,7 +5,7 @@ const { createToken } = require("../middleware/AuthenticateUser");
 class Users {
   fetchUsers(req, res) {
     const query = `
-            SELECT userID, firstName, lastName, username, gender, email, role, userProfile FROM Users;
+            SELECT userID, firstName, lastName, gender, email, userRole, userProfile FROM Users;
         `;
     db.query(query, (err, results) => {
       if (!err) {
@@ -26,7 +26,7 @@ class Users {
   }
   fetchUser(req, res) {
     const query = `
-        SELECT userID, firstName, lastName, username, gender, email, role, userProfile FROM Users WHERE userID = ${req.params.id}
+        SELECT userID, firstName, lastName, username, gender, email, userRole, userProfile FROM Users WHERE userID = ${req.params.id}
         `;
     db.query(query, (err, result) => {
       if (!err) {
@@ -47,10 +47,10 @@ class Users {
   }
   async register(req, res) {
     const data = req.body;
-    data.password = await hash(data.password, 17);
+    data.userPass = await hash(data.userPass, 17);
     const user = {
       email: data.email,
-      password: data.password,
+      password: data.userPass,
     };
     const query = `
             INSERT INTO Users SET ?
@@ -72,9 +72,9 @@ class Users {
     });
   }
   async login(req, res) {
-    const { email, password } = req.body;
+    const { email, userPass } = req.body;
     const query = `
-        SELECT firstName, lastName, username, gender, email, password, role, userProfile FROM Users WHERE email = ?
+        SELECT firstName, lastName, username, gender, email, userPass, userRole, userProfile FROM Users WHERE email = ?
     `;
     db.query(query, [email], async (err, result) => {
       if (err) {
@@ -89,11 +89,11 @@ class Users {
           msg: "You are providing the wrong email or password",
         });
       } else {
-        compare(password, result[0].password, (cErr, cRes) => {
+        compare(userPass, result[0].userPass, (cErr, cRes) => {
           if (cErr) throw cErr;
           const token = createToken({
             email,
-            password,
+            userPass,
           });
           if (cRes) {
             res.json({
