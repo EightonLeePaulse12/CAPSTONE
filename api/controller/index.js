@@ -31,13 +31,13 @@ routes.get('/products', (req, res)=>{
 routes.get('/product/:prodID', (req, res)=>{
     products.fetchProduct(req, res)
 })
-routes.post('/product', bodyParser.json(), (req, res)=>{
+routes.post('/product/:seller_id', bodyParser.json(), (req, res)=>{
     products.addProduct(req, res)
 })
 routes.patch('/product/:prodID', bodyParser.json(), (req, res)=>{
     products.updateProduct(req, res)
 })
-routes.delete('/product/prodID', (req, res)=>{
+routes.delete('/product/:prodID', (req, res)=>{
     products.removeProduct(req, res)
 })
 

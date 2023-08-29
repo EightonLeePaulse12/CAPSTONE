@@ -3,7 +3,7 @@ const db = require('../config')
 class Cart{
     fetchCartItems(req, res){
         const query = `
-            SELECT cartID, userID, productID, quantity, total_price FROM Cart
+            SELECT cartID, userID, productID, quantity FROM Cart
         `
         db.query(query, (err, results)=>{
             if (!err){
@@ -14,6 +14,7 @@ class Cart{
             } else{
                 throw err && res.json({
                     status: res.statusCode,
+                    err,
                     msg:"An error occured"
                 })
             }
