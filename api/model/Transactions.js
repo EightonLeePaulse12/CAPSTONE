@@ -3,7 +3,7 @@ const db = require('../config')
 class Transactions{
     recordTransaction(userID, prodID, transactionType, transactionDate, res){
         const query = `
-            INSERT INTO Transactions (userId, prodID, transaction_type, transaction_date) VALUES(?, ?, ?, ?)
+            INSERT INTO Transactions (userID, prodID, transaction_type, transaction_date) VALUES(?, ?, ?, ?)
         `
         const data = [userID, prodID, transactionType, transactionDate]
         db.query(query, data, (err)=>{

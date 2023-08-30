@@ -78,31 +78,32 @@ class Users {
     `;
     db.query(query, [email], async (err, result) => {
       if (err) {
-        res.json({
+        return res.json({
           status: res.statusCode,
           msg: "An error occured",
         });
       }
       if (!result?.length) {
-        res.json({
+        return res.json({
           status: res.statusCode,
           msg: "You are providing the wrong email or password",
         });
       } else {
-        compare(userPass, result[0].userPass, (cErr, cRes) => {
+        const hashed = result[0].userPass;
+        compare(userPass, hashed, (cErr, cRes) => {
           if (cErr) throw cErr;
-          const token = createToken({
-            email,
-            userPass,
-          });
           if (cRes) {
-            res.json({
+            const token = createToken({
+              email,
+              userPass,
+            });
+
+            return res.json({
               msg: "Logged in successfully",
               token,
-              cResult: cRes[0],
             });
           } else {
-            res.json({
+            return res.json({
               status: res.statusCode,
               msg: "Invalid login details",
             });
@@ -151,4 +152,4 @@ class Users {
   }
 }
 
-module.exports = { Users }
+module.exports = { Users };
