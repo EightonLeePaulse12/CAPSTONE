@@ -1,8 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { verifyAToken } = require("../middleware/AuthenticateUser");
+const { decToken } = require("../middleware/AuthenticateUser");
 const routes = express.Router();
 const { users, products, cart, transactions } = require("../model");
+
 
 // ========== User routes ==========
 routes.get("/users", (req, res) => {
@@ -28,6 +29,7 @@ routes.delete("/user/:id", (req, res) => {
 routes.use("/products", decToken);
 routes.use("/product/:prodID", decToken);
 routes.use("/product/:seller_id", decToken);
+
 routes.get("/products", (req, res) => {
   products.fetchProducts(req, res);
 });
@@ -80,22 +82,5 @@ routes.get("/avg-quant/:userID", (req, res) => {
   transactions.getAvg(userID, res);
 });
 
-// ========== Setting user payload through token authorization ==========
-const decToken = (req, res, next) => {
-  const token = req.header("Authorization");
-  if (!token) {
-    return res.status(401).json({
-      msg: "Access denied. Token not provided",
-    });
-  }
-  const dec = verifyAToken(token);
-  if (!dec) {
-    return res.status(403).json({
-      msg: "Invalid token",
-    });
-  }
-  req.dec = dec;
-  next();
-};
 
 module.exports = { express, routes };

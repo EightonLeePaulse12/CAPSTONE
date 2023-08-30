@@ -1,12 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAPSTONE API</title>
     <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <h1>API Routes</h1>
+    <p class="par">
+      Welcome to the API for my capstone project. The project I am building is
+      an e-commerce website with a points system, where users are also allowed
+      to sell products. The points system operates in a way that the more points
+      a user accumulates, the higher their rank becomes. As they ascend through
+      the ranks, they gain access to discounts and deals. Please see the routes
+      provided by this API below:
+    </p>
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Method</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th colspan="3">Users</th>
+          </tr>
+          <tr>
+            <td>/users</td>
+            <td>GET</td>
+            <td>Fetch All Users' data</td>
+          </tr>
+
+          <tr>
+            <td>/user/:id</td>
+            <td>GET</td>
+            <td>Fetch a single user's data</td>
+          </tr>
+
+          <tr>
+            <td>/register</td>
+            <td>POST</td>
+            <td>
+              Register a user (takes a payload: firstName, lastName, gender,
+              email, userPass and userProfile)
+            </td>
+          </tr>
+
+          <tr>
+            <td>/login</td>
+            <td>POST</td>
+            <td>Log in (requires password and email)</td>
+          </tr>
+
+          <tr>
+            <td>/user/:id</td>
+            <td>PATCH</td>
+            <td>Edit a user's information (also takes a payload)</td>
+          </tr>
+
+          <tr>
+            <td>/user/:id</td>
+            <td>DELETE</td>
+            <td>Ban a user</td>
+          </tr>
+          <tr>
+            <th colspan="3">Products</th>
+          </tr>
+          <tr>
+            <td>/products</td>
+            <td>GET</td>
+            <td>Get all products</td>
+          </tr>
+          <tr>
+            <td>/product/:prodID</td>
+            <td>GET</td>
+            <td>Get a single product's data</td>
+          </tr>
+          <tr>
+            <td>/product/:seller_id</td>
+            <td>POST</td>
+            <td>
+              Add a product. "seller_id" is the user that is selling the product
+            </td>
+          </tr>
+          <tr>
+            <td>/product/:prodID</td>
+            <td>PATCH</td>
+            <td>Edit a product's details</td>
+          </tr>
+          <tr>
+            <td>/product/:prodID</td>
+            <td>DELETE</td>
+            <td>Delete a product</td>
+          </tr>
+          <tr>
+            <th colspan="3">Cart</th>
+          </tr>
+          <tr>
+            <td>/cart</td>
+            <td>GET</td>
+            <td>Fetch all the items in the cart</td>
+          </tr>
+          <tr>
+            <td>/cart</td>
+            <td>POST</td>
+            <td>Add a product to the cart</td>
+          </tr>
+          <tr>
+            <td>/cart/:productID</td>
+            <td>DELETE</td>
+            <td>Delete an item from the cart</td>
+          </tr>
+          <tr>
+            <th colspan="3">Transactions</th>
+          </tr>
+          <tr>
+            <td>/record</td>
+            <td>POST</td>
+            <td>Record a transaction, whether it is a buy or sell</td>
+          </tr>
+          <tr>
+            <td>/avg-quant/:userID</td>
+            <td>GET</td>
+            <td>
+              Get a specific user's Average based on how much they've sold and
+              bought overtime. This will be the points system used on the
+              website
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
