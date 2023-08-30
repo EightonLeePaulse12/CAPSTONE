@@ -1,12 +1,16 @@
 function errorHandling(err, req, res, next) {
   if (err) {
     let status = err.status || 500;
-    res.json({
+    let msg = err.message || "An error occured"
+    const details = err.details || null
+    res.status(status).json({
       status,
-      msg: "An error occured",
-    });
+      msg,
+      details
+    })
+  } else{
+    next();
   }
-  next();
 }
 
 module.exports = { errorHandling };

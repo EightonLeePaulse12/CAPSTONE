@@ -1,7 +1,7 @@
 const { express, routes } = require("./controller");
 const app = express();
 const path = require("path");
-const port = process.env.PORT || 3000;
+const port = +process.env.PORT || 3000;
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { errorHandling } = require("./middleware/ErrorHandling");
