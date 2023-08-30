@@ -13,7 +13,6 @@ function createToken(user) {
     }
   );
 }
-
 function verifyAToken(token) {
   try {
     const dec = verify(token, process.env.SECRET_KEY);
@@ -24,4 +23,21 @@ function verifyAToken(token) {
   }
 }
 
-module.exports = { createToken, verifyAToken };
+const decToken = (req, res, next) => {
+  const token = req.header("Authorization");
+  if (!token) {
+    return res.status(401).json({
+      msg: "Access denied. Token not provided",
+    });
+  }
+  const dec = verifyAToken(token);
+  if (!dec) {
+    return res.status(403).json({
+      msg: "Invalid token",
+    });
+  }
+  req.dec = dec;
+  next();
+};
+
+module.exports = { createToken, decToken };
