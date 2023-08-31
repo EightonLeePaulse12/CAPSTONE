@@ -10,8 +10,8 @@ app.use(
   express.static("./static"),
   express.urlencoded({ extended: false }),
   cookieParser(),
-  errorHandling,
   cors(),
+  errorHandling,
   routes
   );
   
