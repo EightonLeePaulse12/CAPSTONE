@@ -105,15 +105,21 @@ export default createStore({
     async login(context, payload) {
       try {
         const res = await axios.post(`${api}login`, payload);
-        console.log(res.data)
+        console.log("response from api: ", res.data)
         const token = res.data.token;
+        if(!token){
+        context.commit("setError", "An error occured during login");
+        context.commit("setLogStatus", "Not logged in");
+        } else{
         context.commit("setUser", res.data)
         context.commit("setToken", token);
         context.commit("setLogStatus", "Logged in!");
         Cookies.set("userToken", token, { expires: 1 });
+        }
       } catch (e) {
         context.commit("setError", "An error occured during login");
         context.commit("setLogStatus", "Not logged in");
+        return { token ,success: false }
       }
     },
     init(context){
