@@ -50,7 +50,7 @@ export default {
           email: this.email,
           userPass: this.password,
         });
-        await Swal.fire({
+        Swal.fire({
           icon: "success",
           title: "Registration successful",
           text: "You are now registered, please log in",
