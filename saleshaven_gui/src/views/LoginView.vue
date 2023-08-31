@@ -25,7 +25,7 @@ export default {
                     password: this.password
                 })
                 console.log(res)
-                if (res.success) {
+                if (res.token) {
                     await Swal.fire({
                         icon: "success",
                         title: "Login successful",
