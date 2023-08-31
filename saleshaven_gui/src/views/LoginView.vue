@@ -20,7 +20,6 @@ export default {
     methods: {
         async userLogin() {
             try {
-
                 await this.$store.dispatch("login", {
                     email: this.email,
                     password: this.password
@@ -32,10 +31,11 @@ export default {
                 });
                 this.$router.push("/")
             } catch (e) {
+                const error = this.$store.getters.getError
                 await Swal.fire({
                     icon: "error",
                     title: "Login failed",
-                    text: "An error occurred during login.",
+                    text: error || "An error occurred during login.",
                 });
                 console.error("Error while logging in: ", e)
             }

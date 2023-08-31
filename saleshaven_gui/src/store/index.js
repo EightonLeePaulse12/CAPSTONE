@@ -18,6 +18,9 @@ export default createStore({
     token: null,
   },
   getters: {
+    getError(state){
+      return state.error
+    }
   },
   mutations: {
     setUsers(state, users) {
@@ -102,14 +105,14 @@ export default createStore({
     async login(context, payload) {
       try {
         const res = await axios.post(`${api}login`, payload);
-        console.log(res)
+        console.log(res.data)
         const token = res.data.token;
         context.commit("setUser", res.data)
         context.commit("setToken", token);
         context.commit("setLogStatus", "Logged in!");
         Cookies.set("userToken", token, { expires: 1 });
       } catch (e) {
-        context.commit("setError", e);
+        context.commit("setError", "An error occured during login");
         context.commit("setLogStatus", "Not logged in");
       }
     },
