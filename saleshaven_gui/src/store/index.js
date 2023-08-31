@@ -18,9 +18,9 @@ export default createStore({
     token: null,
   },
   getters: {
-    getError(state){
-      return state.error
-    }
+    getError(state) {
+      return state.error;
+    },
   },
   mutations: {
     setUsers(state, users) {
@@ -87,51 +87,64 @@ export default createStore({
       }
     },
     async register(context, payload) {
-      console.log("Reached")
+      console.log("Reached");
       try {
-        const res = await axios.post(`${api}register`, payload)
-        if(res){
-          context.commit("setUser", res.data)
-          context.commit("setRegStatus", "Registered!")
-          context.commit("setError", null)
+        const res = await axios.post(`${api}register`, payload);
+        if (res) {
+          context.commit("setUser", res.data);
+          context.commit("setRegStatus", "Registered!");
+          context.commit("setError", null);
         }
       } catch (e) {
         context.commit("setError", e);
-        console.log(e)
+        console.log(e);
         context.commit("setRegStatus", "Not registered");
         throw e;
       }
     },
-    async login(context, payload) {
-      try {
-        const res = await axios.post(`${api}login`, payload);
-        console.log("response from api: ", res.data)
-        const token = res.data.token;
-        if(!token){
-        context.commit("setError", "An error occured during login");
-        context.commit("setLogStatus", "Not logged in");
-        } else{
-        context.commit("setUser", res.data)
-        context.commit("setToken", token);
-        context.commit("setLogStatus", "Logged in!");
-        Cookies.set("userToken", token, { expires: 1 });
+    async login(context, payload){
+      try{
+        const res = await axios.post(`${api}login`, payload)
+        console.log("Res: ", res.data)
+        const { msg, err, token } = res.data
+        if(msg === "You are providing the wrong email or password"){
+          context.commit("setError", msg)
+          context.commit("setLogStatus", "Not logged in")
+          return { success: false, error: msg }
         }
-      } catch (e) {
-        context.commit("setError", "An error occured during login");
-        context.commit("setLogStatus", "Not logged in");
-        return { token ,success: false }
+        if(msg){
+          context.commit("setUser", res.data)
+          context.commit("setToken", token)
+          context.commit("setLogStatus", "Logged in!")
+          Cookies.set("userToken", token, {
+            expires: 1
+          })
+          return { success: true, token }
+        } else if(err){
+          context.commit("setError", err)
+          context.commit("setLogStatus", "Not logged in")
+          return { success: false, error: err }
+        } else{
+          context.commit("setError", "Unknown error during login")
+          context.commit("setLogStatus", "not logged in")
+          return { success: false, error: "Unknown error" }
+        }
+      } catch(err){
+        context.commit("setError", "An error occured while trying to log in")
+        context.commit("setLogStatus", "Not logged in")
+        return { success: false, error: "Network error" }
       }
     },
-    init(context){
-      const token = Cookies.get("userToken")
-      if(token){
-        context.commit("setToken", token)
+    init(context) {
+      const token = Cookies.get("userToken");
+      if (token) {
+        context.commit("setToken", token);
       }
     },
-    async logout(context){
-      context.commit("setToken", null)
-      Cookies.remove("userToken")
-    }
+    async logout(context) {
+      context.commit("setToken", null);
+      Cookies.remove("userToken");
+    },
   },
   modules: {},
 });
