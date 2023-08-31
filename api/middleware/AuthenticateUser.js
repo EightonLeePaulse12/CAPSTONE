@@ -24,7 +24,7 @@ function verifyAToken(token) {
 }
 
 const decToken = (req, res, next) => {
-  const token = req.header("Authorization");
+  const token = req.header("Authorization") || req.cookies.thisUser;
   if (!token) {
     return res.status(401).json({
       msg: "Access denied. Token not provided",

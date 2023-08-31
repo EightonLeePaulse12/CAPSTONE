@@ -80,6 +80,7 @@ class Users {
       if (err) {
         return res.json({
           status: res.statusCode,
+          err,
           msg: "An error occured",
         });
       }
@@ -96,6 +97,9 @@ class Users {
             const token = createToken({
               email,
               userPass,
+            });
+            res.cookie("thisUser", token, {
+              expiresIn: "1",
             });
 
             return res.json({
