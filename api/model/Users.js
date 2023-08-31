@@ -102,9 +102,19 @@ class Users {
               expiresIn: "1",
             });
 
+            const userData = {
+              firstName: result[0].firstName,
+              lastName: result[0].lastName,
+              gender: result[0].gender,
+              email: result[0].email,
+              userRole: result[0].userRole,
+              userProfile: result[0].userProfile,
+            };
+
             return res.json({
               msg: "Logged in successfully",
               token,
+              userData
             });
           } else {
             return res.json({
