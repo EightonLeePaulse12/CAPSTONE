@@ -47,7 +47,7 @@ class Users {
   }
   async register(req, res) {
     const data = req.body;
-    data.userPass = await hash(data.userPass, 17);
+    data.userPass = await hash(data.userPass, 10);
     const user = {
       email: data.email,
       password: data.userPass,
@@ -91,7 +91,7 @@ class Users {
         });
       } else {
         const hashed = result[0].userPass;
-        compare(userPass, hashed, (cErr, cRes) => {
+        await compare(userPass, hashed, (cErr, cRes) => {
           if (cErr) throw cErr;
           if (cRes) {
             const token = createToken({
