@@ -9,29 +9,34 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                email:"",
-                password:""
-            }
-        },
-        methods:{
-            async userLogin(){
-                try{
-                    await this.$store.dispatch("login", {
-                        email: this.email,
-                        password: this.password
-                    })
-                    this.$router.push("/")
-                } catch(e){
-                    console.error("Error while logging in: ", e)
-                }
+import Swal from 'sweetalert2'
+export default {
+    data() {
+        return {
+            email: "",
+            password: ""
+        }
+    },
+    methods: {
+        async userLogin() {
+            try {
+
+                await this.$store.dispatch("login", {
+                    email: this.email,
+                    password: this.password
+                })
+                await Swal.fire({
+                    icon: "success",
+                    title: "Login successful",
+                    text: "You are now logged in",
+                });
+                this.$router.push("/")
+            } catch (e) {
+                console.error("Error while logging in: ", e)
             }
         }
     }
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

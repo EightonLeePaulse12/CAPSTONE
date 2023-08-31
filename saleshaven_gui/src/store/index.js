@@ -86,11 +86,7 @@ export default createStore({
     async register(context, payload) {
       console.log("Reached")
       try {
-        const res = await axios.post(`${api}register`, payload, {
-          headers:{
-            "Content-type": "application/json"
-          }
-        })
+        const res = await axios.post(`${api}register`, payload)
         if(res){
           context.commit("setUser", res.data)
           context.commit("setRegStatus", "Registered!")
@@ -106,6 +102,7 @@ export default createStore({
     async login(context, payload) {
       try {
         const res = await axios.post(`${api}login`, payload);
+        console.log(res)
         const token = res.data.token;
         context.commit("setUser", res.data)
         context.commit("setToken", token);
