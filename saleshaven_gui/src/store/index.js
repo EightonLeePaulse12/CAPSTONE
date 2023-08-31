@@ -16,6 +16,8 @@ export default createStore({
     logStatus: null,
     error: null,
     token: null,
+    userData: null,
+    userRole: null
   },
   getters: {
     getError(state) {
@@ -28,6 +30,7 @@ export default createStore({
     },
     setUser(state, user) {
       state.user = user;
+      console.log(user)
     },
     setProducts(state, products) {
       state.products = products;
@@ -56,6 +59,11 @@ export default createStore({
     setLogStatus(state, status) {
       state.logStatus = status;
     },
+    setUserData(state, userData){
+      state.userData = userData
+      state.userRole = userData.userRole
+      console.log(userData, userRole)
+    }
   },
   actions: {
     async fetchUsers(context) {
@@ -115,6 +123,7 @@ export default createStore({
         if(msg){
           context.commit("setUser", res.data)
           context.commit("setToken", token)
+          context.commit("setUserData", res.data)
           context.commit("setLogStatus", "Logged in!")
           Cookies.set("userToken", token, {
             expires: 1

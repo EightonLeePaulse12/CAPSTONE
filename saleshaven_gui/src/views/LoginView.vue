@@ -47,4 +47,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+    button:active{
+        background-color: blue;
+    }
+</style>
