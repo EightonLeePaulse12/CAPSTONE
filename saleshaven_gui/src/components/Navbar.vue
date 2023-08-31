@@ -24,12 +24,22 @@
               </div>
             </div>
           </nav>
+          <div v-if="user">
+            {{ user.userRole }}
+          </div>
+          <div v-else>
+            nah
+          </div>
     </div>
 </template>
 
 <script>
     export default {
-        
+        computed:{
+          user(){
+            return this.$store.state.user
+          }
+        }
     }
 </script>
 

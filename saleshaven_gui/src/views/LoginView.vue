@@ -20,33 +20,26 @@ export default {
     methods: {
         async userLogin() {
             try {
-                const res = await this.$store.dispatch("login", {
+                const payload = {
                     email: this.email,
-                    password: this.password
-                })
-                console.log(res)
-                if (res.token) {
+                    userPass: this.password
+                }
+                const resp = await this.$store.dispatch("login", payload)
+                if(resp.success){
                     await Swal.fire({
                         icon: "success",
-                        title: "Login successful",
-                        text: "You are now logged in",
-                    });
+                        title: "Logged in Successfully",
+                        text: "You are now logged in!"
+                    })
                     this.$router.push("/")
-                } else {
-                    const error = this.$store.getters.getError
+                } else{
                     await Swal.fire({
                         icon: "error",
-                        title: "Login failed",
-                        text: error || "An error occurred.",
-                    });
+                        title:"Login failed",
+                        text: resp.error || "Unexpected error"
+                    })
                 }
             } catch (e) {
-                const error = this.$store.getters.getError
-                await Swal.fire({
-                    icon: "error",
-                    title: "Login failed",
-                    text: error || "An error occurred during login.",
-                });
                 console.error("Error while logging in: ", e)
             }
         }
