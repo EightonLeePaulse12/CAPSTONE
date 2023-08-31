@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#"><img id="logo" src="https://i.postimg.cc/2SLYPngk/LOGO-removebg.png"></a>
+              <router-link class="navbar-brand" to="/"><img id="logo" src="https://i.postimg.cc/2SLYPngk/LOGO-removebg.png"></router-link>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -12,32 +12,48 @@
                     <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link class="nav-link" to="/register">Register</router-link>
+                    <router-link class="nav-link active" aria-current="page" to="/about">About</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link class="nav-link" to="/login">Login</router-link>
+                    <router-link class="nav-link active" aria-current="page" to="/products">Catalog</router-link>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <router-link class="nav-link active" aria-current="page" to="/contact">Contact Us</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link active" aria-current="page" to="/admin">Admin</router-link>
+                  </li>
+                  
+                  <li class="nav-item" v-if="userRole === 'admin' || userRole === 'Owner'">
+                    <router-link class="nav-link active" aria-disabled="true" to="/admin">Admin</router-link>
                   </li>
                 </ul>
+                <ul class="navbar-nav" v-if="!user">
+                    <li class="nav-item">
+                      <router-link class="nav-link active" to="/register">Register</router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link class="nav-link active" to="/login">Login</router-link>
+                    </li>
+                  </ul>
+                  <div class="navbar-nav" v-else-if="userRole === 'Admin' || userRole === 'Owner'">
+                    <img src="https://i.postimg.cc/MGydyrwX/icons8-user-96-removebg-preview.png" alt="Your Profile">
+                  </div>
               </div>
             </div>
           </nav>
-          <div v-if="user">
-            {{ user.userRole }}
-          </div>
-          <div v-else>
-            nah
-          </div>
+          
     </div>
 </template>
 
 <script>
     export default {
         computed:{
-          user(){
-            return this.$store.state.user
+          userData(){
+            return this.$store.state.userData
+          },
+          userRole(){
+            return this.$store.state.userRole
           }
         }
     }
@@ -51,5 +67,8 @@
     }
     nav{
         background: transparent !important;
+    }
+    #navbarNav{
+      justify-content: space-between;
     }
 </style>
