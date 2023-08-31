@@ -1,8 +1,8 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="nav">
             <div class="container-fluid">
-              <router-link class="navbar-brand" to="/"><img id="logo" src="https://i.postimg.cc/2SLYPngk/LOGO-removebg.png"></router-link>
+              <router-link class="navbar-brand" to="/"><img id="logo" src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png"></router-link>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -64,6 +64,13 @@
         width:100%;
         height:7.6rem;
         object-fit: contain !important;
+    }
+    .nav-link{
+      color:white !important;
+    }
+    #nav{
+      background:#421983 !important;
+      height:9rem;
     }
     nav{
         background: transparent !important;
