@@ -32,6 +32,11 @@ export default {
                 });
                 this.$router.push("/")
             } catch (e) {
+                await Swal.fire({
+                    icon: "error",
+                    title: "Login failed",
+                    text: "An error occurred during login.",
+                });
                 console.error("Error while logging in: ", e)
             }
         }

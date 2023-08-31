@@ -93,7 +93,7 @@ export default createStore({
           context.commit("setError", null)
         }
       } catch (e) {
-        context.commit("setError", e.response.data.msg);
+        context.commit("setError", e);
         console.log(e)
         context.commit("setRegStatus", "Not registered");
         throw e;
@@ -109,7 +109,7 @@ export default createStore({
         context.commit("setLogStatus", "Logged in!");
         Cookies.set("userToken", token, { expires: 1 });
       } catch (e) {
-        context.commit("setError", e.response.data.msg);
+        context.commit("setError", e);
         context.commit("setLogStatus", "Not logged in");
       }
     },
