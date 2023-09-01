@@ -62,7 +62,7 @@
 <style scoped>
     #logo{
         width:100%;
-        height:7.6rem;
+        height:5.5rem;
         object-fit: contain !important;
     }
     .nav-link{

@@ -62,7 +62,7 @@ export default createStore({
     setUserData(state, userData){
       state.userData = userData
       state.userRole = userData.userRole
-      console.log(userData, userRole)
+      console.log(userData, userData.userRole)
     }
   },
   actions: {
@@ -98,10 +98,18 @@ export default createStore({
       console.log("Reached");
       try {
         const res = await axios.post(`${api}register`, payload);
-        if (res) {
-          context.commit("setUser", res.data);
-          context.commit("setRegStatus", "Registered!");
-          context.commit("setError", null);
+        console.log("Res: ", res.data)
+        const { msg, err, token } = res.data
+        if (msg === "An error occured"){
+          context.commit("setError", msg)
+          context.commit("setRegStatus", "Not registered")
+          return { success: false, error: msg }
+        } else if(token){
+          context.commit("setToken", token)
+          context.commit("setRegStatus", "Registered successfully")
+          return { success: true, token }
+        } else if(err){
+
         }
       } catch (e) {
         context.commit("setError", e);
@@ -131,7 +139,7 @@ export default createStore({
           return { success: true, token }
         } else if(err){
           context.commit("setError", err)
-          context.commit("setLogStatus", "Not logged in")
+          context.commit("setRegStatus", "Not Registered")
           return { success: false, error: err }
         } else{
           context.commit("setError", "Unknown error during login")
@@ -139,6 +147,13 @@ export default createStore({
           return { success: false, error: "Unknown error" }
         }
       } catch(err){
+        if(err.resp){
+          console.error("Server gave an error: ", err.resp.status, err.resp.data)
+        } else if(err.req){
+          console.error("No response from the server. Check your internet connection")
+        } else{
+          console.log("An error occured: ", err)
+        }
         context.commit("setError", "An error occured while trying to log in")
         context.commit("setLogStatus", "Not logged in")
         return { success: false, error: "Network error" }
