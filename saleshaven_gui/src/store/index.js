@@ -20,11 +20,14 @@ export default createStore({
     userRole: null,
     featuredProducts: null,
     msg: null,
+    cart: []
   },
   getters: {
     getError(state) {
       return state.error;
     },
+    cart: (state) => cart,
+    cartTotal: (state) => state.cart.reduce((total, product)=> total + product.price, 0)
   },
   mutations: {
     setUsers(state, users) {
@@ -80,29 +83,26 @@ export default createStore({
       }
       console.log(userData, userData.userRole);
     },
-    setFeaturedProducts(state, products) {
-      state.featuredProducts = products;
-    },
+    addToCart(state, product){
+      state.cart.push(product)
+    }
   },
   actions: {
     async fetchUsers(context) {
       try {
-        const { err, results } = await axios.get(`${api}users`, {
-          headers: {
-            "Authorization": context.state.token,
-            "Content-Type": "application/json"
-          }
-        });
-        if (results) {
+        // console.log(context.state.token);
+          const res = await axios.get(`${api}users`, {
+            headers: {
+              "Authorization": context.state.token,
+              "Content-Type": "application/json"
+            }
+          });
+          console.log()
+          const { err, results } = res.data;
           context.commit("setUsers", results);
-          console.log("Users retrieved successfully");
+        } catch (e) {
+          context.commit("setMsg", "an error occured");
         }
-        if (err) {
-          context.commit("setMsg", err);
-        }
-      } catch (e) {
-        context.commit("setMsg", e);
-      }
     },
     async fetchUser(context) {
       try {
@@ -132,10 +132,15 @@ export default createStore({
             "Content-Type": "application/json"
           }
         });
+        console.log()
         const { err, results } = res.data;
-        context.commit("setProducts", results);
+        if(results){
+          context.commit("setProducts", results);
+        } else if(err){
+          context.commit("setMsg", err)
+        }
       } catch (e) {
-        context.commit("setMsg", "an error occured");
+        context.commit("setMsg", "An error occured");
       }
     },
     async fetchProduct(context) {
@@ -238,6 +243,25 @@ export default createStore({
       Cookies.remove("userToken");
       router.push("/login");
     },
+    async addToCart(context, product){
+      try{
+        const { res } = await axios.post(`${api}cart`, product,{
+          headers:{
+            Authorization: context.state.token,
+            "Content-Type": "application/json"
+          }
+        })
+        const { err, msg } = res.data
+        if(msg){
+          context.commit("addToCart", product)
+        } else{
+          console.error(err)
+        }
+      } catch(e){
+        console.error(e)
+      }
+      
+    }
   },
   modules: {},
 });
