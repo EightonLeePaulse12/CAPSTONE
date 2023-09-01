@@ -1,10 +1,35 @@
 
 <template>
-  <div class="home">
-    <div class="rel">
-      <div>
-        <h1 class="head">Welcome to SalesHaven</h1>
-        <p>Discover. Shop. Save. Elevate Your Shopping Experience with SalesHaven.</p>
+  <div v-if="userRole === 'User' || userRole === 'Admin' || userRole === 'Owner'">
+    <div class="home">
+      <div class="rel">
+        <div>
+          <h1 class="head">Welcome to SalesHaven</h1>
+          <p>Discover. Shop. Save. Elevate Your Shopping Experience with SalesHaven.</p>
+        </div>
+      </div>
+    </div>
+    <div class="featuredProd">
+      <h2>Featured Products</h2>
+      <div class="each" v-for="product in getRandom" :key="product.prodID">
+        {{ product.prodID }}
+        <h3>{{ product.prodName }}</h3>
+      <p>{{ product.prodDesc }}</p>
+      <img :src="product.prodUrl" alt="">
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class="home">
+      <div class="rel">
+        <div>
+          <h1 class="head">Welcome to SalesHaven</h1>
+          <p>Discover. Shop. Save. Elevate Your Shopping Experience with SalesHaven.</p>
+        </div>
+      </div>
+      <div class="login">
+        <h4>You need to Log in to get the full experience</h4>
+        <button @click="pushToLog">Click here to Log in</button>
       </div>
     </div>
   </div>
@@ -18,8 +43,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex !important;
+  flex-direction: column;
   justify-content: center !important;
   align-items: center !important;
+}
+
+h4 {
+  color: white;
 }
 
 .rel {
@@ -29,10 +59,16 @@
   align-items: center !important;
 }
 
+.login {
+  display: flex;
+  flex-direction: column;
+
+}
+
 p {
   color: white;
   text-shadow: 1px 1px 0px rgb(191, 88, 251);
- 
+
 }
 
 .head {
@@ -54,3 +90,55 @@ p {
 
 }
 </style>
+
+<script>
+export default {
+  mounted() {
+    this.$store.dispatch("cookieCheck")
+    this.$store.dispatch("fetchProducts").then(()=>{
+      console.log(this.$store.state.products)
+    })
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    },
+    userData() {
+      const data = this.$store.state.userData
+      console.log("data: ", data)
+      return data
+    },
+    userRole() {
+      const role = this.$store.state.userRole
+      console.log("userRole: ", role)
+      return role
+    },
+    getRandom() {
+      // return this.$store.state.products
+      const products = this.$store.state.products
+
+        // if (!this.$store.state.products) {
+        //   await this.$store.dispatch("fetchProducts")
+        // }
+        // const products = await this.$store.state.products
+        console.log(products)
+        if (products) {
+          console.log("Reached")
+          const random = []
+          while (random.length < 3 && products.length > 0) {
+            const i = Math.floor(Math.random() * products.length)
+            const prod = products.splice(i, 1)[0]
+            random.push(prod)
+          }
+          return random
+        }
+        return []
+    }
+  },
+  methods: {
+    pushToLog() {
+      this.$router.push("/login")
+    }
+  }
+}
+</script>

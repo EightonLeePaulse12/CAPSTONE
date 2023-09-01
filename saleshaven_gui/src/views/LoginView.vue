@@ -1,8 +1,8 @@
 <template>
     <div>
         <form @submit.prevent="userLogin">
-            <input type="email" v-model="email" placeholder="Email">
-            <input type="password" v-model="password" placeholder="Password">
+            <input type="email" name="email" v-model="email" placeholder="Email">
+            <input type="password" name="password" v-model="password" placeholder="Password">
             <button type="submit">Log in</button>
         </form>
     </div>
@@ -17,8 +17,12 @@ export default {
             password: ""
         }
     },
+    mounted(){
+        this.$store.dispatch("cookieCheck")
+    },
     methods: {
         async userLogin() {
+            console.log("Reached")
             try {
                 const payload = {
                     email: this.email,
