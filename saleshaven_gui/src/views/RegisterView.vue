@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Register</h2>
-    <form @submit.prevent="registerUser">
+    <form @submit.prevent="register">
       <div>
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" v-model="firstName" required />
@@ -41,32 +41,36 @@ export default {
     };
   },
   methods: {
-    async registerUser() {
+
+    async register() {
       try {
-        await this.$store.dispatch("register", {
+        const resp = await this.$store.dispatch("register", {
           firstName: this.firstName,
           lastName: this.lastName,
           gender: this.gender,
           email: this.email,
           userPass: this.password,
-        });
-        Swal.fire({
-          icon: "success",
-          title: "Registration successful",
-          text: "You are now registered, please log in",
-        });
-        this.$router.push("/login");
+        })
+        if (resp.success) {
+          await Swal.fire({
+            icon: "success",
+            title: "Registration successful",
+            text: "You are now registered, please log in",
+          });
+        } else {
+          await Swal.fire({
+            icon: "error",
+            title: "Registration failed",
+            text: resp.error || "Unexpected error"
+          })
+        }
+        this.$router.push("/login")
       } catch (e) {
         console.error("Registration error: ", e);
-        await Swal.fire({
-          icon: "error",
-          title: "Registration failed",
-          text: "An error occurred during registration.",
-        });
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
