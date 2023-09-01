@@ -6,8 +6,20 @@
 
 <script>
 export default {
-
+    computed:{
+        cart(){
+            return this.$store.getters['cart/cart']
+        },
+        cartTotal(){
+            return this.$store.getters['cart/cartTotal']
+        }
+    },
+    methods:{
+        removeFromCart(product){
+            
+        }
+    }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

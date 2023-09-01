@@ -7,7 +7,6 @@ import './assets/stylesheet/style.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Cookies from "js-cookie"
-
 const app = createApp(App)
 app.use(store)
 app.use(router)
