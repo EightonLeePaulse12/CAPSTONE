@@ -22,11 +22,12 @@
             <li class="nav-item">
               <router-link class="nav-link active" aria-current="page" to="/contact">Contact Us</router-link>
             </li>
-            <li class="nav-item" v-if="userRole === 'admin' || userRole === 'Owner'">
+            <li class="nav-item" v-if="userRole === 'Admin' || userRole === 'Owner'">
               <router-link class="nav-link active" aria-disabled="true" to="/admin">Admin</router-link>
             </li>
-            <li class="nav-item" v-if="userRole === 'admin' || userRole === 'Owner' || userRole === 'User'">
-              <router-link class="nav-link active" aria-disabled="true" to="/cart"><i class="fas fa fa-light fa-cart-shopping"></i></router-link>
+            <li class="nav-item" v-if="userRole === 'Admin' || userRole === 'Owner' || userRole === 'User'">
+              <router-link class="nav-link active" aria-disabled="true" to="/cart"><font-awesome-icon
+                  :icon="faShoppingCart" /></router-link>
             </li>
           </ul>
           <ul class="navbar-nav" v-if="userRole === '' || userRole === undefined || userRole === null">
@@ -39,7 +40,9 @@
           </ul>
           <div class="navbar-nav" v-else-if="userRole === 'Admin' || userRole === 'Owner' || userRole === 'User'">
             <button @click="logout">Log out</button>
-            <img src="https://i.postimg.cc/MGydyrwX/icons8-user-96-removebg-preview.png" alt="Your Profile">
+            <div class="point"><router-link to="/profile"><img id="prof" to="/profile"
+                  :src="userData.userProfile"></router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +52,8 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 export default {
   computed: {
     user() {
@@ -61,9 +66,13 @@ export default {
       return this.$store.state.userRole
     }
   },
+  components: {
+    FontAwesomeIcon
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout")
+      this.$router.push("/login")
     }
   }
 }
@@ -74,6 +83,10 @@ export default {
   width: 100%;
   height: 5.5rem;
   object-fit: contain !important;
+}
+
+.point {
+  cursor: pointer;
 }
 
 .nav-link {
@@ -89,6 +102,14 @@ nav {
   background: transparent !important;
 }
 
+#prof {
+  cursor: pointer;
+  clip-path: circle();
+  width: 2rem;
+  height: 100%;
+}
+
 #navbarNav {
   justify-content: space-between;
-}</style>
+}
+</style>

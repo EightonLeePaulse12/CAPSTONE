@@ -13,9 +13,9 @@
                             <p> {{ product.stock }} </p>
                             <p> {{ product.seller_id }} </p>
                             <div class="buttons">
-                            <button>View More</button>
-                            <button @click="addToCart(product)">Add To Cart</button>
-                        </div>
+                                <button @click="singleProduct(product.prodID)">View More</button>
+                                <button @click="addToCart(product)">Add To Cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,21 +29,31 @@ export default {
     computed: {
         products() {
             return this.$store.state.products
+        },
+        product(){
+            return this.$store.state.product
         }
     },
     mounted() {
         this.$store.dispatch("fetchProducts")
     },
-    methods:{
-        addToCart(product){
+    methods: {
+        addToCart(product) {
             this.$store.dispatch('cart/addToCart', product)
+        },
+        singleProduct(prodID) {
+            const chosenProd = this.products.find(product => product.prodID === prodID)
+            if(chosenProd){
+                this.$store.commit("setSelectedProduct", chosenProd)
+            this.$router.push({ name: "ProductView", params: { prodID: chosenProd.prodID } })
+            }   
         }
     }
 }
 </script>
 
 <style scoped>
-.buttons{
-    display:flex !important;
+.buttons {
+    display: flex !important;
 }
 </style>

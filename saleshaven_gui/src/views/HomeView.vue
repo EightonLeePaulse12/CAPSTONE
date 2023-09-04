@@ -15,7 +15,7 @@
         {{ product.prodID }}
         <h3>{{ product.prodName }}</h3>
       <p>{{ product.prodDesc }}</p>
-      <img :src="product.prodUrl" alt="">
+      <img :src="product.prodURL" alt="">
       </div>
     </div>
   </div>
@@ -121,7 +121,6 @@ export default {
         //   await this.$store.dispatch("fetchProducts")
         // }
         // const products = await this.$store.state.products
-        console.log(products)
         if (products) {
           console.log("Reached")
           const random = []

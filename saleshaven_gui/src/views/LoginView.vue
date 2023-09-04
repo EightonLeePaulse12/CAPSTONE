@@ -17,7 +17,7 @@ export default {
             password: ""
         }
     },
-    mounted(){
+    beforeCreate(){
         this.$store.dispatch("cookieCheck")
     },
     methods: {
@@ -29,7 +29,8 @@ export default {
                     userPass: this.password
                 }
                 const resp = await this.$store.dispatch("login", payload)
-                if(resp.success){
+                console.log("Login Response:", resp);
+                if(resp.success && resp.token){
                     await Swal.fire({
                         icon: "success",
                         title: "Logged in Successfully",
@@ -37,10 +38,11 @@ export default {
                     })
                     this.$router.push("/")
                 } else{
+                    const errMsg = resp.error || "Unexpected error"
                     await Swal.fire({
                         icon: "error",
                         title:"Login failed",
-                        text: resp.error || "Unexpected error"
+                        text: errMsg
                     })
                 }
             } catch (e) {
