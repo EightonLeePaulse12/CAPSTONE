@@ -12,7 +12,6 @@
             }
         },
         components:{
-            FontAwesomeIcon
         }
     }
 </script>

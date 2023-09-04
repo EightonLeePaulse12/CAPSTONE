@@ -94,7 +94,8 @@ export default {
 }
 
 #nav {
-  background: #421983 !important;
+  background: #010005 !important;
+background: linear-gradient(180deg, rgba(2,2,4,1) 0%, rgba(6,4,17,1) 100%) !important;
   height: 9rem;
 }
 

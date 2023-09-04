@@ -325,6 +325,30 @@ export default createStore({
         console.log(e);
       }
     },
+    async updateDetails(context, payload){
+      console.log(payload)
+      try{
+        const { res } = await axios.patch(`${api}user/${payload.userID}`, payload, {
+          headers:{
+            Authorization: context.state.token,
+            "Content-Type": "application/json"
+          }
+        })
+        console.log(res)
+        const { msg, err } = res.data
+        console.log(msg)
+        if(err){
+          context.commit("setError", err)
+        }
+        if(msg){
+          context.dispatch("fetchUser")
+          context.commit("setUser", msg)
+          context.commit("setMsg", "Successfully updated profile")
+        }
+      } catch(e){
+        console.log(e)
+      }
+    }
   },
   modules: {},
 });
