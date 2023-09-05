@@ -74,7 +74,7 @@ class Users {
   async login(req, res) {
     const { email, userPass } = req.body;
     const query = `
-        SELECT firstName, lastName, gender, email, userPass, userRole, userProfile FROM Users WHERE email = ?
+        SELECT firstName, lastName, gender, email, userPass, userRole, userProfile FROM Users WHERE email = ${email}
     `;
     db.query(query, [email], async (err, result) => {
       if (err) {
