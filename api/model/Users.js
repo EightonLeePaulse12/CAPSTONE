@@ -103,6 +103,7 @@ class Users {
             });
 
             const userData = {
+              userID: result[0].userID,
               firstName: result[0].firstName,
               lastName: result[0].lastName,
               gender: result[0].gender,
