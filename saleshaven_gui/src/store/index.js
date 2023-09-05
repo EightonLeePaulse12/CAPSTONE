@@ -327,11 +327,10 @@ export default createStore({
       }
     },
     async updateDetails(context, payload) {
-      console.log(payload);
       try {
-        const { res } = await axios.patch(
+        const res = await axios.patch(
           `${api}user/${payload.userID}`,
-          payload,
+          payload.data,
           {
             headers: {
               Authorization: context.state.token,
@@ -339,14 +338,14 @@ export default createStore({
             },
           }
         );
-        console.log(res);
-        const { msg, err } = res.data;
+        console.log(res)
+        const { msg, err, userData } = res.data;
         console.log(msg);
         if (err) {
           context.commit("setError", err);
         }
         if (msg) {
-          context.dispatch("fetchUser");
+          context.commit("setUserData", userData)
           context.commit("setUser", msg);
           context.commit("setMsg", "Successfully updated profile");
         }

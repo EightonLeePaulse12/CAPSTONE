@@ -64,7 +64,7 @@ export default {
         };
     },
     computed: {
-        userData() {
+        thisUser() {
             return this.$store.state.userData;
         },
     },
@@ -73,22 +73,21 @@ export default {
             this.editingUserID = id;
         },
         async updateUser(id) {
-            try{
-                const resp = await this.$store
-                .dispatch("updateDetails", {
-                    userID: this.userData.userID,
-                    data: { ...this.editingUser },
-                })
-                console.log("Response: ", resp)
-                if(resp && resp.msg){
+            try {
+                const { resp } = await this.$store
+                    .dispatch("updateDetails", {
+                        userID: id,
+                        data: { ...this.editingUser },
+                    })
+                if (resp && resp.msg) {
                     console.log("User Updated!")
-                } else{
+                } else {
                     console.error("Error while updating your profile: ", resp && resp.err)
                 }
-                if(resp && resp.msg === "Something went wrong"){
+                if (resp && resp.msg === "Something went wrong") {
                     console.error("Something went horribly wrong")
                 }
-            } catch(e){
+            } catch (e) {
                 console.log(e)
             }
         },

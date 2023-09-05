@@ -10,16 +10,16 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <img id="profile" :src="userData.userProfile" :alt="firstName">
+                    <img id="profile" :src="userData ? userData.userProfile : 'false'" :alt="firstName">
                 </div>
                 <div class="col">
                     <div class="data">
-                        {{ userData }}
-                        {{ userData.firstName }} <br>
-                        {{ userData.lastName }} <br>
-                        {{ userData.gender }} <br>
-                        {{ userData.email }} <br>
-                        {{ userData.userRole }} <br>
+                        {{ userData ? userData : 'false' }}
+                        {{ userData ? userData.firstName : 'false' }} <br>
+                        {{ userData ? userData.lastName : 'false' }} <br>
+                        {{ userData ? userData.gender : 'false' }} <br>
+                        {{ userData ? userData.email : 'false' }} <br>
+                        {{ userData ? userData.userRole : 'false' }} <br>
                     </div>
                     <div class="update-details">
                         <EditProfile :userData="userData"/>
@@ -52,9 +52,6 @@ export default {
             this.$store.dispatch("logout")
             this.$router.push("/login")
         }
-    },
-    deactivateAcc(){
-
     }
 }
 </script>
