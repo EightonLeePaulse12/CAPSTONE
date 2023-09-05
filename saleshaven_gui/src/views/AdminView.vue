@@ -78,7 +78,7 @@
     </table>
     <div class="table-responsive">
       <h4>Products</h4>
-      <table class="table" v-for="product in products" :key="product.prodID">
+      <table class="table">
         <thead>
           <tr>
             <th class="name">Name</th>
@@ -87,12 +87,11 @@
             <th class="name">Price</th>
             <th class="name">Stock</th>
             <th>Product image</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for="product in products" :key="product.prodID">
             <td class="name">{{ product.prodName }}</td>
             <td class="name">{{ product.prodDesc }}</td>
             <td class="name">{{ product.category }}</td>
@@ -184,6 +183,10 @@ td {
   aspect-ratio: 1/1;
   width: 10rem;
   border-radius: 5rem;
+}
+
+.table-responsive{
+  width:100%;
 }
 
 .table-container {
