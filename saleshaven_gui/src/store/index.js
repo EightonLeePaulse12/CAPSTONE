@@ -199,7 +199,7 @@ export default createStore({
           Cookies.set("userToken", token, {
             expires: 1,
           });
-          return { success: true, token };
+          return { success: true, token, userData };
         } else if (err) {
           context.commit("setError", err);
           return { success: false, error: err };
@@ -281,23 +281,23 @@ export default createStore({
         console.log("An error occured: ", e);
       }
     },
-    async deleteProduct(context, prodID){
-      try{
+    async deleteProduct(context, prodID) {
+      try {
         const { res } = await axios.delete(`${api}product/${prodID}`, {
           headers: {
             Authorization: context.state.token,
             "Content-Type": "application/json",
           },
-        })
-        const { msg, err } = res.data
-        if(msg){
-          context.commit("setProduct", msg)
-        } 
-        if(err){
-          context.commit("setError", err)
+        });
+        const { msg, err } = res.data;
+        if (msg) {
+          context.commit("setProduct", msg);
         }
-      } catch(e){
-        console.log("An error occured: ", e)
+        if (err) {
+          context.commit("setError", err);
+        }
+      } catch (e) {
+        console.log("An error occured: ", e);
       }
     },
     async updateProduct(context, payload) {
@@ -305,7 +305,8 @@ export default createStore({
       try {
         const res = await axios.patch(
           `${api}product/${payload.prodID}`,
-          payload, {
+          payload,
+          {
             headers: {
               Authorization: context.state.token,
               "Content-Type": "application/json",
@@ -325,30 +326,34 @@ export default createStore({
         console.log(e);
       }
     },
-    async updateDetails(context, payload){
-      console.log(payload)
-      try{
-        const { res } = await axios.patch(`${api}user/${payload.userID}`, payload, {
-          headers:{
-            Authorization: context.state.token,
-            "Content-Type": "application/json"
+    async updateDetails(context, payload) {
+      console.log(payload);
+      try {
+        const { res } = await axios.patch(
+          `${api}user/${payload.userID}`,
+          payload,
+          {
+            headers: {
+              Authorization: context.state.token,
+              "Content-Type": "application/json",
+            },
           }
-        })
-        console.log(res)
-        const { msg, err } = res.data
-        console.log(msg)
-        if(err){
-          context.commit("setError", err)
+        );
+        console.log(res);
+        const { msg, err } = res.data;
+        console.log(msg);
+        if (err) {
+          context.commit("setError", err);
         }
-        if(msg){
-          context.dispatch("fetchUser")
-          context.commit("setUser", msg)
-          context.commit("setMsg", "Successfully updated profile")
+        if (msg) {
+          context.dispatch("fetchUser");
+          context.commit("setUser", msg);
+          context.commit("setMsg", "Successfully updated profile");
         }
-      } catch(e){
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
-    }
+    },
   },
   modules: {},
 });

@@ -9,13 +9,12 @@
         </div>
       </div>
     </div>
+    <h2>Featured Products</h2>
     <div class="featuredProd">
-      <h2>Featured Products</h2>
       <div class="each" v-for="product in getRandom" :key="product.prodID">
-        {{ product.prodID }}
         <h3>{{ product.prodName }}</h3>
       <p>{{ product.prodDesc }}</p>
-      <img :src="product.prodURL" alt="">
+      <img id="feat" :src="product.prodURL" alt="">
       </div>
     </div>
   </div>
@@ -58,6 +57,9 @@ h4 {
   justify-content: center !important;
   align-items: center !important;
 }
+#feat{
+  height:4rem;
+}
 
 .login {
   display: flex;
@@ -65,10 +67,19 @@ h4 {
 
 }
 
+.featuredProd{
+  display:flex;
+  flex-direction: column;
+}
+
 p {
   color: white;
   text-shadow: 1px 1px 0px rgb(191, 88, 251);
 
+}
+
+.each{
+  flex-direction: column;
 }
 
 .head {

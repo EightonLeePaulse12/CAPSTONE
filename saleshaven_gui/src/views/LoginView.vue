@@ -34,7 +34,7 @@ export default {
                     await Swal.fire({
                         icon: "success",
                         title: "Logged in Successfully",
-                        text: "You are now logged in!"
+                        text: `You are now logged in! Welcome, ${resp.userData.firstName}.`
                     })
                     this.$router.push("/")
                 } else{

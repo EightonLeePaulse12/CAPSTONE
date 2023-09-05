@@ -7,11 +7,10 @@
                         <img id="product" :src="product.prodURL">
                         <div class="card-body">
                             <h6>{{ product.prodName }}</h6>
-                            <p> {{ product.prodDesc }} </p>
-                            <p> {{ product.category }} </p>
-                            <p> {{ product.price }} </p>
-                            <p> {{ product.stock }} </p>
-                            <p> {{ product.seller_id }} </p>
+                            <p> Description: {{ product.prodDesc }} </p>
+                            <p> Category: {{ product.category }} </p>
+                            <p> Price: {{ product.price }} </p>
+                            <p> Stock: {{ product.stock }} </p>
                             <div class="buttons">
                                 <button @click="singleProduct(product.prodID)">View More</button>
                                 <button @click="addToCart(product)">Add To Cart</button>
@@ -55,5 +54,11 @@ export default {
 <style scoped>
 .buttons {
     display: flex !important;
+}
+#product{
+    aspect-ratio: 1/1;
+}
+.card-body{
+    height:20rem !important;
 }
 </style>

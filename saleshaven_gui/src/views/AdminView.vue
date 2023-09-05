@@ -110,6 +110,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import updateProduct from '@/components/UpdateProduct.vue'
 export default {
   components: {
@@ -136,10 +137,18 @@ export default {
   methods: {
     banUser(id) {
       if (confirm("Do you want to ban this user?")) {
-        this.$store.dispatch("banUser", id)
-        setTimeout(() => {
-          location.reload()
-        }, 500)
+        if (id !== 1) {
+          this.$store.dispatch("banUser", id)
+          setTimeout(() => {
+            location.reload()
+          }, 500)
+        } else{
+          Swal.fire({
+            icon: "error",
+            title: "Cannot delete this user",
+            text:"You are not authorized to ban this user"
+          })
+        }
       }
     },
     deleteProduct(prodID) {
@@ -185,8 +194,8 @@ td {
   border-radius: 5rem;
 }
 
-.table-responsive{
-  width:100%;
+.table-responsive {
+  width: 100%;
 }
 
 .table-container {
@@ -194,4 +203,5 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}</style>
+}
+</style>
