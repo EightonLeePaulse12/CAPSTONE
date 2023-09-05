@@ -26,7 +26,7 @@ export default createStore({
     getError(state) {
       return state.error;
     },
-    cart: (state) => cart,
+    cart: (state) => state.cart,
     cartTotal: (state) =>
       state.cart.reduce((total, product) => total + product.price, 0),
   },
@@ -86,6 +86,9 @@ export default createStore({
     addToCart(state, product) {
       state.cart.push(product);
     },
+    removeFromCart(state, prodID){
+      state.cart = state.cart.filter(item => item.prodID !== prodID)
+    }
   },
   actions: {
     async fetchUsers(context) {
@@ -260,6 +263,19 @@ export default createStore({
         console.error(e);
       }
     },
+    async removeFromCart(context, prodID){
+      try{
+        await axios.delete(`${api}cart/${prodID}`, {
+          headers:{
+            Authorization: context.state.token,
+            "Content-Type": "application/json"
+          }
+        })
+        context.commit('removeFromCart', prodID)
+      } catch(e){
+        console.error(e)
+      }
+    },
     async banUser(context, id) {
       try {
         const { res } = await axios.delete(`${api}user/${id}`, {
@@ -328,27 +344,29 @@ export default createStore({
     },
     async updateDetails(context, payload) {
       try {
-        const res = await axios.patch(
-          `${api}user/${payload.userID}`,
-          payload.data,
-          {
-            headers: {
-              Authorization: context.state.token,
-              "Content-Type": "application/json",
-            },
+          const res = await axios.patch(
+            `${api}user/${payload.userID}`,
+            payload.data,
+            {
+              headers: {
+                Authorization: context.state.token,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log(res)
+          const { msg, err } = res.data;
+          console.log(msg);
+          if (err) {
+            context.commit("setError", err);
           }
-        );
-        console.log(res)
-        const { msg, err, userData } = res.data;
-        console.log(msg);
-        if (err) {
-          context.commit("setError", err);
-        }
-        if (msg) {
-          context.commit("setUserData", userData)
-          context.commit("setUser", msg);
-          context.commit("setMsg", "Successfully updated profile");
-        }
+          if (msg) {
+            console.log(payload.data)
+            context.commit("setUserData", payload.data)
+            context.commit("setMsg", "Successfully updated profile");
+          } else{
+            console.log("User data is not ready yet")
+          }
       } catch (e) {
         console.log(e);
       }

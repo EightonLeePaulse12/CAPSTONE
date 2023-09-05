@@ -74,19 +74,10 @@ export default {
         },
         async updateUser(id) {
             try {
-                const { resp } = await this.$store
-                    .dispatch("updateDetails", {
+                await this.$store.dispatch("updateDetails", {
                         userID: id,
                         data: { ...this.editingUser },
                     })
-                if (resp && resp.msg) {
-                    console.log("User Updated!")
-                } else {
-                    console.error("Error while updating your profile: ", resp && resp.err)
-                }
-                if (resp && resp.msg === "Something went wrong") {
-                    console.error("Something went horribly wrong")
-                }
             } catch (e) {
                 console.log(e)
             }
