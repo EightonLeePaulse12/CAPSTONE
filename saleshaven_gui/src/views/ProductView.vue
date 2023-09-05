@@ -25,11 +25,16 @@
 
 <script>
 export default {
+    data() {
+        return {
+            products: []
+        }
+    },
     computed: {
         products() {
             return this.$store.state.products
         },
-        product(){
+        product() {
             return this.$store.state.product
         }
     },
@@ -37,28 +42,38 @@ export default {
         this.$store.dispatch("fetchProducts")
     },
     methods: {
+        async fetchProducts() {
+            try {
+                // After lunch
+            } catch (e) {
+                // After lunch
+            }
+        },
         addToCart(product) {
             this.$store.dispatch('cart/addToCart', product)
         },
         singleProduct(prodID) {
             const chosenProd = this.products.find(product => product.prodID === prodID)
-            if(chosenProd){
+            if (chosenProd) {
                 this.$store.commit("setSelectedProduct", chosenProd)
-            this.$router.push({ name: "ProductView", params: { prodID: chosenProd.prodID } })
-            }   
+                this.$router.push({ name: "ProductView", params: { prodID: chosenProd.prodID } })
+            }
         }
-    }
+    },
 }
+
 </script>
 
 <style scoped>
 .buttons {
     display: flex !important;
 }
-#product{
+
+#product {
     aspect-ratio: 1/1;
 }
-.card-body{
-    height:20rem !important;
+
+.card-body {
+    height: 20rem !important;
 }
 </style>

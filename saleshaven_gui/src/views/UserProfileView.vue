@@ -45,6 +45,9 @@ export default {
     computed: {
         userData() {
             return this.$store.state.userData
+        },
+        user(){
+            return this.$store.state.user
         }
     },
     methods: {
