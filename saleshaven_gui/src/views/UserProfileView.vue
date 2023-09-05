@@ -14,6 +14,7 @@
                 </div>
                 <div class="col">
                     <div class="data">
+                        {{ userData }}
                         {{ userData.firstName }} <br>
                         {{ userData.lastName }} <br>
                         {{ userData.gender }} <br>

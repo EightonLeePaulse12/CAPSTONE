@@ -64,16 +64,13 @@ export default {
         };
     },
     computed: {
-        currentUser() {
+        userData() {
             return this.$store.state.userData;
         },
     },
     methods: {
         openEditModal(id) {
             this.editingUserID = id;
-            // this.editingUser = {
-            //     ...this.$store.state.userData.find((user) => user.userID === id),
-            // };
         },
         async updateUser(id) {
             try{
