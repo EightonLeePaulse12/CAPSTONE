@@ -3,7 +3,7 @@ const db = require("../config");
 class Products {
   fetchProducts(req, res) {
     const query = `
-            SELECT prodID, prodName, prodDesc, category, price, seller_id FROM Products
+            SELECT prodID, prodName, prodDesc, category, price, stock, prodURL, seller_id FROM Products
         `;
     db.query(query, (err, results) => {
       if (!err) {
@@ -22,7 +22,7 @@ class Products {
   }
   fetchProduct(req, res) {
     const query = `
-            SELECT prodID, prodName, prodDesc, category, price, seller_id FROM Products WHERE prodID = ${req.params.prodID}
+    SELECT prodID, prodName, prodDesc, category, price, stock, prodURL, seller_id FROM Products WHERE prodID = ${req.params.prodID}
         `;
     db.query(query, (err, results) => {
       if (!err) {
@@ -46,7 +46,14 @@ class Products {
     const { prodName, prodDesc, category, price, prodURL } = req.body;
     const seller_id = req.params.seller_id;
     const data = [prodName, prodDesc, category, price, prodURL, seller_id];
-    if (!prodName || !prodDesc || !category || !price || !prodURL || !seller_id) {
+    if (
+      !prodName ||
+      !prodDesc ||
+      !category ||
+      !price ||
+      !prodURL ||
+      !seller_id
+    ) {
       return res.status(400).json({
         status: res.statusCode,
         msg: "Missing or invalid data",
