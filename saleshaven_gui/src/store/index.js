@@ -90,7 +90,7 @@ export default createStore({
       }
     },
     addToCart(state, product) {
-      const exists = state.cart.find((item) => item.productID === productID);
+      const exists = state.cart.find((item) => item.productID === product);
       if (exists) {
         exists.quantity += product.quantity;
         exists.total_price += product.total_price;
