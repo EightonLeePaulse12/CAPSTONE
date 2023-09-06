@@ -24,6 +24,7 @@ class Cart {
     });
   }
   addToCart({ userID, productID, quantity, total_price }, res) {
+    console.log("Adding to cart...", userID, productID, quantity, total_price)
     try {
       const query = `
             INSERT INTO Cart (userID, productID, quantity, total_price) VALUES(?, ?, ?, ?)
@@ -41,6 +42,7 @@ class Cart {
             res.json({
               status: res.statusCode,
               msg: "Something went wrong",
+              err
             })
           );
         }
@@ -53,10 +55,12 @@ class Cart {
     }
   }
   removeFromCart(req, res) {
+    const user = req.dec.user
+    const productID = req.params.productID
     const query = `
             DELETE FROM Cart WHERE userID = ? AND productID = ?
         `;
-    const data = [userID, productID];
+    const data = [user.userID, productID];
     db.query(query, data, (err) => {
       if (!err) {
         res.json({
