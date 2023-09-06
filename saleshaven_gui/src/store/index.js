@@ -267,13 +267,13 @@ export default createStore({
     },
     async addToCart(context, product) {
       try {
-        const { res } = await axios.post(`${api}cart`, product, {
+        const response = await axios.post(`${api}cart`, product, {
           headers: {
             Authorization: context.state.token,
             "Content-Type": "application/json",
           },
         });
-        const { err, msg } = res.data;
+        const { err, msg } = response.data;
         if (msg) {
           context.commit("addToCart", product);
         } else if (msg === "Something went wrong") {
@@ -282,7 +282,7 @@ export default createStore({
           context.commit("setError", err);
         }
       } catch (e) {
-        console.error(e);
+        console.error("Response: ", e);
       }
     },
     async removeFromCart(context, prodID) {
