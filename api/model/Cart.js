@@ -80,7 +80,7 @@ class Cart {
   }
   updateCartItem(user, productID, quantity, total_price, res) {
     const query = `
-      UPDATE Cart SET quantity = ?, total_price = ?, WHERE userID = ? AND productID = ?
+      UPDATE Cart SET quantity = ?, total_price = ? WHERE userID = ? AND productID = ?
     `;
     const data = [quantity, total_price, user.userID, productID];
     db.query(query, data, (err) => {
