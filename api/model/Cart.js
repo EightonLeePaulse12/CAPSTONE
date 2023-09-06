@@ -55,8 +55,6 @@ class Cart {
     }
   }
   removeFromCart(userID, productID, res) {
-    const userID = req.dec.user;
-    const productID = req.params.productID;
     const query = `
             DELETE FROM Cart WHERE userID = ? AND productID = ?
         `;
