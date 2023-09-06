@@ -54,14 +54,16 @@ routes.get("/cart", (req, res) => {
   cart.fetchCartItems(user.userID, res);
 });
 routes.post("/cart", bodyParser.json(), (req, res) => {
+  console.log("POST /cart request received")
   const user = req.dec.user;
+  console.log("user: ", user)
   const { productID, quantity, total_price } = req.body
-  cart.addToCart({ userID: user.userID, productID, quantity, total_price }, res);
+  cart.addToCart({ userID: user, productID, quantity, total_price }, res);
 });
 routes.delete("/cart/:productID", (req, res) => {
   const user = req.dec.user;
   const productID = req.params.productID;
-  cart.removeFromCart(user.userID, productID, res);
+  cart.removeFromCart(user, productID, res);
 });
 
 // ========== Transactions Routes ==========
