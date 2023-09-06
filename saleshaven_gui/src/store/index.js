@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import axios from "axios";
 import Cookies from "js-cookie";
 const api = "https://capstone-project-ymzb.onrender.com/";
+import Swal from 'sweetalert2'
 
 export default createStore({
   state: {
@@ -67,6 +68,11 @@ export default createStore({
     },
     setError(state, error) {
       state.error = error;
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+      });
     },
     setLogStatus(state, status) {
       state.logStatus = status;
@@ -85,9 +91,23 @@ export default createStore({
     },
     addToCart(state, product) {
       state.cart.push(product);
+      Swal.fire({
+        icon: "success",
+        title: "Added to Cart",
+        text: `${product.prodName} has been added to your cart.`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
     removeFromCart(state, prodID) {
       state.cart = state.cart.filter((item) => item.prodID !== prodID);
+      Swal.fire({
+        icon: "success",
+        title: "Removed from Cart",
+        text: "Item has been removed from your cart.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
   },
   actions: {
