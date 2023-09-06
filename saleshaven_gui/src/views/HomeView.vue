@@ -59,6 +59,7 @@ h4 {
 }
 #feat{
   height:4rem;
+  aspect-ratio: 1/1;
 }
 
 .login {

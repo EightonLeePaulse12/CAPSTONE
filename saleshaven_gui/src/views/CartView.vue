@@ -1,25 +1,29 @@
 <template>
     <div>
-
+        <div v-if="!cart">
+            Your cart is empty
+        </div>
+        <Cart></Cart>
     </div>
 </template>
 
 <script>
-export default {
-    computed:{
-        cart(){
-            return this.$store.getters['cart/cart']
+import Cart from '@/components/Cart.vue'
+    export default {
+        components:{
+            Cart
         },
-        cartTotal(){
-            return this.$store.getters['cart/cartTotal']
-        }
-    },
-    methods:{
-        removeFromCart(product){
-            
+        computed:{
+            userRole(){
+                return this.$store.state.userRole
+            },
+            cart(){
+                return this.$store.state.cart
+            }
         }
     }
-}
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+
+</style>

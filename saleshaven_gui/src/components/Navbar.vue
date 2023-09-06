@@ -39,6 +39,7 @@
             </li>
           </ul>
           <div class="navbar-nav" v-else-if="userRole === 'Admin' || userRole === 'Owner' || userRole === 'User'">
+            <router-link to="/cart">View Cart</router-link>
             <button @click="logout">Log out</button>
             <div class="point"><router-link to="/profile"><img id="prof" to="/profile"
                   :src="userData.userProfile"></router-link>

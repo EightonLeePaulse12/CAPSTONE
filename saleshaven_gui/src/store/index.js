@@ -86,9 +86,9 @@ export default createStore({
     addToCart(state, product) {
       state.cart.push(product);
     },
-    removeFromCart(state, prodID){
-      state.cart = state.cart.filter(item => item.prodID !== prodID)
-    }
+    removeFromCart(state, prodID) {
+      state.cart = state.cart.filter((item) => item.prodID !== prodID);
+    },
   },
   actions: {
     async fetchUsers(context) {
@@ -256,24 +256,26 @@ export default createStore({
         const { err, msg } = res.data;
         if (msg) {
           context.commit("addToCart", product);
-        } else {
-          console.error(err);
+        } else if (msg === "Something went wrong") {
+          console.log("Something actually went wrong");
+        } else if (err) {
+          context.commit("setError", err);
         }
       } catch (e) {
         console.error(e);
       }
     },
-    async removeFromCart(context, prodID){
-      try{
+    async removeFromCart(context, prodID) {
+      try {
         await axios.delete(`${api}cart/${prodID}`, {
-          headers:{
+          headers: {
             Authorization: context.state.token,
-            "Content-Type": "application/json"
-          }
-        })
-        context.commit('removeFromCart', prodID)
-      } catch(e){
-        console.error(e)
+            "Content-Type": "application/json",
+          },
+        });
+        context.commit("removeFromCart", prodID);
+      } catch (e) {
+        console.error(e);
       }
     },
     async banUser(context, id) {
@@ -344,29 +346,29 @@ export default createStore({
     },
     async updateDetails(context, payload) {
       try {
-          const res = await axios.patch(
-            `${api}user/${payload.userID}`,
-            payload.data,
-            {
-              headers: {
-                Authorization: context.state.token,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          console.log(res)
-          const { msg, err } = res.data;
-          console.log(msg);
-          if (err) {
-            context.commit("setError", err);
+        const res = await axios.patch(
+          `${api}user/${payload.userID}`,
+          payload.data,
+          {
+            headers: {
+              Authorization: context.state.token,
+              "Content-Type": "application/json",
+            },
           }
-          if (msg) {
-            console.log(payload.data)
-            context.commit("setUserData", payload.data)
-            context.commit("setMsg", "Successfully updated profile");
-          } else{
-            console.log("User data is not ready yet")
-          }
+        );
+        console.log(res);
+        const { msg, err } = res.data;
+        console.log(msg);
+        if (err) {
+          context.commit("setError", err);
+        }
+        if (msg) {
+          console.log(payload.data);
+          context.commit("setUserData", payload.data);
+          context.commit("setMsg", "Successfully updated profile");
+        } else {
+          console.log("User data is not ready yet");
+        }
       } catch (e) {
         console.log(e);
       }
