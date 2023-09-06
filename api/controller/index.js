@@ -4,7 +4,6 @@ const { decToken } = require("../middleware/AuthenticateUser");
 const routes = express.Router();
 const { users, products, cart, transactions } = require("../model");
 
-
 // ========== User routes ==========
 routes.get("/users", (req, res) => {
   users.fetchUsers(req, res);
@@ -54,16 +53,22 @@ routes.get("/cart", (req, res) => {
   cart.fetchCartItems(user.userID, res);
 });
 routes.post("/cart", bodyParser.json(), (req, res) => {
-  console.log("POST /cart request received")
+  console.log("POST /cart request received");
   const user = req.dec.user;
-  console.log("user: ", user)
-  const { productID, quantity, total_price } = req.body
+  console.log("user: ", user);
+  const { productID, quantity, total_price } = req.body;
   cart.addToCart({ userID: user, productID, quantity, total_price }, res);
 });
 routes.delete("/cart/:productID", (req, res) => {
   const user = req.dec.user;
   const productID = req.params.productID;
   cart.removeFromCart(user, productID, res);
+});
+routes.put("/cart/:productID", bodyParser.json(), (req, res) => {
+  const user = req.dec.user;
+  const { productID } = req.params;
+  const { quantity, total_price } = req.body;
+  cart.updateCartItem(user, productID, quantity, total_price, res);
 });
 
 // ========== Transactions Routes ==========
@@ -84,6 +89,5 @@ routes.get("/avg-quant/:userID", (req, res) => {
   const { userID } = req.params;
   transactions.getAvg(userID, res);
 });
-
 
 module.exports = { express, routes };
