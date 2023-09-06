@@ -90,10 +90,10 @@ export default createStore({
       }
     },
     addToCart(state, product) {
-      const exists = state.cart.find(item => item.productID === productID)
-      if(exists){
-        exists.quantity += product.quantity
-        exists.total_price += product.total_price
+      const exists = state.cart.find((item) => item.productID === productID);
+      if (exists) {
+        exists.quantity += product.quantity;
+        exists.total_price += product.total_price;
         Swal.fire({
           icon: "success",
           title: "Item already in cart",
@@ -101,8 +101,8 @@ export default createStore({
           showConfirmButton: false,
           timer: 1000,
         });
-      } else{
-        state.cart.push(product)
+      } else {
+        state.cart.push(product);
         Swal.fire({
           icon: "success",
           title: "Added to Cart",
@@ -111,10 +111,9 @@ export default createStore({
           timer: 1500,
         });
       }
-      
     },
     removeFromCart(state, productID) {
-      state.cart = state.cart.filter(item => item.productID !== productID);
+      state.cart = state.cart.filter((item) => item.productID !== productID);
       Swal.fire({
         icon: "success",
         title: "Removed from Cart",
@@ -123,13 +122,13 @@ export default createStore({
         timer: 1500,
       });
     },
-    updatesForCart(state, { productID, quantity, total_price }){
-      const cartItem = state.cart.find(item => item.productID === productID)
-      if(cartItem){
-        cartItem.quantity = quantity
-        cartItem.total_price = total_price
+    updatesForCart(state, { productID, quantity, total_price }) {
+      const cartItem = state.cart.find((item) => item.productID === productID);
+      if (cartItem) {
+        cartItem.quantity = quantity;
+        cartItem.total_price = total_price;
       }
-    }
+    },
   },
   actions: {
     async fetchUsers(context) {
@@ -294,7 +293,7 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        context.commit("addToCart", product)
+        context.commit("addToCart", product);
         // if (msg) {
         //   context.commit("addToCart", product);
         // } else if (msg === "Something went wrong") {
@@ -319,19 +318,25 @@ export default createStore({
         console.error("Error while removing from cart: ", e);
       }
     },
-    async updateCartItem(context, { productID, quantity, total_price }){
-      try{
-        await axios.patch(`${api}cart/${productID}`, {quantity, total_price},{
-          headers:{
-            Authorization: context.state.token,
-            "Content-Type": "application/json"
+    async updateCartItem(context, { productID, quantity, total_price }) {
+      try {
+        const response = await axios.put(
+          `${api}cart/${productID}`,
+          { quantity, total_price },
+          {
+            headers: {
+              Authorization: context.state.token,
+              "Content-Type": "application/json",
+            },
           }
-        })
-        context.commit("updateCartItem", { productID, quantity, total_price })
-      } catch(e){
-        console.log("Error while updating cart: ", e)
+        );
+        const { msg } = response.data
+        if(msg){
+          context.commit("updateCartItem", { productID, quantity, total_price })
+        }
+      } catch (e) {
+        console.log("Error while updating cart: ", e);
       }
-      
     },
     async banUser(context, id) {
       try {

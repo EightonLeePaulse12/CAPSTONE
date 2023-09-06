@@ -4,8 +4,8 @@
     <ul>
       <li v-for="product in cart" :key="product.productID">
         {{ product.prodName }} - Price: {{ product.price }} - Quantity: {{ product.quantity }}
-        <button @click="removeFromCart(product.productID)">Remove</button>
-        <input type="number" v-model="product.quantity" @input="updateQuantity(product)">
+        <button @click="removeFromCart(product.prodID)">Remove</button>
+        <input type="number" v-model="product.quantity" @input="updateCart(product)">
       </li>
     </ul>
     <p>Total: {{ cartTotal }}</p>
@@ -26,6 +26,9 @@
       removeFromCart(prodID) {
         this.$store.dispatch('removeFromCart', prodID);
       },
+      updateCart(product){
+        this.$store.dispatch("updateCartItem", product)
+      }
     },
   };
   </script>
