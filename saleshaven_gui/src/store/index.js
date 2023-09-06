@@ -293,18 +293,11 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        if (response.data.msg) {
+        if (response.status === 200) {
           context.commit("addToCart", product);
         } else {
           context.commit("setError", "Failed to add to cart");
         }
-        // if (msg) {
-        //   context.commit("addToCart", product);
-        // } else if (msg === "Something went wrong") {
-        //   console.log("Something actually went wrong");
-        // } else if (err) {
-        //   context.commit("setError", err);
-        // }
       } catch (e) {
         console.error("Error adding to cart: ", e);
         context.commit(
