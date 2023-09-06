@@ -1,7 +1,7 @@
 const db = require("../config");
 
 class Cart {
-  fetchCartItems(req, res) {
+  fetchCartItems(user, res) {
     const query = `
             SELECT cartID, userID, productID, quantity FROM Cart
         `;
@@ -54,7 +54,7 @@ class Cart {
         .json({ status: res.statusCode, msg: "Internal server error" });
     }
   }
-  removeFromCart(req, res) {
+  removeFromCart(userID, productID, res) {
     const userID = req.dec.user;
     const productID = req.params.productID;
     const query = `
