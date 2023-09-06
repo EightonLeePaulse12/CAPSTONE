@@ -90,17 +90,31 @@ export default createStore({
       }
     },
     addToCart(state, product) {
-      state.cart.push(product);
-      Swal.fire({
-        icon: "success",
-        title: "Added to Cart",
-        text: `${product.prodName} has been added to your cart.`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      const exists = state.cart.find(item => item.productID === productID)
+      if(exists){
+        exists.quantity += product.quantity
+        exists.total_price += product.total_price
+        Swal.fire({
+          icon: "success",
+          title: "Item already in cart",
+          text: `${product.prodName} has already been added to your cart.`,
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      } else{
+        state.cart.push(product)
+        Swal.fire({
+          icon: "success",
+          title: "Added to Cart",
+          text: `${product.prodName} has been added to your cart.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+      
     },
-    removeFromCart(state, prodID) {
-      state.cart = state.cart.filter((item) => item.prodID !== prodID);
+    removeFromCart(state, productID) {
+      state.cart = state.cart.filter(item => item.productID !== productID);
       Swal.fire({
         icon: "success",
         title: "Removed from Cart",
@@ -109,6 +123,13 @@ export default createStore({
         timer: 1500,
       });
     },
+    updatesForCart(state, { productID, quantity, total_price }){
+      const cartItem = state.cart.find(item => item.productID === productID)
+      if(cartItem){
+        cartItem.quantity = quantity
+        cartItem.total_price = total_price
+      }
+    }
   },
   actions: {
     async fetchUsers(context) {
@@ -273,16 +294,16 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        const { err, msg } = response.data;
-        if (msg) {
-          context.commit("addToCart", product);
-        } else if (msg === "Something went wrong") {
-          console.log("Something actually went wrong");
-        } else if (err) {
-          context.commit("setError", err);
-        }
+        context.commit("addToCart", product)
+        // if (msg) {
+        //   context.commit("addToCart", product);
+        // } else if (msg === "Something went wrong") {
+        //   console.log("Something actually went wrong");
+        // } else if (err) {
+        //   context.commit("setError", err);
+        // }
       } catch (e) {
-        console.error("Response: ", e);
+        console.error("Error adding to cart: ", e);
       }
     },
     async removeFromCart(context, productID) {
@@ -293,10 +314,24 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        context.commit("removeFromCart", prodID);
+        context.commit("removeFromCart", productID);
       } catch (e) {
-        console.error(e);
+        console.error("Error while removing from cart: ", e);
       }
+    },
+    async updateCartItem(context, { productID, quantity, total_price }){
+      try{
+        await axios.patch(`${api}cart/${productID}`, {quantity, total_price},{
+          headers:{
+            Authorization: context.state.token,
+            "Content-Type": "application/json"
+          }
+        })
+        context.commit("updateCartItem", { productID, quantity, total_price })
+      } catch(e){
+        console.log("Error while updating cart: ", e)
+      }
+      
     },
     async banUser(context, id) {
       try {

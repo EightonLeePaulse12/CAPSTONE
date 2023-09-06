@@ -1,15 +1,16 @@
 <template>
-    <div>
-      <h2>Cart</h2>
-      <ul>
-        <li v-for="product in cart" :key="product.prodID">
-          {{ product.prodName }} - Price: {{ product.price }}
-          <button @click="removeFromCart(product.prodID)">Remove</button>
-        </li>
-      </ul>
-      <p>Total: {{ cartTotal }}</p>
-    </div>
-  </template>
+  <div>
+    <h2>Cart</h2>
+    <ul>
+      <li v-for="product in cart" :key="product.productID">
+        {{ product.prodName }} - Price: {{ product.price }} - Quantity: {{ product.quantity }}
+        <button @click="removeFromCart(product.productID)">Remove</button>
+        <input type="number" v-model="product.quantity" @input="updateQuantity(product)">
+      </li>
+    </ul>
+    <p>Total: {{ cartTotal }}</p>
+  </div>
+</template>
   
   <script>
   export default {
