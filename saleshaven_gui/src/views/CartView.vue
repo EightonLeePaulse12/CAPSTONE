@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!cart">
+        <div v-if="cart.length === 0">
             Your cart is empty
         </div>
         <Cart></Cart>

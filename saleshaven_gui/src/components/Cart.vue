@@ -7,6 +7,7 @@
           <button @click="removeFromCart(product.prodID)">Remove</button>
         </li>
       </ul>
+      <p>Total: {{ cartTotal }}</p>
     </div>
   </template>
   
@@ -16,6 +17,9 @@
       cart() {
         return this.$store.getters.cart;
       },
+      cartTotal(){
+        return this.$store.getters.cartTotal
+      }
     },
     methods: {
       removeFromCart(prodID) {
