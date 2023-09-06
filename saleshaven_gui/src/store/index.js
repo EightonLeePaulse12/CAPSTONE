@@ -293,7 +293,11 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        context.commit("addToCart", product);
+        if (response.data.msg) {
+          context.commit("addToCart", product);
+        } else {
+          context.commit("setError", "Failed to add to cart");
+        }
         // if (msg) {
         //   context.commit("addToCart", product);
         // } else if (msg === "Something went wrong") {
@@ -303,6 +307,10 @@ export default createStore({
         // }
       } catch (e) {
         console.error("Error adding to cart: ", e);
+        context.commit(
+          "setError",
+          "An error occurred while adding to the cart"
+        );
       }
     },
     async removeFromCart(context, productID) {
@@ -330,12 +338,18 @@ export default createStore({
             },
           }
         );
-        const { msg } = response.data
-        if(msg){
-          context.commit("updateCartItem", { productID, quantity, total_price })
+        if (response.data.msg) {
+          context.commit("updateCartItem", {
+            productID,
+            quantity,
+            total_price,
+          });
+        } else {
+          context.commit("setError", "Failed to update cart item");
         }
       } catch (e) {
-        console.log("Error while updating cart: ", e);
+        context.commit("setError", "An error occurred while updating the cart");
+        console.error("Error while updating cart: ", e);
       }
     },
     async banUser(context, id) {
