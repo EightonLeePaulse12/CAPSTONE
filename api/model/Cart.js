@@ -24,7 +24,7 @@ class Cart {
     });
   }
   addToCart({ userID, productID, quantity, total_price }, res) {
-    console.log("Adding to cart...", userID, productID, quantity, total_price)
+    console.log("Adding to cart...", userID, productID, quantity, total_price);
     try {
       const query = `
             INSERT INTO Cart (userID, productID, quantity, total_price) VALUES(?, ?, ?, ?)
@@ -42,7 +42,7 @@ class Cart {
             res.json({
               status: res.statusCode,
               msg: "Something went wrong",
-              err
+              err,
             })
           );
         }
@@ -55,8 +55,8 @@ class Cart {
     }
   }
   removeFromCart(req, res) {
-    const userID = req.dec.user
-    const productID = req.params.productID
+    const userID = req.dec.user;
+    const productID = req.params.productID;
     const query = `
             DELETE FROM Cart WHERE userID = ? AND productID = ?
         `;
@@ -66,6 +66,28 @@ class Cart {
         res.json({
           status: res.statusCode,
           msg: "Product removed from cart",
+        });
+      } else {
+        throw (
+          err &&
+          res.json({
+            status: res.statusCode,
+            msg: "Something went wrong",
+          })
+        );
+      }
+    });
+  }
+  updateCartItem(user, productID, quantity, total_price, res) {
+    const query = `
+      UPDATE Cart SET quantity = ?, total_price = ?, WHERE userID = ? AND productID = ?
+    `;
+    const data = [quantity, total_price, user.userID, productID];
+    db.query(query, data, (err) => {
+      if (!err) {
+        res.json({
+          status: res.statusCode,
+          msg: "Cart item updated successfully",
         });
       } else {
         throw (
