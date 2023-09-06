@@ -285,9 +285,9 @@ export default createStore({
         console.error("Response: ", e);
       }
     },
-    async removeFromCart(context, prodID) {
+    async removeFromCart(context, productID) {
       try {
-        await axios.delete(`${api}cart/${prodID}`, {
+        await axios.delete(`${api}cart/${productID}`, {
           headers: {
             Authorization: context.state.token,
             "Content-Type": "application/json",
