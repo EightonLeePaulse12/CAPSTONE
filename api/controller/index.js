@@ -55,7 +55,8 @@ routes.get("/cart", (req, res) => {
 });
 routes.post("/cart", bodyParser.json(), (req, res) => {
   const user = req.dec.user;
-  cart.addToCart(user.userID, req.body.productID, res);
+  const { productID, quantity, total_price } = req.body
+  cart.addToCart({ userID: user.userID, productID, quantity, total_price }, res);
 });
 routes.delete("/cart/:productID", (req, res) => {
   const user = req.dec.user;
