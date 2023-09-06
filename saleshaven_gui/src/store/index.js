@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 import axios from "axios";
 import Cookies from "js-cookie";
 const api = "https://capstone-project-ymzb.onrender.com/";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 export default createStore({
   state: {
