@@ -71,9 +71,14 @@ routes.post("/cart", bodyParser.json(), async (req, res) => {
   })
 });
 routes.delete("/cart/:productID", (req, res) => {
-  const user = req.dec.user;
-  const productID = req.params.productID;
-  cart.removeFromCart(user.userID, productID, res);
+  const userEmail = req.dec.email;
+  getUserIDByEmail(userEmail).then((userID)=> {
+    const { productID } = req.params.productID
+    cart.removeFromCart(userID, productID, res);
+  }).catch((error)=>{
+    console.error("Error getting userID: ", error)
+    return res.status(500).json({msg: "Internal server error"})
+  })
 });
 
 
