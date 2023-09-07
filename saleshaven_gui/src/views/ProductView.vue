@@ -43,6 +43,7 @@ export default {
     },
     methods: {
         addToCart(product) {
+            console.log("Product to add: ", product)
             this.$store.dispatch('addToCart', product)
         },
         singleProduct(prodID) {
