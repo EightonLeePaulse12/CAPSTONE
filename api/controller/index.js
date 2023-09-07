@@ -4,6 +4,11 @@ const { decToken } = require("../middleware/AuthenticateUser");
 const routes = express.Router();
 const { users, products, cart, transactions } = require("../model");
 
+if (require.cache[require.resolve("../model/UserDB.js")]) {
+  delete require.cache[require.resolve("../model/UserDB.js")];
+}
+const { getUserIDByEmail } = require('../model/UserDB')
+
 // ========== User routes ==========
 routes.get("/users", (req, res) => {
   users.fetchUsers(req, res);
@@ -54,10 +59,16 @@ routes.get("/cart", (req, res) => {
 });
 routes.post("/cart", bodyParser.json(), (req, res) => {
   console.log("POST /cart request received");
-  const user = req.dec.user;
-  console.log("user: ", user);
-  const { productID } = req.body;
-  cart.addToCart({ userID: user.userID, productID }, res);
+  console.log(req.dec)
+  const userEmail = req.dec.email;
+
+  getUserIDByEmail(userEmail).then((userID)=> {
+    const { productID } = req.body
+    cart.addToCart({userID, productID}, res)
+  }).catch((error)=>{
+    console.error("Error getting userID: ", error)
+    return res.status(500).json({msg: "Internal server error"})
+  })
 });
 routes.delete("/cart/:productID", (req, res) => {
   const user = req.dec.user;
