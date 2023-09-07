@@ -54,7 +54,7 @@ routes.get("/cart", (req, res) => {
 });
 routes.post("/cart", bodyParser.json(), (req, res) => {
   console.log("POST /cart request received");
-  const user = req.user;
+  const user = req.dec.user;
   console.log("user: ", user);
   const { productID } = req.body;
   cart.addToCart({ userID: user.userID, productID }, res);
