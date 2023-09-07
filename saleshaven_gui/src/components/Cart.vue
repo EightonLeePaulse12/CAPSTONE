@@ -2,10 +2,11 @@
   <div>
     <h2>Cart</h2>
     <ul>
-      <li v-for="product in cart" :key="product.productID">
-        {{ product.prodName }} - Price: {{ product.price }} - Quantity: {{ product.quantity }}
-        <button @click="removeFromCart(product.prodID)">Remove</button>
-        <input type="number" v-model="product.quantity" @input="updateCart(product)">
+      <li v-for="item in cart" :key="item.productID">
+        {{ item.prodName }} - Price: {{ item.price }} - Quantity: {{ item.quantity }}
+        <button @click="removeFromCart(item.productID)">Remove</button>
+        <button @click="decreaseQuantity(item)">-</button>
+        <button @click="increaseQuantity(item)">+</button>
       </li>
     </ul>
     <p>Total: {{ cartTotal }}</p>
@@ -23,8 +24,14 @@
       }
     },
     methods: {
-      removeFromCart(prodID) {
-        this.$store.dispatch('removeFromCart', prodID);
+      removeFromCart(productID) {
+        this.$store.dispatch('removeFromCart', productID);
+      },
+      decreaseQuantity(item){
+        if(item.quantity > 1){
+          item.quantity += 1
+          this.$store.dispatch("updateCartItem", item)
+        }
       },
       updateCart(product){
         this.$store.dispatch("updateCartItem", product)
