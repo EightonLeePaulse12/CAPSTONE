@@ -27,9 +27,9 @@ export default createStore({
     getError(state) {
       return state.error;
     },
-    cart: (state) => state.cart,
-    cartTotal: (state) =>
-      state.cart.reduce((total, product) => total + product.price, 0),
+    cartTotal(state) {
+      return state.cart.reduce((total, product)=> total + product.price, 0)
+    },
   },
   mutations: {
     setUsers(state, users) {
@@ -90,9 +90,11 @@ export default createStore({
       }
     },
     addToCart(state, product) {
-      const exists = state.cart.find((item) => item.productID === product.productID);
+      const exists = state.cart.find(
+        (item) => item.productID === product.productID
+      );
       if (exists) {
-        exists.quantity += 1
+        exists.quantity += 1;
         Swal.fire({
           icon: "success",
           title: "Item already in cart",
@@ -101,8 +103,8 @@ export default createStore({
           timer: 1000,
         });
       } else {
-        product.quantity = 1
-        state.cart.push(product)
+        product.quantity = 1;
+        state.cart.push(product);
         Swal.fire({
           icon: "success",
           title: "Added to Cart",
@@ -113,12 +115,14 @@ export default createStore({
       }
     },
     removeFromCart(state, productID) {
-      const cartItem = state.cart.find((item)=> item.productID === productID)
-      if(cartItem){
-        if(cartItem.quantity > 1){
-          cartItem.quantity -= 1
-        } else{
-          state.cart = state.cart.filter((item)=> item.productID !== productID)
+      const cartItem = state.cart.find((item) => item.productID === productID);
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          cartItem.quantity -= 1;
+        } else {
+          state.cart = state.cart.filter(
+            (item) => item.productID !== productID
+          );
         }
       }
       Swal.fire({
@@ -130,9 +134,11 @@ export default createStore({
       });
     },
     updateCartItem(state, updatedItem) {
-      const cartItem = state.cart.find((item)=> item.productID === updatedItem.productID)
-      if(cartItem){
-        cartItem.quantity = updatedItem.quantity
+      const cartItem = state.cart.find(
+        (item) => item.productID === updatedItem.productID
+      );
+      if (cartItem) {
+        cartItem.quantity = updatedItem.quantity;
       }
     },
   },
@@ -293,7 +299,7 @@ export default createStore({
     },
     async addToCart(context, product) {
       try {
-        const response = await axios.post(`${api}cart`, product, {
+        const response = await axios.post(`${api}cart`, {productID: product.prodID}, {
           headers: {
             Authorization: context.state.token,
             "Content-Type": "application/json",
@@ -327,9 +333,9 @@ export default createStore({
     },
     async updateCartItem(context, updatedItem) {
       try {
-        const response = await axios.put(
-          `${api}cart/${productID}`,
-          { quantity, total_price },
+        const response = await axios.post(
+          `${api}cart/${updatedItem.productID}`,
+          { quantity: updatedItem.quantity },
           {
             headers: {
               Authorization: context.state.token,
@@ -337,7 +343,7 @@ export default createStore({
             },
           }
         );
-        context.commit("updateCartItem", updatedItem)
+        context.commit("updateCartItem", updatedItem);
       } catch (e) {
         context.commit("setError", "An error occurred while updating the cart");
         console.error("Error while updating cart: ", e);

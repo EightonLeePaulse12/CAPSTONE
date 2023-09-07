@@ -29,7 +29,7 @@
       },
       decreaseQuantity(item){
         if(item.quantity > 1){
-          item.quantity += 1
+          item.quantity -= 1
           this.$store.dispatch("updateCartItem", item)
         }
       },
