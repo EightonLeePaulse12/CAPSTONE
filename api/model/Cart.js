@@ -1,11 +1,11 @@
 const db = require("../config");
 
 class Cart {
-  fetchCartItems(user, res) {
+  fetchCartItems(userID, res) {
     const query = `
-            SELECT cartID, userID, productID, quantity FROM Cart
+            SELECT cartID, userID, productID FROM Cart WHERE userID = ?
         `;
-    db.query(query, (err, results) => {
+    db.query(query, [userID], (err, results) => {
       if (!err) {
         res.json({
           status: res.statusCode,
@@ -23,13 +23,12 @@ class Cart {
       }
     });
   }
-  addToCart({ userID, productID, quantity, total_price }, res) {
-    console.log("Adding to cart...", userID, productID, quantity, total_price);
+  addToCart({ userID, productID }, res) {
     try {
       const query = `
-            INSERT INTO Cart (userID, productID, quantity, total_price) VALUES(?, ?, ?, ?)
+            INSERT INTO Cart (userID, productID) VALUES(?,?)
         `;
-      const data = [userID, productID, quantity, total_price];
+      const data = [userID, productID];
       db.query(query, data, (err) => {
         if (!err) {
           res.json({
@@ -64,28 +63,6 @@ class Cart {
         res.json({
           status: res.statusCode,
           msg: "Product removed from cart",
-        });
-      } else {
-        throw (
-          err &&
-          res.json({
-            status: res.statusCode,
-            msg: "Something went wrong",
-          })
-        );
-      }
-    });
-  }
-  updateCartItem(user, productID, quantity, total_price, res) {
-    const query = `
-      UPDATE Cart SET quantity = ?, total_price = ? WHERE userID = ? AND productID = ?
-    `;
-    const data = [quantity, total_price, user.userID, productID];
-    db.query(query, data, (err) => {
-      if (!err) {
-        res.json({
-          status: res.statusCode,
-          msg: "Cart item updated successfully",
         });
       } else {
         throw (
