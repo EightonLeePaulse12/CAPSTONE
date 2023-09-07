@@ -57,7 +57,7 @@ routes.get("/cart", (req, res) => {
   const user = req.dec.user;
   cart.fetchCartItems(user.userID, res);
 });
-routes.post("/cart", bodyParser.json(), (req, res) => {
+routes.post("/cart", bodyParser.json(), async (req, res) => {
   console.log("POST /cart request received");
   console.log(req.dec)
   const userEmail = req.dec.email;
