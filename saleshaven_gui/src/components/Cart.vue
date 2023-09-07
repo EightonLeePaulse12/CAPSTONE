@@ -9,7 +9,7 @@
         <button @click="increaseQuantity(item)">+</button>
       </li>
     </ul>
-    <p>Total: {{ cartTotal }}</p>
+    <p>Total: R{{ cartTotal }}</p>
   </div>
 </template>
 
@@ -17,28 +17,25 @@
 export default {
   computed: {
     cart() {
-      return this.$store.state.cart;
+      const cart = this.$store.state.cart
+      console.log(cart)
+      return cart
     },
     cartTotal() {
-      return this.$store.getters.cartTotal;
+      return this.$store.state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
     },
   },
   methods: {
     removeFromCart(productID) {
-      // Dispatch the removeFromCart action with the productID
-      this.$store.dispatch('removeFromCart', productID);
+      this.$store.dispatch("removeFromCart", productID);
     },
     decreaseQuantity(item) {
-      if (item.quantity > 1) {
-        item.quantity -= 1;
-        // Dispatch the updateCartItem action with the updated item
-        this.$store.dispatch('updateCartItem', item);
-      }
+      const updatedItem = { ...item, quantity: item.quantity - 1 }
+      this.$store.dispatch("updateCartItem", updatedItem)
     },
     increaseQuantity(item) {
-      // Increase the quantity and dispatch the updateCartItem action
-      item.quantity += 1;
-      this.$store.dispatch('updateCartItem', item);
+      const updatedItem = { ...item, quantity: item.quantity + 1 }
+      this.$store.dispatch("updateCartItem", updatedItem)
     },
     // ... other methods
   },

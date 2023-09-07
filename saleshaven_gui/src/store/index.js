@@ -89,16 +89,33 @@ export default createStore({
         localStorage.removeItem("userData");
       }
     },
-    addToCart(state, product) {
-      state.cart.push(product)
+    addToCart(state, productToAdd) {
+      console.log("Reached");
+      const exists = state.cart.find(
+        (item) => item.productID === productToAdd.prodID
+      );
+      console.error(exists);
+      if (exists) {
+        exists.quantity += 1;
+      } else {
+        state.cart.push({
+          productID: productToAdd.prodID,
+          prodName: productToAdd.prodName,
+          price: productToAdd.price,
+          quantity: 1,
+        });
+      }
+      console.log("Cart: ", state.cart);
     },
     removeFromCart(state, productID) {
-      state.cart = state.cart.filter(item => item.productID !== productID)
+      state.cart = state.cart.filter((item) => item.productID !== productID);
     },
     updateCartItem(state, updatedItem) {
-      const itemIndex = state.cart.findIndex(item => item.productID === updatedItem.productID)
-      if(itemIndex !== -1){
-        state.cart[itemIndex].quantity = updatedItem.quantity
+      const itemIndex = state.cart.findIndex(
+        (item) => item.productID === updatedItem.productID
+      );
+      if (itemIndex !== -1) {
+        state.cart[itemIndex].quantity = updatedItem.quantity;
       }
     },
   },
@@ -291,34 +308,25 @@ export default createStore({
     },
     async removeFromCart(context, productID) {
       try {
-        await axios.delete(`${api}cart/${productID}`, {
+        const res = await axios.delete(`${api}cart/${productID}`, {
           headers: {
             Authorization: context.state.token,
             "Content-Type": "application/json",
           },
         });
-        context.commit("removeFromCart", productID);
+        const { err, msg } = res.data
+        if(err){
+          context.commit("setError", err)
+        }
+        if(msg === "Product removed from cart"){
+          context.commit("removeFromCart", productID);
+        }
       } catch (e) {
         console.error("Error while removing from cart: ", e);
       }
     },
     async updateCartItem(context, updatedItem) {
-      try {
-        const response = await axios.post(
-          `${api}cart/${updatedItem.productID}`,
-          { quantity: updatedItem.quantity },
-          {
-            headers: {
-              Authorization: context.state.token,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        context.commit("updateCartItem", updatedItem);
-      } catch (e) {
-        context.commit("setError", "An error occurred while updating the cart");
-        console.error("Error while updating cart: ", e);
-      }
+      context.commit("updateCartItem", updatedItem)
     },
     async banUser(context, id) {
       try {
