@@ -1,4 +1,5 @@
 <template>
+  <div v-if="!users && !products">
   <div v-if="userRole === 'User' || userRole === '' || userRole === undefined || userRole === null">
     <div class="container">
       You are not authorized to be here
@@ -114,6 +115,12 @@
       </table>
     </div>
   </div>
+</div>
+<div v-else>
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 </template>
 
 <script>

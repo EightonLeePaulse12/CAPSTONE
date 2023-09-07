@@ -9,12 +9,19 @@
         </div>
       </div>
     </div>
-    <h2>Featured Products</h2>
-    <div class="featuredProd">
-      <div class="each" v-for="product in getRandom" :key="product.prodID">
-        <h3>{{ product.prodName }}</h3>
-      <p>{{ product.prodDesc }}</p>
-      <img id="feat" :src="product.prodURL" alt="">
+    <div v-if="getRandom">
+      <h2>Featured Products</h2>
+      <div class="featuredProd">
+        <div class="each" v-for="product in getRandom" :key="product.prodID">
+          <h3>{{ product.prodName }}</h3>
+          <p>{{ product.prodDesc }}</p>
+          <img id="feat" :src="product.prodURL" alt="">
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
   </div>
@@ -57,8 +64,9 @@ h4 {
   justify-content: center !important;
   align-items: center !important;
 }
-#feat{
-  height:4rem;
+
+#feat {
+  height: 4rem;
   aspect-ratio: 1/1;
 }
 
@@ -68,8 +76,8 @@ h4 {
 
 }
 
-.featuredProd{
-  display:flex;
+.featuredProd {
+  display: flex;
   flex-direction: column;
 }
 
@@ -79,7 +87,7 @@ p {
 
 }
 
-.each{
+.each {
   flex-direction: column;
 }
 
@@ -107,7 +115,7 @@ p {
 export default {
   mounted() {
     this.$store.dispatch("cookieCheck")
-    this.$store.dispatch("fetchProducts").then(()=>{
+    this.$store.dispatch("fetchProducts").then(() => {
       console.log(this.$store.state.products)
     })
   },
@@ -129,21 +137,21 @@ export default {
       // return this.$store.state.products
       const products = this.$store.state.products
 
-        // if (!this.$store.state.products) {
-        //   await this.$store.dispatch("fetchProducts")
-        // }
-        // const products = await this.$store.state.products
-        if (products) {
-          console.log("Reached")
-          const random = []
-          while (random.length < 3 && products.length > 0) {
-            const i = Math.floor(Math.random() * products.length)
-            const prod = products.splice(i, 1)[0]
-            random.push(prod)
-          }
-          return random
+      // if (!this.$store.state.products) {
+      //   await this.$store.dispatch("fetchProducts")
+      // }
+      // const products = await this.$store.state.products
+      if (products) {
+        console.log("Reached")
+        const random = []
+        while (random.length < 3 && products.length > 0) {
+          const i = Math.floor(Math.random() * products.length)
+          const prod = products.splice(i, 1)[0]
+          random.push(prod)
         }
-        return []
+        return random
+      }
+      return []
     }
   },
   methods: {

@@ -12,30 +12,35 @@
     <p>Total: {{ cartTotal }}</p>
   </div>
 </template>
-  
-  <script>
-  export default {
-    computed: {
-      cart() {
-        return this.$store.getters.cart;
-      },
-      cartTotal(){
-        return this.$store.getters.cartTotal
+
+<script>
+export default {
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal;
+    },
+  },
+  methods: {
+    removeFromCart(productID) {
+      // Dispatch the removeFromCart action with the productID
+      this.$store.dispatch('removeFromCart', productID);
+    },
+    decreaseQuantity(item) {
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+        // Dispatch the updateCartItem action with the updated item
+        this.$store.dispatch('updateCartItem', item);
       }
     },
-    methods: {
-      removeFromCart(productID) {
-        this.$store.dispatch('removeFromCart', productID);
-      },
-      decreaseQuantity(item){
-        if(item.quantity > 1){
-          item.quantity -= 1
-          this.$store.dispatch("updateCartItem", item)
-        }
-      },
-      updateCart(product){
-        this.$store.dispatch("updateCartItem", product)
-      }
+    increaseQuantity(item) {
+      // Increase the quantity and dispatch the updateCartItem action
+      item.quantity += 1;
+      this.$store.dispatch('updateCartItem', item);
     },
-  };
-  </script>
+    // ... other methods
+  },
+};
+</script>

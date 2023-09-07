@@ -21,6 +21,18 @@ export default {
     if (userData) {
       this.$store.commit("setUserData", JSON.parse(userData))
     }
+  },
+  beforeMount(){
+    this.$store.dispatch("fetchProducts")
+    this.$store.dispatch("fetchUsers")
+  },
+  computed:{
+    users(){
+      return this.$store.state.users
+    },
+    products(){
+      return this.$store.state.products
+    }
   }
 }
 </script>

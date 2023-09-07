@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="products">
         <div class="container-fluid">
             <div class="row card-group row-cols-1 row-cols-sm-2 row-cols-lg-3 mx-auto g-4">
                 <div class="col" v-for="product in products" :key="product.prodID">
@@ -21,6 +21,11 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -29,7 +34,7 @@ export default {
         products() {
             return this.$store.state.products
         },
-        product(){
+        product() {
             return this.$store.state.product
         }
     },
@@ -42,10 +47,10 @@ export default {
         },
         singleProduct(prodID) {
             const chosenProd = this.products.find(product => product.prodID === prodID)
-            if(chosenProd){
+            if (chosenProd) {
                 this.$store.commit("setSelectedProduct", chosenProd)
-            this.$router.push({ name: "ProductView", params: { prodID: chosenProd.prodID } })
-            }   
+                this.$router.push({ name: "ProductView", params: { prodID: chosenProd.prodID } })
+            }
         }
     }
 }
@@ -55,11 +60,13 @@ export default {
 .buttons {
     display: flex !important;
 }
-#product{
+
+#product {
     aspect-ratio: 1/1;
     object-fit: cover;
 }
-.card-body{
-    height:20rem !important;
+
+.card-body {
+    height: 20rem !important;
 }
 </style>

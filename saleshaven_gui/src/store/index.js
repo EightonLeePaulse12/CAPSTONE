@@ -28,7 +28,7 @@ export default createStore({
       return state.error;
     },
     cartTotal(state) {
-      return state.cart.reduce((total, product)=> total + product.price, 0)
+      return state.cart.reduce((total, product) => total + product.price, 0);
     },
   },
   mutations: {
@@ -90,55 +90,15 @@ export default createStore({
       }
     },
     addToCart(state, product) {
-      const exists = state.cart.find(
-        (item) => item.productID === product.productID
-      );
-      if (exists) {
-        exists.quantity += 1;
-        Swal.fire({
-          icon: "success",
-          title: "Item already in cart",
-          text: `${product.prodName} has already been added to your cart.`,
-          showConfirmButton: false,
-          timer: 1000,
-        });
-      } else {
-        product.quantity = 1;
-        state.cart.push(product);
-        Swal.fire({
-          icon: "success",
-          title: "Added to Cart",
-          text: `${product.prodName} has been added to your cart.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
+      state.cart.push(product)
     },
     removeFromCart(state, productID) {
-      const cartItem = state.cart.find((item) => item.productID === productID);
-      if (cartItem) {
-        if (cartItem.quantity > 1) {
-          cartItem.quantity -= 1;
-        } else {
-          state.cart = state.cart.filter(
-            (item) => item.productID !== productID
-          );
-        }
-      }
-      Swal.fire({
-        icon: "success",
-        title: "Removed from Cart",
-        text: "Item has been removed from your cart.",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      state.cart = state.cart.filter(item => item.productID !== productID)
     },
     updateCartItem(state, updatedItem) {
-      const cartItem = state.cart.find(
-        (item) => item.productID === updatedItem.productID
-      );
-      if (cartItem) {
-        cartItem.quantity = updatedItem.quantity;
+      const itemIndex = state.cart.findIndex(item => item.productID === updatedItem.productID)
+      if(itemIndex !== -1){
+        state.cart[itemIndex].quantity = updatedItem.quantity
       }
     },
   },
@@ -299,14 +259,25 @@ export default createStore({
     },
     async addToCart(context, product) {
       try {
-        const response = await axios.post(`${api}cart`, {productID: product.prodID}, {
-          headers: {
-            Authorization: context.state.token,
-            "Content-Type": "application/json",
-          },
-        });
-        if (response.data.msg) {
+        const response = await axios.post(
+          `${api}cart`,
+          { productID: product.prodID },
+          {
+            headers: {
+              Authorization: context.state.token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.data.msg === "Product added to cart successfully") {
           context.commit("addToCart", product);
+          Swal.fire({
+            icon: "success",
+            title: "Added to Cart",
+            text: `${product.prodName} has been added to your cart.`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         } else {
           context.commit("setError", "Failed to add to cart");
         }
