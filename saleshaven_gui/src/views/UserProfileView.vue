@@ -31,6 +31,17 @@
                         <button @click="deactivateAcc">Deactivate Account</button>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="data">
+                        <div>
+                            <div>
+                              <h2>Transaction Counts</h2>
+                              <p>Buy Transactions: {{ buyTransactionCount }}</p>
+                              <p>Sell Transactions: {{ sellTransactionCount }}</p>
+                            </div>
+                          </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -48,6 +59,12 @@ export default {
         },
         user() {
             return this.$store.state.user
+        },
+        buyTransactionCount(){
+            return this.$store.state.buyTransactionCount
+        },
+        sellTransactionCount(){
+            return this.$store.state.sellTransactionCount
         }
     },
     methods: {
@@ -55,6 +72,11 @@ export default {
             this.$store.dispatch("logout")
             this.$router.push("/login")
         }
+    },
+    created(){
+        const userID = this.$store.state.userData.userID
+        this.$store.dispatch('buyTransactions', userID)
+        this.$store.dispatch('sellTransactions', userID)
     }
 }
 </script>
