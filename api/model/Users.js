@@ -52,21 +52,32 @@ class Users {
       email: data.email,
       password: data.userPass,
     };
-    const query = `
-            INSERT INTO Users SET ?
-        `;
-    db.query(query, [req.body], (err) => {
-      if (!err) {
-        let token = createToken(user);
+    const checkEmail = `SELECT COUNT(*) AS Count FROM Users WHERE email = ?`;
+    db.query(checkEmail, [data.email], (checkErr, checkRes) => {
+      if (checkErr) throw checkErr;
+      if (checkRes[0].Count > 0) {
         res.json({
           status: res.statusCode,
-          token,
-          msg: "User registered successfully",
+          msg: "This email address is already in use",
         });
       } else {
-        res.json({
-          err,
-          msg: "An error occured",
+        const query = `
+            INSERT INTO Users SET ?
+        `;
+        db.query(query, [req.body], (err) => {
+          if (!err) {
+            let token = createToken(user);
+            res.json({
+              status: res.statusCode,
+              token,
+              msg: "User registered successfully",
+            });
+          } else {
+            res.json({
+              err,
+              msg: "An error occured",
+            });
+          }
         });
       }
     });
@@ -115,7 +126,7 @@ class Users {
             return res.json({
               msg: "Logged in successfully",
               token,
-              userData
+              userData,
             });
           } else {
             return res.json({
@@ -147,9 +158,9 @@ class Users {
     });
   }
   editUser(req, res) {
-    const data = req.body
-    if(data.userPass){
-      data.userPass = hashSync(data.userPass, 10)
+    const data = req.body;
+    if (data.userPass) {
+      data.userPass = hashSync(data.userPass, 10);
     }
     const query = `
         UPDATE Users SET ? WHERE userID = ${req.params.id}
