@@ -22,6 +22,8 @@ export default createStore({
     featuredProducts: null,
     msg: null,
     cart: [],
+    buyTransactions:0,
+    sellTransactions:0
   },
   getters: {
     getError(state) {
@@ -118,6 +120,12 @@ export default createStore({
         state.cart[itemIndex].quantity = updatedItem.quantity;
       }
     },
+    setBuyTransactions(state, count){
+      state.buyTransactions = count
+    },
+    setSellTransactions(state, count){
+      state.sellTransactions = count
+    }
   },
   actions: {
     async fetchUsers(context) {
@@ -430,6 +438,22 @@ export default createStore({
         console.log(e);
       }
     },
+    async buyTransactions(context, userID){
+      try{
+        const res = await axios.get(`${api}count-buys/${userID}`)
+        context.commit("setBuyTransactions", res.data.count)
+      } catch(e){
+        console.error("Error counting buy transactions: ", e)
+      }
+    },
+    async sellTransactions(context, userID){
+      try{
+        const res = await axios.get(`${api}count-sells/${userID}`)
+        context.commit("setSellTransactions", res.data.count)
+      } catch(e){
+        console.error("Error while counting sells: ", e)
+      }
+    },
     async recordTransaction(context, transactionData){
       try{
         const res = await axios.post(`${api}/record`, transactionData)
@@ -437,7 +461,7 @@ export default createStore({
       } catch(e){
         console.error("Error while recording transaction: ", e)
       }
-    }
+    },
   },
   modules: {},
 });
