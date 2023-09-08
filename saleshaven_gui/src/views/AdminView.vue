@@ -1,126 +1,126 @@
 <template>
-  <div v-if="!users && !products">
-  <div v-if="userRole === 'User' || userRole === '' || userRole === undefined || userRole === null">
-    <div class="container">
-      You are not authorized to be here
+  <div v-if="users && products">
+    <div v-if="userRole === 'User' || userRole === '' || userRole === undefined || userRole === null">
+      <div class="container">
+        You are not authorized to be here
+      </div>
     </div>
-  </div>
-  <div v-else-if="userRole === 'Admin'" class="table-responsive table-container">
-    <h4>Users</h4>
-    <table class="table" v-for="user in users" :key="user.userID">
-      <thead>
-        <tr>
-          <th class="name">First Name</th>
-          <th class="name">Last Name</th>
-          <th class="name">Gender</th>
-          <th class="name">Role</th>
-          <th>Profile Pic</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="name">{{ user.firstName }}</td>
-          <td class="name">{{ user.lastName }}</td>
-          <td class="name">{{ user.gender }}</td>
-          <td class="name">{{ user.userRole }}</td>
-          <td><img id="pic" :src="user.userProfile" :alt="user.firstName"></td>
-          <td><button @click="banUser(user.userID)">Ban</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="table-responsive">
-      <h4>Products</h4>
-      <table class="table">
+    <div v-else-if="userRole === 'Admin'" class="table-responsive table-container">
+      <h4>Users</h4>
+      <table class="table" v-for="user in users" :key="user.userID">
         <thead>
           <tr>
-            <th class="name">Name</th>
-            <th class="name">Description</th>
-            <th class="name">Category</th>
-            <th class="name">Price</th>
-            <th class="name">Stock</th>
-            <th>Product image</th>
-            <th>Actions</th>
+            <th class="name">First Name</th>
+            <th class="name">Last Name</th>
+            <th class="name">Gender</th>
+            <th class="name">Role</th>
+            <th>Profile Pic</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in products" :key="product.prodID">
-            <td class="name">{{ product.prodName }}</td>
-            <td class="name">{{ product.prodDesc }}</td>
-            <td class="name">{{ product.category }}</td>
-            <td class="name">{{ product.price }}</td>
-            <td class="name">{{ product.stock }}</td>
-            <td><img id="pic" :src="product.prodURL" :alt="product.prodName"></td>
-            <td>
-              <updateProduct :product="product" />
-              <button @click="deleteProduct(product.prodID)">Delete</button>
-            </td>
+          <tr>
+            <td class="name">{{ user.firstName }}</td>
+            <td class="name">{{ user.lastName }}</td>
+            <td class="name">{{ user.gender }}</td>
+            <td class="name">{{ user.userRole }}</td>
+            <td><img id="pic" :src="user.userProfile" :alt="user.firstName"></td>
+            <td><button @click="banUser(user.userID)">Ban</button></td>
           </tr>
         </tbody>
       </table>
+      <div class="table-responsive">
+        <h4>Products</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="name">Name</th>
+              <th class="name">Description</th>
+              <th class="name">Category</th>
+              <th class="name">Price</th>
+              <th class="name">Stock</th>
+              <th>Product image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="product in products" :key="product.prodID">
+              <td class="name">{{ product.prodName }}</td>
+              <td class="name">{{ product.prodDesc }}</td>
+              <td class="name">{{ product.category }}</td>
+              <td class="name">{{ product.price }}</td>
+              <td class="name">{{ product.stock }}</td>
+              <td><img id="pic" :src="product.prodURL" :alt="product.prodName"></td>
+              <td>
+                <updateProduct :product="product" />
+                <button @click="deleteProduct(product.prodID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div v-else-if="userRole === 'Owner'" class="table-responsive table-container">
-    <h4>Users</h4>
-    <table class="table" v-for="user in users" :key="user.userID">
-      <thead>
-        <tr>
-          <th class="name">First Name</th>
-          <th class="name">Last Name</th>
-          <th class="name">Gender</th>
-          <th class="name">Role</th>
-          <th>Profile Pic</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="name">{{ user.firstName }}</td>
-          <td class="name">{{ user.lastName }}</td>
-          <td class="name">{{ user.gender }}</td>
-          <td class="name">{{ user.userRole }}</td>
-          <td><img id="pic" :src="user.userProfile" :alt="user.firstName"></td>
-          <td><button @click="banUser(user.userID)">Ban</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="table-responsive">
-      <h4>Products</h4>
-      <table class="table">
+    <div v-else-if="userRole === 'Owner'" class="table-responsive table-container">
+      <h4>Users</h4>
+      <table class="table" v-for="user in users" :key="user.userID">
         <thead>
           <tr>
-            <th class="name">Name</th>
-            <th class="name">Description</th>
-            <th class="name">Category</th>
-            <th class="name">Price</th>
-            <th class="name">Stock</th>
-            <th>Product image</th>
-            <th>Actions</th>
+            <th class="name">First Name</th>
+            <th class="name">Last Name</th>
+            <th class="name">Gender</th>
+            <th class="name">Role</th>
+            <th>Profile Pic</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in products" :key="product.prodID">
-            <td class="name">{{ product.prodName }}</td>
-            <td class="name">{{ product.prodDesc }}</td>
-            <td class="name">{{ product.category }}</td>
-            <td class="name">{{ product.price }}</td>
-            <td class="name">{{ product.stock }}</td>
-            <td><img id="pic" :src="product.prodURL" :alt="product.prodName"></td>
-            <td>
-              <updateProduct :product="product" />
-              <button @click="deleteProduct(product.prodID)">Delete</button>
-            </td>
+          <tr>
+            <td class="name">{{ user.firstName }}</td>
+            <td class="name">{{ user.lastName }}</td>
+            <td class="name">{{ user.gender }}</td>
+            <td class="name">{{ user.userRole }}</td>
+            <td><img id="pic" :src="user.userProfile" :alt="user.firstName"></td>
+            <td><button @click="banUser(user.userID)">Ban</button></td>
           </tr>
         </tbody>
       </table>
+      <div class="table-responsive">
+        <h4>Products</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="name">Name</th>
+              <th class="name">Description</th>
+              <th class="name">Category</th>
+              <th class="name">Price</th>
+              <th class="name">Stock</th>
+              <th>Product image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="product in products" :key="product.prodID">
+              <td class="name">{{ product.prodName }}</td>
+              <td class="name">{{ product.prodDesc }}</td>
+              <td class="name">{{ product.category }}</td>
+              <td class="name">{{ product.price }}</td>
+              <td class="name">{{ product.stock }}</td>
+              <td><img id="pic" :src="product.prodURL" :alt="product.prodName"></td>
+              <td>
+                <updateProduct :product="product" />
+                <button @click="deleteProduct(product.prodID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
-<div v-else>
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
+  <div v-else>
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -134,14 +134,14 @@ export default {
     userRole() {
       return this.$store.state.userRole
     },
-    users() {
-      return this.$store.state.users
+    user() {
+      return this.$store.state.user
     },
     products() {
       return this.$store.state.products
     },
-    user() {
-      return this.$store.state.user
+    users() {
+      return this.$store.state.users
     }
   },
   mounted() {
@@ -150,28 +150,72 @@ export default {
   },
   methods: {
     banUser(id) {
-      if (confirm("Do you want to ban this user?")) {
-        if (id !== 1) {
-          this.$store.dispatch("banUser", id)
-          setTimeout(() => {
-            location.reload()
-          }, 500)
-        } else{
-          Swal.fire({
-            icon: "error",
-            title: "Cannot delete this user",
-            text:"You are not authorized to ban this user"
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You are about to ban this user.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, ban this user",
+        cancelButtonText: "No, cancel",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          this.$store.dispatch("banUser", id).then(() => {
+            Swal.fire(
+              "Banned",
+              "This user has been banned",
+              'success',
+            )
+            setTimeout(() => {
+              location.reload()
+            }, 500)
+          }).catch((err) => {
+            Swal.fire(
+              "Error!",
+              "An error occured while trying to ban this user",
+              "error"
+            )
           })
+        } else if (res.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            "Cancelled",
+            "The user ban has been cancelled",
+            "info"
+          )
         }
-      }
+      })
     },
     deleteProduct(prodID) {
-      if (confirm("Are you sure you want to delete this product?")) {
-        this.$store.dispatch("deleteProduct", prodID)
-        setTimeout(() => {
-          location.reload()
-        }, 500)
-      }
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You are about to remove this product.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, remove this product",
+        cancelButtonText: "No, cancel",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          this.$store.dispatch("deleteProduct", prodID)
+            .then(() => {
+              Swal.fire(
+                "Removed",
+                "This product has been removed",
+                'success',
+              )
+            }).catch((error) => {
+              Swal.fire(
+                "Error!",
+                "An error occured while trying to remove this product",
+                "error"
+              )
+            })
+        } else if (res.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            "Cancelled",
+            "The user ban has been cancelled",
+            "info"
+          )
+        }
+      })
     }
   }
 

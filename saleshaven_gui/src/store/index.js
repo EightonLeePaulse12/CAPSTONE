@@ -314,12 +314,16 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        const { err, msg } = res.data
+        if(res.status === 200){
+          const { err, msg } = res.data
         if(err){
           context.commit("setError", err)
         }
         if(msg === "Product removed from cart"){
           context.commit("removeFromCart", productID);
+        } else{
+          context.commit("setError", "Something went wrong with the server")
+        }
         }
       } catch (e) {
         console.error("Error while removing from cart: ", e);
@@ -423,6 +427,11 @@ export default createStore({
         console.log(e);
       }
     },
+    // async recordTransaction(context, transactionData){
+    //   try{
+    //     const res = await axios.post(`${api}/record`, transactionData)
+    //   }
+    // }
   },
   modules: {},
 });

@@ -31,11 +31,11 @@
 <script>
 export default {
     computed: {
-        products() {
-            return this.$store.state.products
-        },
         product() {
             return this.$store.state.product
+        },
+        products(){
+            return this.$store.state.products
         }
     },
     mounted() {

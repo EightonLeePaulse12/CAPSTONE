@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    
+
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                         {{ userData ? userData.userRole : 'false' }} <br>
                     </div>
                     <div class="update-details">
-                        <EditProfile :userData="userData"/>
+                        <EditProfile :userData="userData" />
                     </div>
                     <div class="logout">
                         <button @click="logout">Log out</button>
@@ -39,14 +39,14 @@
 <script>
 import EditProfile from '@/components/UpdateUser.vue'
 export default {
-    components:{
+    components: {
         EditProfile
     },
     computed: {
         userData() {
             return this.$store.state.userData
         },
-        user(){
+        user() {
             return this.$store.state.user
         }
     },
