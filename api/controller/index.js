@@ -73,7 +73,7 @@ routes.post("/cart", bodyParser.json(), async (req, res) => {
 routes.delete("/cart/:productID", (req, res) => {
   const userEmail = req.dec.email;
   getUserIDByEmail(userEmail).then((userID)=> {
-    const { productID } = req.params.productID
+    const { productID } = req.params
     cart.removeFromCart(userID, productID, res);
   }).catch((error)=>{
     console.error("Error getting userID: ", error)
