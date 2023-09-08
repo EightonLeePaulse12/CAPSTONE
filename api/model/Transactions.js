@@ -1,6 +1,34 @@
 const db = require('../config')
 
 class Transactions{
+    fetchBuyTransactions(userID, cb){
+        const query = `
+            SELECT COUNT(*) AS buyTransactions
+            FROM Transactions WHERE userID = ?
+            AND transaction_type = 'buy'
+        `
+        db.query(query, [userID], (err, results)=>{
+            if(err){
+                cb(err, null)
+            } else{
+                const buyTransactions = results[0].buyTransactions || 0;
+                cb(null, buyTransactions)
+            }
+        })
+    }
+    fetchSellTransactions(userID, cb){
+        const query = `
+            SELECT COUNT(*) AS sellTransactions FROM Transactions WHERE userID = ? AND transaction_type = 'sell'
+        `
+        db.query(query, [userID], (err, results)=>{
+            if(err){
+                cb(err, null)
+            } else{
+                const sellTransactions = results[0].sellTransactions || 0
+                cb(null, sellTransactions)
+            }
+        })
+    }
     recordTransaction(userID, prodID, transactionType, transactionDate, res){
         const query = `
             INSERT INTO Transactions (userID, prodID, transaction_type, transaction_date) VALUES(?, ?, ?, ?)

@@ -96,6 +96,30 @@ routes.post("/record", bodyParser.json(), (req, res) => {
     res
   );
 });
+routes.get("/count-buys/:userID", (req, res)=>{
+  const { userID } = req.params
+  transactions.fetchBuyTransactions(userID, (err, buyTransactions)=>{
+    if(err){
+      res.status(500).json({ error: "Error counting buys" })
+    } else{
+      res.json({
+        buyTransactions
+      })
+    }
+  })
+})
+routes.get("/count-sells/:userID", (req, res)=>{
+  const userID = req.params
+  transactions.fetchSellTransactions(userID, (err, sellTransactions)=>{
+    if(err){
+      res.status(500).json({ error: "Error counting sells" })
+    } else{
+      res/json({
+        sellTransactions
+      })
+    }
+  }), 
+})
 routes.get("/avg-quant/:userID", (req, res) => {
   const { userID } = req.params;
   transactions.getAvg(userID, res);
