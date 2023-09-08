@@ -10,6 +10,9 @@
       </li>
     </ul>
     <p>Total: R{{ cartTotal }}</p>
+    <router-link :to="{ name: 'checkout' }">
+      Proceed to Checkout
+    </router-link>
   </div>
 </template>
 

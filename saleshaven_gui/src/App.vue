@@ -16,6 +16,14 @@ export default {
     Navbar,
     Footer
   },
+  computed:{
+    products(){
+      return this.$store.state.products
+    },
+    users(){
+      return this.$store.state.users
+    }
+  },
   created() {
     const userData = localStorage.getItem("userData")
     if (userData) {
@@ -25,14 +33,6 @@ export default {
   beforeMount(){
     this.$store.dispatch("fetchProducts")
     this.$store.dispatch("fetchUsers")
-  },
-  computed:{
-    users(){
-      return this.$store.state.users
-    },
-    products(){
-      return this.$store.state.products
-    }
   }
 }
 </script>
