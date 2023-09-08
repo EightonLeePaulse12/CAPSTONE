@@ -51,20 +51,26 @@ export default {
           email: this.email,
           userPass: this.password,
         })
-        if (resp.success) {
+        if (resp.success && resp.token) {
           await Swal.fire({
             icon: "success",
             title: "Registration successful",
             text: "You are now registered, please log in",
           });
-        } else {
+          this.$router.push("/login")
+        } else if(resp.success === false && resp.msg === "Email is already in use"){
           await Swal.fire({
             icon: "error",
-            title: "Registration failed",
-            text: resp.error || "Unexpected error"
+            title: "Email already in use",
+            text: resp.msg
+          })
+        } else{
+          await Swal.fire({
+            icon: "error",
+            title: "Unexpected error",
+            text: "Unexpected error has occured"
           })
         }
-        this.$router.push("/login")
       } catch (e) {
         console.error("Registration error: ", e);
       }

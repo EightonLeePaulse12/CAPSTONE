@@ -4,7 +4,7 @@
             <h2>Checkout</h2>
           </div>
           <div class="finish">
-            <button @click="recordTransaction">Complete Purchase</button>
+            <button @click="complete">Complete Purchase</button>
           </div>
     </div>
 </template>
@@ -13,6 +13,12 @@
 export default {
     props:{
         total: Number
+    },
+    complete(){
+        const transData = {
+            userID: this.$store.state.userData.userID,
+            prodID: this.selectedProduct.prodID
+        }
     }
 }
 </script>

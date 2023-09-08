@@ -198,12 +198,15 @@ export default createStore({
           context.commit("setError", msg);
           context.commit("setRegStatus", "Not registered");
           return { success: false, error: msg };
-        } else if (token) {
+        } else if (token && msg === "User registered successfully") {
           context.commit("setToken", token);
           context.commit("setRegStatus", "Registered successfully");
           return { success: true, token };
         } else if (err) {
           console.error(err);
+        } else if(msg === "This email address is already in use"){
+          context.commit("setRegStatus", "Not registered")
+          return { success: false, msg: "Email is already in use" }
         }
       } catch (e) {
         context.commit("setError", e);
@@ -427,11 +430,14 @@ export default createStore({
         console.log(e);
       }
     },
-    // async recordTransaction(context, transactionData){
-    //   try{
-    //     const res = await axios.post(`${api}/record`, transactionData)
-    //   }
-    // }
+    async recordTransaction(context, transactionData){
+      try{
+        const res = await axios.post(`${api}/record`, transactionData)
+        console.log("Transaction recorded successfully", res.data)
+      } catch(e){
+        console.error("Error while recording transaction: ", e)
+      }
+    }
   },
   modules: {},
 });
