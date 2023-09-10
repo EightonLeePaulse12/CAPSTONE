@@ -23,7 +23,8 @@ export default createStore({
     msg: null,
     cart: [],
     buyTransactions:0,
-    sellTransactions:0
+    sellTransactions:0,
+    points: 0
   },
   getters: {
     getError(state) {
@@ -125,6 +126,15 @@ export default createStore({
     },
     setSellTransactions(state, count){
       state.sellTransactions = count
+    },
+    awardPoints(state, { userID, points }){
+      const user = state.users.find((user) => user.userID === userID)
+      if(user){
+        user.points += points
+      }
+    },
+    increasePoints(state, amount){
+      state.points += amount
     }
   },
   actions: {
@@ -458,6 +468,14 @@ export default createStore({
       try{
         const res = await axios.post(`${api}/record`, transactionData)
         console.log("Transaction recorded successfully", res.data)
+        let pointsToAward = 0;
+        if(transactionData.transactionType === 'buy'){
+          pointsToAward = 10
+        } else if(transactionData.transactionType === 'sell'){
+          pointsToAward = 15
+        }
+
+        context.commit("increasePoints", pointsToAward)
       } catch(e){
         console.error("Error while recording transaction: ", e)
       }

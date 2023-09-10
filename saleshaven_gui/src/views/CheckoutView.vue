@@ -1,26 +1,38 @@
 <template>
+  <div>
     <div>
-        <div>
-            <h2>Checkout</h2>
-          </div>
-          <div class="finish">
-            <button @click="complete">Complete Purchase</button>
-          </div>
+      <h2>Checkout</h2>
     </div>
+    <div class="finish">
+      <button @click="completePurchase">Complete Purchase</button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    props:{
-        total: Number
+  computed: {
+    cart() {
+      return this.$store.state.cart;
     },
-    complete(){
-        const transData = {
-            userID: this.$store.state.userData.userID,
-            prodID: this.selectedProduct.prodID
-        }
-    }
-}
+  },
+  props: {
+    total: Number,
+  },
+  methods: {
+    completePurchase() {
+      this.cart.forEach((item) => {
+        const transactionData = {
+          userID: this.$store.state.userData.userID,
+          prodID: item.productID,
+          transactionType: "buy",
+          transactionDate: new Date().toISOString(),
+        };
+        this.$store.dispatch("recordTransaction", transactionData);
+      });
+    },
+  },
+};
 </script>
 
 <style scoped></style>

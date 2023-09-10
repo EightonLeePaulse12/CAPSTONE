@@ -14,6 +14,7 @@
                 </div>
                 <div class="col">
                     <div class="data">
+                        <p>Points: {{ $store.state.points }} </p>
                         {{ userData ? userData : 'false' }}
                         {{ userData ? userData.firstName : 'false' }} <br>
                         {{ userData ? userData.lastName : 'false' }} <br>

@@ -92,6 +92,11 @@ export default {
 
 .nav-link {
   color: white !important;
+  transition: color .3s ease;
+}
+
+.nav-link:hover{
+  color:blue;
 }
 
 #nav {
