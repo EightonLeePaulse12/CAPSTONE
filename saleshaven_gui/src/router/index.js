@@ -6,11 +6,13 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    meta: { title: 'Home - SalesHaven' },
     component: HomeView
   },
   {
     path: '/about',
     name: 'about',
+    meta: { title: 'About - SalesHaven' },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -20,6 +22,8 @@ const routes = [
   {
     path: '/register',
     name: 'register',
+    meta: { title: 'Register - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -29,6 +33,8 @@ const routes = [
   {
     path: '/login',
     name: 'login',
+    meta: { title: 'Login - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -37,6 +43,8 @@ const routes = [
   {
     path: '/products',
     name: 'products',
+    meta: { title: 'Catalog - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -45,6 +53,8 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
+    meta: { title: 'Admin - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -53,6 +63,8 @@ const routes = [
   {
     path: '/cart',
     name: 'cart',
+    meta: { title: 'Cart - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -61,6 +73,8 @@ const routes = [
   {
     path: '/checkout',
     name: 'checkout',
+    meta: { title: 'Checkout - SalesHaven' },
+
     props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -70,6 +84,8 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
+    meta: { title: 'Profile - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -78,6 +94,8 @@ const routes = [
   {
     path: '/contact',
     name: 'contact',
+    meta: { title: 'Contact - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -86,6 +104,8 @@ const routes = [
   {
     path: '/product/:prodID',
     name: 'ProductView',
+    meta: { title: 'Product - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -94,6 +114,8 @@ const routes = [
   {
     path: '/success',
     name: 'success',
+    meta: { title: 'Purchase Complete - SalesHaven' },
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

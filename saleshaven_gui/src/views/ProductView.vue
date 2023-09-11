@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div v-else>
+    <div v-else id="else">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -61,7 +61,17 @@ export default {
 .buttons {
     display: flex !important;
 }
-
+#else{
+    display:flex;
+    height:70vh;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .spinner-border{
+    height:9rem;
+    width:9rem;
+  }
 #product {
     aspect-ratio: 1/1;
     object-fit: cover;

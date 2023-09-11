@@ -466,7 +466,12 @@ export default createStore({
     },
     async recordTransaction(context, transactionData){
       try{
-        const res = await axios.post(`${api}/record`, transactionData)
+        const res = await axios.post(`${api}record`, transactionData, {
+          headers:{
+            Authorization: context.state.token,
+            "Content-Type":"application/json"
+          }
+        })
         console.log("Transaction recorded successfully", res.data)
         let pointsToAward = 0;
         if(transactionData.transactionType === 'buy'){
