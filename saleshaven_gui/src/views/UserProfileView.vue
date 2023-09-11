@@ -14,7 +14,6 @@
                 </div>
                 <div class="col">
                     <div class="data">
-                        <p>Points: {{ $store.state.points }} </p>
                         {{ userData ? userData : 'false' }}
                         {{ userData ? userData.firstName : 'false' }} <br>
                         {{ userData ? userData.lastName : 'false' }} <br>
@@ -36,11 +35,11 @@
                     <div class="data">
                         <div>
                             <div>
-                              <h2>Transaction Counts</h2>
-                              <p>Buy Transactions: {{ buyTransactionCount }}</p>
-                              <p>Sell Transactions: {{ sellTransactionCount }}</p>
+                                <h2>Transaction Counts</h2>
+                                <p>Points: {{ points }}</p>
+
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,11 +60,8 @@ export default {
         user() {
             return this.$store.state.user
         },
-        buyTransactionCount(){
-            return this.$store.state.buyTransactionCount
-        },
-        sellTransactionCount(){
-            return this.$store.state.sellTransactionCount
+        points() {
+            return this.$store.state.points
         }
     },
     methods: {
@@ -74,7 +70,7 @@ export default {
             this.$router.push("/login")
         }
     },
-    created(){
+    created() {
         const userID = this.$store.state.userData.userID
         this.$store.dispatch('buyTransactions', userID)
         this.$store.dispatch('sellTransactions', userID)

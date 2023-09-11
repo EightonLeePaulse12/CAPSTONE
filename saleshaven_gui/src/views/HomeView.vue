@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else id="else">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -73,6 +73,18 @@
   align-items: center !important;
 }
 
+#else{
+  display:flex;
+  height:70vh;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-border{
+  height:9rem;
+  width:9rem;
+}
+
 .home::before {
   content: "";
   position: absolute;
@@ -80,7 +92,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 h4 {
@@ -185,13 +197,7 @@ export default {
       return role;
     },
     getRandom() {
-      // return this.$store.state.products
       const products = this.$store.state.products;
-
-      // if (!this.$store.state.products) {
-      //   await this.$store.dispatch("fetchProducts")
-      // }
-      // const products = await this.$store.state.products
       if (products) {
         console.log("Reached");
         const random = [];

@@ -116,7 +116,7 @@
       </div>
     </div>
   </div>
-  <div v-else>
+  <div v-else id="else">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
@@ -229,7 +229,17 @@ table {
   border: 10px solid #6d4e9f;
   background: transparent !important;
 }
-
+#else{
+  display:flex;
+  height:70vh;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-border{
+  height:9rem;
+  width:9rem;
+}
 .name {
   width: 8rem;
 }

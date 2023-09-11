@@ -1,6 +1,6 @@
 <template>
-  <div>
-    About Page
+  <div id="about">
+    <h2>About Page</h2>
 
   </div>
 </template>
@@ -11,4 +11,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+  #about{
+    height:100vh;
+  }
+</style>
