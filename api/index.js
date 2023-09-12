@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const { errorHandling } = require("./middleware/ErrorHandling");
 
 app.use(
+  express.json(),
   express.static("./static"),
   express.urlencoded({ extended: false }),
   cookieParser(),
