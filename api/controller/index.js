@@ -108,18 +108,20 @@ routes.get("/count-buys/:userID", (req, res)=>{
     }
   })
 })
+
 routes.get("/count-sells/:userID", (req, res)=>{
   const userID = req.params
   transactions.fetchSellTransactions(userID, (err, sellTransactions)=>{
     if(err){
       res.status(500).json({ error: "Error counting sells" })
     } else{
-      res/json({
+      res.json({
         sellTransactions
       })
     }
-  }), 
+  })
 })
+
 routes.get("/avg-quant/:userID", (req, res) => {
   const { userID } = req.params;
   transactions.getAvg(userID, res);
