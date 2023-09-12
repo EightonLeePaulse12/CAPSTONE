@@ -80,7 +80,10 @@
             <td class="name">{{ user.gender }}</td>
             <td class="name">{{ user.userRole }}</td>
             <td><img id="pic" :src="user.userProfile" :alt="user.firstName"></td>
-            <td><button @click="banUser(user.userID)">Ban</button></td>
+
+            <td>
+              <updareUser :user="user" />
+              <button @click="banUser(user.userID)">Ban</button></td>
           </tr>
         </tbody>
       </table>
@@ -126,9 +129,11 @@
 <script>
 import Swal from 'sweetalert2'
 import updateProduct from '@/components/UpdateProduct.vue'
+import UpdareUser from '@/components/UpdareUser.vue'
 export default {
   components: {
-    updateProduct
+    updateProduct,
+    UpdareUser
   },
   computed: {
     userRole() {

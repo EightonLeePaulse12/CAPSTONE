@@ -39,6 +39,7 @@ export default {
           transactionDate: formattedDate
         }
         await this.$store.dispatch("recordTransaction", transactionData);
+        this.$store.state.cart === null
 
       }
     }

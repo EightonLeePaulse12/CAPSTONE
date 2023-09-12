@@ -23,10 +23,13 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 /* add icons to the library */
 library.add(fas, far);
+import AOS from "aos";
+import "aos/dist/aos.css";
 const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(store);
 app.use(router);
 app.use(Cookies);
+app.use(AOS.init());
 store.dispatch("init");
 app.mount("#app");
