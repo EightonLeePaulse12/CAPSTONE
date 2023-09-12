@@ -37,14 +37,14 @@
                     <h5>Contact Us Today:</h5>
                     <form action="https://formspree.io/f/xgejygbv" method="POST">
                         <div id="mail">
-                            <label for="email">Email Address</label>
-                            <input type="email" name="email" placeholder="Email" required
+                            <label for="email" id="lab">Email Address</label>
+                            <input type="email" id="em" name="email" placeholder="Email" required
                                 oninvalid="this.setCustomValidity('Please enter your email address')"
                                 oninput="this.setCustomValidity('')">
                         </div>
-                        <div id="mes">
-                            <label for="message">Message</label>
-                            <input type="text" class="message" name="message" placeholder="Tell us something..." required
+                        <div>
+                            <label for="message" id="lab">Message</label>
+                            <input type="text" id="mes" class="message" name="message" placeholder="Tell us something..." required
                                 oninvalid="this.setCustomValidity('Tell us something...')"
                                 oninput="this.setCustomValidity('')">
                         </div>
@@ -75,7 +75,9 @@ export default {
 <style scoped>
 .yes {
     padding: 20px;
-    padding-top: 70px;
+    padding-top: 20px;
+    margin-top:50px !important;
+    border-top: 1px solid white;
 }
 
 .container-fluid {
@@ -89,8 +91,11 @@ form {
 
 #mes {
     height: 100% !important;
+    border:1px solid white;
 }
-
+#lab{
+    padding:0 0 10px 0 !important;
+}
 #mail {
     height: 100% !important;
 }
@@ -99,7 +104,15 @@ input{
     border:transparent;
     margin-top:7px;
 }
-
+#em{
+    background: transparent;
+    border:1px solid white;
+    padding:5px !important;
+}
+#mes{
+    background: transparent;
+    padding:20px !important;
+}
 .butto{
     display: flex;
     justify-content: center;

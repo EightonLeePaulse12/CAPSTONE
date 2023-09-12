@@ -16,7 +16,15 @@
     <div v-if="getRandom">
       <h2>Featured Products</h2>
       <div class="featuredProd">
-        <div
+        <div class="card mb-3 each" v-for="product in getRandom" :key="product.prodID" @mouseover="highlightProduct(product.prodID)" @mouseleave="resetHighlight()">
+          <img :src="product.prodURL" id="prodd" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.prodName }}</h5>
+            <p class="card-text it">{{ product.prodDesc }}</p>
+            <p class="card-text"><small class="text-body-secondary"><button id="buttonn" @click="toProd">View Catalog</button></small></p>
+          </div>
+        </div>
+        <!-- <div
           class="each"
           v-for="product in getRandom"
           :key="product.prodID"
@@ -33,6 +41,8 @@
           />
         </div>
       </div>
+    </div> -->
+    </div>
     </div>
     <div v-else id="else">
       <div class="spinner-border" role="status">
@@ -63,7 +73,7 @@
 .home {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   background-image: url(https://i.postimg.cc/QMz5bmFL/hd-3816045-1920.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -85,6 +95,35 @@
   width:9rem;
 }
 
+.card-text{
+  padding:10px;
+}
+.it{
+  color:black;
+  text-shadow: none;
+}
+#buttonn{
+  padding:10px !important;
+  border:1px solid black;
+  background: transparent;
+  cursor: pointer !important;
+  transition: .4s;
+}
+#buttonn:hover{
+  background: rgb(5,4,15);
+  color:white;
+}
+.card-body{
+  background: transparent !important;
+}
+.mb-3{
+  width:70%;
+}
+#prodd{
+  height:38rem;
+  width:100%;
+  aspect-ratio: 1/1;
+}
 .home::before {
   content: "";
   position: absolute;
@@ -106,11 +145,7 @@ h4 {
   align-items: center !important;
 }
 
-.highlighted {
-  filter: blur(0);
-  transform: scale(1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+
 
 
 #feat {
@@ -136,9 +171,15 @@ h4 {
 
 .featuredProd {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-top:20px;
+}
+
+h2{
+  text-align: center;
+  padding:20px;
 }
 
 p {
@@ -151,6 +192,7 @@ p {
   text-align: center;
   margin: 1rem;
   transition: transform 0.3s ease;
+  width:80% !important;
 }
 .each:hover {
   transform: scale(1.1);
@@ -214,6 +256,9 @@ export default {
   methods: {
     pushToLog() {
       this.$router.push("/login");
+    },
+    toProd(){
+      this.$router.push('/products')
     },
     highlightProduct(prodID) {
       this.highlightedProduct = prodID;
