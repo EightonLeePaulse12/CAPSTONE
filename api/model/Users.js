@@ -171,12 +171,12 @@ class Users {
           status: res.statusCode,
           msg: "User record updated successfully",
         });
-      } else {
+      } else if(err){
         res.json({
           status: res.statusCode,
+          err,
           msg: "Something went wrong",
         });
-        throw err;
       }
     });
   }
