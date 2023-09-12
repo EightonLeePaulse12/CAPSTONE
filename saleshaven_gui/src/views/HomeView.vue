@@ -82,6 +82,10 @@
   justify-content: center !important;
   align-items: center !important;
 }
+.card-title{
+  color:white;
+}
+
 
 #else{
   display:flex;
@@ -99,19 +103,21 @@
   padding:10px;
 }
 .it{
-  color:black;
+  color:white;
+
   text-shadow: none;
 }
 #buttonn{
   padding:10px !important;
-  border:1px solid black;
+  border:1px solid rgb(255, 255, 255);
   background: transparent;
   cursor: pointer !important;
+  color:white;
   transition: .4s;
 }
 #buttonn:hover{
-  background: rgb(5,4,15);
-  color:white;
+  background: white;
+  color:rgb(5,4,15);
 }
 .card-body{
   background: transparent !important;
@@ -120,9 +126,9 @@
   width:70%;
 }
 #prodd{
-  height:38rem;
+  height:40rem;
   width:100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1/9;
 }
 .home::before {
   content: "";
@@ -175,6 +181,7 @@ h4 {
   justify-content: space-between;
   align-items: center;
   margin-top:20px;
+  background: transparent !important;
 }
 
 h2{
@@ -191,6 +198,8 @@ p {
   flex-direction: column;
   text-align: center;
   margin: 1rem;
+  border:1px solid white;
+  background: transparent !important;
   transition: transform 0.3s ease;
   width:80% !important;
 }

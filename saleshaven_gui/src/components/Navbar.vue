@@ -116,9 +116,8 @@ export default {
   margin-right: 20px;
   background: transparent;
   color: white;
-  font-weight: bold;
   padding: 3px;
-  height:4rem;
+  height:2.7rem;
   cursor: pointer !important;
   border: 1px solid white;
 }

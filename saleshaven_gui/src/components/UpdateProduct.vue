@@ -12,7 +12,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <h1 class="modal-title" id="exampleModalLabel">
                             Edit Product
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -91,11 +91,10 @@ export default {
   
 <style scoped>
 .btn {
-    border: 2px solid #f7f4f1;
-    background-color: #f7f4f1;
-    margin-bottom: 1rem;
-    color: black;
-    box-shadow: 4px 4px black;
+    border: 1px solid #f7f4f1;
+    background:transparent;
+    padding:0 !important;
+    color: rgb(255, 255, 255);
 }
 
 input {

@@ -12,7 +12,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <h1 class="modal-title" id="exampleModalLabel">
                             Edit User
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -20,12 +20,12 @@
                     <div class="modal-body">
                         <label>User name:</label>
                         <input placeholder="name" type="text" v-model="editingUser.firstName" />
-                        <label>User Stock:</label>
-                        <input placeholder="quantity" type="number" v-model="editingUser.lastName" />
-                        <label>User description:</label>
+                        <label>User lastname:</label>
+                        <input placeholder="quantity" type="text" v-model="editingUser.lastName" />
+                        <label>User gender:</label>
                         <input placeholder="description" type="text" v-model="editingUser.gender" />
-                        <label>User price:</label>
-                        <input placeholder="price" type="number" v-model="editingUser.email" />
+                        <label>User email:</label>
+                        <input placeholder="price" type="text" v-model="editingUser.email" />
                         <label>User category:</label>
                         <input placeholder="category" type="text" v-model="editingUser.userRole" />
                         <label>User image:</label>
@@ -73,11 +73,17 @@ export default {
         },
         updateUser() {
             const userID = this.editingUserID
-            this.$store
-                .dispatch("updateDetails", {
-                    userID: userID,
-                    ...this.editingUser,
-                })
+            const payload = {
+                userID: userID,
+                firstName: this.editingUser.firstName,
+                lastName: this.editingUser.lastName,
+                gender: this.editingUser.gender,
+                email: this.editingUser.email,
+                userRole: this.editingUser.userRole,
+                userProfile: this.editingUser.userProfile
+            }
+            console.log(payload)
+            this.$store.dispatch('updateUsers', payload)
             console.log("Successfully updated")
         },
     },
@@ -86,11 +92,14 @@ export default {
   
 <style scoped>
 .btn {
-    border: 2px solid #f7f4f1;
-    background-color: #f7f4f1;
-    margin-bottom: 1rem;
-    color: black;
-    box-shadow: 4px 4px black;
+    border: 1px solid #f7f4f1;
+    background:transparent;
+    color: rgb(255, 255, 255);
+    cursor:pointer !important;
+}
+.btn:hover{
+    color: rgb(4, 3, 10) !important;
+    background: white;
 }
 
 input {
