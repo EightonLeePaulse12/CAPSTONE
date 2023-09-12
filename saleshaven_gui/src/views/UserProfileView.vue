@@ -14,7 +14,6 @@
                 </div>
                 <div class="col">
                     <div class="data">
-                        {{ userData ? userData : 'false' }}
                         {{ userData ? userData.firstName : 'false' }} <br>
                         {{ userData ? userData.lastName : 'false' }} <br>
                         {{ userData ? userData.gender : 'false' }} <br>

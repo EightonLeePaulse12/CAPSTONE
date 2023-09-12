@@ -99,6 +99,11 @@ export default createStore({
       );
       console.error(exists);
       if (exists) {
+        Swal.fire({
+          icon:"success",
+          title:"Item is already in cart",
+          
+        })
         exists.quantity += 1;
       } else {
         state.cart.push({
@@ -217,6 +222,7 @@ export default createStore({
           context.commit("setRegStatus", "Not registered");
           return { success: false, error: msg };
         } else if (token && msg === "User registered successfully") {
+          context.dispatch("fetchUsers")
           context.commit("setToken", token);
           context.commit("setRegStatus", "Registered successfully");
           return { success: true, token };
@@ -419,11 +425,33 @@ export default createStore({
         console.log(e);
       }
     },
+    async updateUsers(context, payload){
+      try{
+        const res = await axios.patch(`${api}user/${payload.userID}`, payload, {
+          headers:{
+            Authorization:context.state.token,
+            "Content-Type":"application/json"
+          }
+        })
+        console.log(payload)
+        const {msg, err} = res.data
+        if(err){
+          context.commit("setError", err)
+        }
+        if(msg === "User record updated successfully"){
+          context.dispatch("fetchUsers")
+          context.commit("setUser", msg)
+          context.commit("setMsg", "User profile updated successfully")
+        }
+      } catch(e){
+
+      }
+    },
     async updateDetails(context, payload) {
       try {
         const res = await axios.patch(
           `${api}user/${payload.userID}`,
-          payload.data,
+          payload,
           {
             headers: {
               Authorization: context.state.token,
@@ -485,6 +513,26 @@ export default createStore({
         console.error("Error while recording transaction: ", e)
       }
     },
+    async createProduct(context, payload){
+      try{
+        const res = await axios.post(`${api}product/${context.state.userData.userID}`, payload, {
+          headers:{
+            Authorization:context.state.token,
+            "Content-Type":"application/json"
+          }
+        })
+        const { msg, err } = await res.data
+        if(err){
+          context.commit("setError", err)
+        }
+        if(msg === "Product added successfully"){
+          context.dispatch("fetchProducts")
+          context.commit("setProduct", msg)
+        }
+      } catch(e){
+        console.log(e)
+      }
+    }
   },
   modules: {},
 });

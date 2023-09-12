@@ -62,7 +62,9 @@
     </div>
     <div v-else-if="userRole === 'Owner'" class="table-responsive table-container">
       <h4>Users</h4>
-      <table class="table" v-for="user in users" :key="user.userID">
+      <AddUser/>
+      <div class="table-responsive">
+      <table class="table" >
         <thead>
           <tr>
             <th class="name">First Name</th>
@@ -74,7 +76,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for="user in users" :key="user.userID">
             <td class="name">{{ user.firstName }}</td>
             <td class="name">{{ user.lastName }}</td>
             <td class="name">{{ user.gender }}</td>
@@ -83,12 +85,15 @@
 
             <td>
               <updareUser :user="user" />
-              <button @click="banUser(user.userID)">Ban</button></td>
+              <button id="ban" @click="banUser(user.userID)">Ban</button></td>
           </tr>
         </tbody>
       </table>
+    </div>
       <div class="table-responsive">
         <h4>Products</h4>
+        <AddProduct/>
+        <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
@@ -117,6 +122,7 @@
           </tbody>
         </table>
       </div>
+      </div>
     </div>
   </div>
   <div v-else id="else">
@@ -130,10 +136,14 @@
 import Swal from 'sweetalert2'
 import updateProduct from '@/components/UpdateProduct.vue'
 import UpdareUser from '@/components/UpdareUser.vue'
+import AddUser from '@/components/AddUser.vue'
+import AddProduct from '@/components/AddProduct.vue'
 export default {
   components: {
     updateProduct,
-    UpdareUser
+    UpdareUser,
+    AddUser,
+    AddProduct
   },
   computed: {
     userRole() {
@@ -206,6 +216,7 @@ export default {
                 "This product has been removed",
                 'success',
               )
+              location.reload()
             }).catch((error) => {
               Swal.fire(
                 "Error!",
@@ -231,7 +242,7 @@ export default {
 table {
   width: 100%;
   border-collapse: collapse;
-  border: 10px solid #6d4e9f;
+  border: 1px solid white;
   background: transparent !important;
 }
 #else{
@@ -245,15 +256,25 @@ table {
   height:9rem;
   width:9rem;
 }
+#ban{
+  width:3rem;
+  margin-top:7px;
+  border:1px solid white;
+  background: transparent;
+  color:white;
+}
+table{
+}
 .name {
   width: 8rem;
 }
 
 th,
 td {
+  color:white;
   text-align: center;
-  padding: 0.5rem;
-  border: 2px solid #421983;
+  background: transparent !important;
+  border: 2px solid white;
 }
 
 #picc {
@@ -263,11 +284,14 @@ td {
 
 #pic {
   aspect-ratio: 1/1;
-  width: 11rem;
+  width: 4rem;
+  height:4rem;
   border-radius: 5.5rem;
   object-fit: cover;
 }
-
+td{
+  font-size:.7rem !important;
+}
 .table-responsive {
   width: 100%;
 }
