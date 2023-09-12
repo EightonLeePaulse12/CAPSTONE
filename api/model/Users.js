@@ -163,16 +163,16 @@ class Users {
       data.userPass = hashSync(data.userPass, 10);
     }
     const query = `
-        UPDATE Users SET ? WHERE userID = ${req.params.id}
+        UPDATE Users SET ? WHERE userID = ?
     `;
-    db.query(query, [req.body], (err) => {
+    db.query(query, [data, req.params.id], (err) => {
       if (!err) {
         res.json({
           status: res.statusCode,
           msg: "User record updated successfully",
         });
-      } else if(err){
-        res.json({
+      } else {
+        res.status(500).json({
           status: res.statusCode,
           err,
           msg: "Something went wrong",
