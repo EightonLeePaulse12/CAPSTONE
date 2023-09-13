@@ -13,20 +13,20 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title" id="texampleModalLabel3">
-                            Modal title
+                            Update your details
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <label>first name:</label>
+                        <label>First name:</label>
                         <input type="text" placeholder="first name" v-model="editingUser.firstName" />
-                        <label>last name:</label>
+                        <label>Last name:</label>
                         <input type="text" placeholder="last name" v-model="editingUser.lastName" />
-                        <label>gender:</label>
+                        <label>Gender:</label>
                         <input type="text" placeholder="gender" v-model="editingUser.gender" />
-                        <label>email address:</label>
+                        <label>eEmail address:</label>
                         <input type="text" placeholder="email address" v-model="editingUser.email" />
-                        <label>user profile:</label>
+                        <label>User profile (links only):</label>
                         <input type="text" placeholder="profile image" v-model="editingUser.userProfile" />
                     </div>
                     <div class="modal-footer">
@@ -91,7 +91,12 @@ export default {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
+    cursor:pointer !important;
 }
+.btn:hover{
+    background:white;
+    color:rgb(2,2,5) !important;
+  }
 .modal-content{
     color: black !important;
 }

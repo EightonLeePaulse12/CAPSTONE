@@ -28,7 +28,7 @@
                         <input placeholder="price" type="text" v-model="editingUser.email" />
                         <label>User category:</label>
                         <input placeholder="category" type="text" v-model="editingUser.userRole" />
-                        <label>User image:</label>
+                        <label>User image (links only):</label>
                         <input placeholder="image" type="text" v-model="editingUser.userProfile" />
                     </div>
                     <div class="modal-footer">
@@ -95,7 +95,12 @@ export default {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
+    cursor:pointer !important;
 }
+.btn:hover{
+    background:white;
+    color:rgb(2,2,5) !important;
+  }
 .modal-content{
     color: black !important;
 }

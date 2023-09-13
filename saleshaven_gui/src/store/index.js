@@ -8,6 +8,7 @@ export default createStore({
   state: {
     users: null,
     user: null,
+    myprod: null,
     products: null,
     product: null,
     selectedProduct: null,
@@ -22,9 +23,9 @@ export default createStore({
     featuredProducts: null,
     msg: null,
     cart: [],
-    buyTransactions:0,
-    sellTransactions:0,
-    points: 0
+    buyTransactions: 0,
+    sellTransactions: 0,
+    points: 0,
   },
   getters: {
     getError(state) {
@@ -100,10 +101,9 @@ export default createStore({
       console.error(exists);
       if (exists) {
         Swal.fire({
-          icon:"success",
-          title:"Item is already in cart",
-          
-        })
+          icon: "success",
+          title: "Item is already in cart",
+        });
         exists.quantity += 1;
       } else {
         state.cart.push({
@@ -126,21 +126,24 @@ export default createStore({
         state.cart[itemIndex].quantity = updatedItem.quantity;
       }
     },
-    setBuyTransactions(state, count){
-      state.buyTransactions = count
+    setBuyTransactions(state, count) {
+      state.buyTransactions = count;
     },
-    setSellTransactions(state, count){
-      state.sellTransactions = count
+    setSellTransactions(state, count) {
+      state.sellTransactions = count;
     },
-    awardPoints(state, { userID, points }){
-      const user = state.users.find((user) => user.userID === userID)
-      if(user){
-        user.points += points
+    awardPoints(state, { userID, points }) {
+      const user = state.users.find((user) => user.userID === userID);
+      if (user) {
+        user.points += points;
       }
     },
-    increasePoints(state, amount){
-      state.points += amount
-    }
+    increasePoints(state, amount) {
+      state.points += amount;
+    },
+    setMyProd(state, myprod) {
+      state.myprod = myprod;
+    },
   },
   actions: {
     async fetchUsers(context) {
@@ -211,6 +214,24 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
+    async fetchOwnProd(context) {
+      const res = await axios.get(
+        `${api}ownProd/${context.state.userData.userID}`,
+        {
+          headers: {
+            Authorization: context.state.token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const { results, err } = res.data;
+      if (err) {
+        context.commit("setError", err);
+      }
+      if (results) {
+        context.commit("setMyProd", results);
+      }
+    },
     async register(context, payload) {
       console.log("Reached");
       try {
@@ -222,15 +243,15 @@ export default createStore({
           context.commit("setRegStatus", "Not registered");
           return { success: false, error: msg };
         } else if (token && msg === "User registered successfully") {
-          context.dispatch("fetchUsers")
+          context.dispatch("fetchUsers");
           context.commit("setToken", token);
           context.commit("setRegStatus", "Registered successfully");
           return { success: true, token };
         } else if (err) {
           console.error(err);
-        } else if(msg === "This email address is already in use"){
-          context.commit("setRegStatus", "Not registered")
-          return { success: false, msg: "Email is already in use" }
+        } else if (msg === "This email address is already in use") {
+          context.commit("setRegStatus", "Not registered");
+          return { success: false, msg: "Email is already in use" };
         }
       } catch (e) {
         context.commit("setError", e);
@@ -341,23 +362,43 @@ export default createStore({
             "Content-Type": "application/json",
           },
         });
-        if(res.status === 200){
-          const { err, msg } = res.data
-        if(err){
-          context.commit("setError", err)
-        }
-        if(msg === "Product removed from cart"){
-          context.commit("removeFromCart", productID);
-        } else{
-          context.commit("setError", "Something went wrong with the server")
-        }
+        if (res.status === 200) {
+          const { err, msg } = res.data;
+          if (err) {
+            context.commit("setError", err);
+          }
+          if (msg === "Product removed from cart") {
+            context.commit("removeFromCart", productID);
+          } else {
+            context.commit("setError", "Something went wrong with the server");
+          }
         }
       } catch (e) {
         console.error("Error while removing from cart: ", e);
       }
     },
     async updateCartItem(context, updatedItem) {
-      context.commit("updateCartItem", updatedItem)
+      context.commit("updateCartItem", updatedItem);
+    },
+    async deactivate(context){
+      try{  
+        const res = await axios.delete(`${api}user/${context.state.userData.userID}`, {
+          headers:{
+            Authorization: context.state.token,
+            "Content-Type": "application/json",
+          }
+        })
+        const { err, msg } = res.data
+        if (err) {
+          context.commit("setError", err);
+        }
+        if (msg) {
+          context.commit("setUser", msg);
+          console.log("User deleted successfully");
+        }
+      } catch(e){
+        console.log("An error occured: ", e);
+      }
     },
     async banUser(context, id) {
       try {
@@ -390,6 +431,8 @@ export default createStore({
         });
         const { msg, err } = res.data;
         if (msg) {
+          context.dispatch("fetchProducts")
+          context.dispatch("fetchOwnProd")
           context.commit("setProduct", msg);
         }
         if (err) {
@@ -417,6 +460,7 @@ export default createStore({
           context.commit("setError", err);
         }
         if (msg) {
+          context.dispatch("fetchOwnProd")
           context.dispatch("fetchProducts");
           context.commit("setProduct", msg);
           context.commit("setMsg", "Successfully updated product");
@@ -425,40 +469,34 @@ export default createStore({
         console.log(e);
       }
     },
-    async updateUsers(context, payload){
-      try{
+    async updateUsers(context, payload) {
+      try {
         const res = await axios.patch(`${api}user/${payload.userID}`, payload, {
-          headers:{
-            Authorization:context.state.token,
-            "Content-Type":"application/json"
-          }
-        })
-        console.log(payload)
-        const {msg, err} = res.data
-        if(err){
-          context.commit("setError", err)
+          headers: {
+            Authorization: context.state.token,
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(payload);
+        const { msg, err } = res.data;
+        if (err) {
+          context.commit("setError", err);
         }
-        if(msg === "User record updated successfully"){
-          context.dispatch("fetchUsers")
-          context.commit("setUser", msg)
-          context.commit("setMsg", "User profile updated successfully")
+        if (msg === "User record updated successfully") {
+          context.dispatch("fetchUsers");
+          context.commit("setUser", msg);
+          context.commit("setMsg", "User profile updated successfully");
         }
-      } catch(e){
-
-      }
+      } catch (e) {}
     },
     async updateDetails(context, payload) {
       try {
-        const res = await axios.patch(
-          `${api}user/${payload.userID}`,
-          payload,
-          {
-            headers: {
-              Authorization: context.state.token,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await axios.patch(`${api}user/${payload.userID}`, payload, {
+          headers: {
+            Authorization: context.state.token,
+            "Content-Type": "application/json",
+          },
+        });
         console.log(res);
         const { msg, err } = res.data;
         console.log(msg);
@@ -476,63 +514,68 @@ export default createStore({
         console.log(e);
       }
     },
-    async buyTransactions(context, userID){
-      try{
-        const res = await axios.get(`${api}count-buys/${userID}`)
-        context.commit("setBuyTransactions", res.data.count)
-      } catch(e){
-        console.error("Error counting buy transactions: ", e)
+    async buyTransactions(context, userID) {
+      try {
+        const res = await axios.get(`${api}count-buys/${userID}`);
+        context.commit("setBuyTransactions", res.data.count);
+      } catch (e) {
+        console.error("Error counting buy transactions: ", e);
       }
     },
-    async sellTransactions(context, userID){
-      try{
-        const res = await axios.get(`${api}count-sells/${userID}`)
-        context.commit("setSellTransactions", res.data.count)
-      } catch(e){
-        console.error("Error while counting sells: ", e)
+    async sellTransactions(context, userID) {
+      try {
+        const res = await axios.get(`${api}count-sells/${userID}`);
+        context.commit("setSellTransactions", res.data.count);
+      } catch (e) {
+        console.error("Error while counting sells: ", e);
       }
     },
-    async recordTransaction(context, transactionData){
-      try{
+    async recordTransaction(context, transactionData) {
+      try {
         const res = await axios.post(`${api}record`, transactionData, {
-          headers:{
+          headers: {
             Authorization: context.state.token,
-            "Content-Type":"application/json"
-          }
-        })
-        console.log("Transaction recorded successfully", res.data)
+            "Content-Type": "application/json",
+          },
+        });
+        console.log("Transaction recorded successfully", res.data);
         let pointsToAward = 0;
-        if(transactionData.transactionType === 'buy'){
-          pointsToAward = 10
-        } else if(transactionData.transactionType === 'sell'){
-          pointsToAward = 15
+        if (transactionData.transactionType === "buy") {
+          pointsToAward = 10;
+        } else if (transactionData.transactionType === "sell") {
+          pointsToAward = 15;
         }
 
-        context.commit("increasePoints", pointsToAward)
-      } catch(e){
-        console.error("Error while recording transaction: ", e)
+        context.commit("increasePoints", pointsToAward);
+      } catch (e) {
+        console.error("Error while recording transaction: ", e);
       }
     },
-    async createProduct(context, payload){
-      try{
-        const res = await axios.post(`${api}product/${context.state.userData.userID}`, payload, {
-          headers:{
-            Authorization:context.state.token,
-            "Content-Type":"application/json"
+    async createProduct(context, payload) {
+      try {
+        const res = await axios.post(
+          `${api}product/${context.state.userData.userID}`,
+          payload,
+          {
+            headers: {
+              Authorization: context.state.token,
+              "Content-Type": "application/json",
+            },
           }
-        })
-        const { msg, err } = await res.data
-        if(err){
-          context.commit("setError", err)
+        );
+        const { msg, err } = await res.data;
+        if (err) {
+          context.commit("setError", err);
         }
-        if(msg === "Product added successfully"){
-          context.dispatch("fetchProducts")
-          context.commit("setProduct", msg)
+        if (msg === "Product added successfully") {
+          context.dispatch("fetchOwnProd")
+          context.dispatch("fetchProducts");
+          context.commit("setProduct", msg);
         }
-      } catch(e){
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
-    }
+    },
   },
   modules: {},
 });

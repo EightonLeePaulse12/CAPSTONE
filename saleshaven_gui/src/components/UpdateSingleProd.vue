@@ -2,13 +2,13 @@
     <div>
         <!-- Button trigger modal -->
         <button type="button" class="btn" @click="openEditModal(product.prodID)" data-bs-toggle="modal"
-            :data-bs-target="'#texampleModal' + product.prodID">
+            :data-bs-target="'#yexampleModal' + product.prodID">
             Edit
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" :id="'texampleModal' + product.prodID" tabindex="-1"
-            :aria-labelledby="'texampleModalLabel' + product.prodID" aria-hidden="true">
+        <div class="modal fade" :id="'yexampleModal' + product.prodID" tabindex="-1"
+            :aria-labelledby="'yexampleModalLabel' + product.prodID" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -66,7 +66,7 @@ export default {
             console.log("Edit button clicked: ", prodID)
             this.editingProductID = prodID;
             this.editingProduct = {
-                ...this.$store.state.products.find(
+                ...this.$store.state.myprod.find(
                     (product) => product.prodID === prodID
                 ),
             };
@@ -100,9 +100,10 @@ export default {
     background:white;
     color:rgb(2,2,5) !important;
   }
-.modal-content{
+.modal-content {
     color: black !important;
 }
+
 input {
     width: 100%;
     height: 3rem;
