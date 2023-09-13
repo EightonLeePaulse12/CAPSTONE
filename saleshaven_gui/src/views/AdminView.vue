@@ -10,6 +10,7 @@
       <table class="table" v-for="user in users" :key="user.userID">
         <thead>
           <tr>
+            <th class="name">ID</th>
             <th class="name">First Name</th>
             <th class="name">Last Name</th>
             <th class="name">Gender</th>
@@ -67,6 +68,7 @@
       <table class="table" >
         <thead>
           <tr>
+            <th class="name">ID</th>
             <th class="name">First Name</th>
             <th class="name">Last Name</th>
             <th class="name">Gender</th>
@@ -76,14 +78,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.userID">
+          <tr v-for="user in users" class="tr" :key="user.userID">
+            <td class="name">{{ user.userID }}</td>
             <td class="name">{{ user.firstName }}</td>
             <td class="name">{{ user.lastName }}</td>
             <td class="name">{{ user.gender }}</td>
             <td class="name">{{ user.userRole }}</td>
-            <td><img id="pic" :src="user.userProfile" :alt="user.firstName"></td>
+            <td><img id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
 
-            <td>
+            <td class="actions">
               <updareUser :user="user" />
               <button id="ban" @click="banUser(user.userID)">Ban</button></td>
           </tr>
@@ -97,6 +100,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th class="name">ID</th>
               <th class="name">Name</th>
               <th class="name">Description</th>
               <th class="name">Category</th>
@@ -108,15 +112,16 @@
           </thead>
           <tbody>
             <tr v-for="product in products" :key="product.prodID">
+              <td class="name">{{ product.prodID }}</td>
               <td class="name">{{ product.prodName }}</td>
-              <td class="name">{{ product.prodDesc }}</td>
+              <td class="name" id="proddd">{{ product.prodDesc }}</td>
               <td class="name">{{ product.category }}</td>
               <td class="name">{{ product.price }}</td>
               <td class="name">{{ product.stock }}</td>
-              <td><img id="pic" :src="product.prodURL" :alt="product.prodName"></td>
-              <td>
+              <td><img :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
+              <td class="actions">
                 <updateProduct :product="product" />
-                <button @click="deleteProduct(product.prodID)">Delete</button>
+                <button @click="deleteProduct(product.prodID)" id="ban">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -245,6 +250,20 @@ table {
   border: 1px solid white;
   background: transparent !important;
 }
+#proddd{
+  width:10rem !important;
+}
+.product-image{
+  width: 4rem !important;
+  height: 4rem !important;
+  margin-top:0.7rem;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
+.tr{
+  height:100%;
+}
+
 #else{
   display:flex;
   height:70vh;
@@ -257,13 +276,14 @@ table {
   width:9rem;
 }
 #ban{
-  width:3rem;
+  width:3.4rem;
   margin-top:7px;
-  border:1px solid white;
-  background: transparent;
-  color:white;
-}
-table{
+  padding:0.7rem;
+  font-weight:bolder;
+  border-radius: 5px;
+  border:1px solid black;
+  background: white;
+  color:black;
 }
 .name {
   width: 8rem;

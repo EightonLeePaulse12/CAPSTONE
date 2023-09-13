@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="main">
       <!-- Button trigger modal -->
       <button
         type="button"
-        class="btn"
+        class="btn add"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal1"
       >
@@ -123,7 +123,16 @@
     background:transparent;
     color: rgb(255, 255, 255);
 }
-
+.main{
+  display:flex;
+  justify-content: center;
+}
+.modal-content{
+    color: black !important;
+}
+.main{
+  margin-bottom:10px;
+}
 input {
     width: 100%;
     height: 3rem;
