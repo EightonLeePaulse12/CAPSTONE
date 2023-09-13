@@ -49,6 +49,9 @@ routes.patch("/product/:prodID", bodyParser.json(), (req, res) => {
 routes.delete("/product/:prodID", (req, res) => {
   products.removeProduct(req, res);
 });
+routes.get("/ownProd/:id", (req, res)=>{
+  products.fetchOwnProducts(req, res)
+})
 
 // ========== Cart Routes ==========
 routes.use("/cart", decToken);
