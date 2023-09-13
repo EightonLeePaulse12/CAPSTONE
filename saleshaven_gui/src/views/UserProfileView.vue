@@ -1,52 +1,36 @@
 <template>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-
-                </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img id="profile" :src="userData ? userData.userProfile : 'false'"
+                    :alt="userData ? userData.firstName : 'User Profile'" class="img-fluid rounded-circle" />
             </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <img id="profile" :src="userData ? userData.userProfile : 'false'" :alt="firstName">
+            <div class="col-md-8">
+                <div class="d-flex justify-content-between">
+                    <h2>My Profile</h2>
+                    <button @click="logout" class="btn btn-danger">Log out</button>
                 </div>
-                <div class="col">
-                    <div class="data">
-                        {{ userData ? userData.firstName : 'false' }} <br>
-                        {{ userData ? userData.lastName : 'false' }} <br>
-                        {{ userData ? userData.gender : 'false' }} <br>
-                        {{ userData ? userData.email : 'false' }} <br>
-                        {{ userData ? userData.userRole : 'false' }} <br>
-                    </div>
-                    <div class="update-details">
-                        <EditProfile :userData="userData" />
-                    </div>
-                    <div class="logout">
-                        <button @click="logout">Log out</button>
-                    </div>
-                    <div class="deactivate">
-                        <button @click="deactivateAcc">Deactivate Account</button>
-                    </div>
+                <hr />
+                <div class="data">
+                    <h6><strong>First Name:</strong> {{ userData ? userData.firstName : 'N/A' }}</h6>
+                    <h6><strong>Last Name:</strong> {{ userData ? userData.lastName : 'N/A' }}</h6>
+                    <h6><strong>Email Address:</strong> {{ userData ? userData.email : 'N/A' }}</h6>
+                    <h6><strong>Gender:</strong> {{ userData ? userData.gender : 'N/A' }}</h6>
+                    <h6><strong>Role:</strong> {{ userData ? userData.userRole : 'N/A' }}</h6>
+                    <h6><strong>Points:</strong> {{ points }}</h6>
                 </div>
-                <div class="col">
-                    <div class="data">
-                        <div>
-                            <div>
-                                <h2>Transaction Counts</h2>
-                                <p>Points: {{ points }}</p>
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="mt-4">
+                    <EditProfile :userData="userData" />
+                    <button class="btn btn-warning" id="special" @click="manage">Create & Manage products</button> <br>
+                    <button @click="deactivate" class="btn btn-warning">Deactivate Account</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
+  
 <script>
+import Swal from 'sweetalert2'
 import EditProfile from '@/components/UpdateUser.vue'
 export default {
     components: {
@@ -61,32 +45,97 @@ export default {
         },
         points() {
             return this.$store.state.points
-        }
+        },
     },
     methods: {
         logout() {
             this.$store.dispatch("logout")
             this.$router.push("/login")
+        },
+        manage(){
+            this.$router.push('manage')
+        },
+        async deactivate() {
+             await Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to deactivate your account.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, deactivate my account",
+                cancelButtonText: "No, cancel",
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    this.$store.dispatch("deactivate").then(() => {
+                        Swal.fire(
+                            "Deactivated",
+                            "Your account has been deactivated",
+                            'success',
+                        )
+                        this.$store.dispatch("logout")
+                        this.$router.push("/register")
+                    })
+                }
+            })
         }
     },
-    created() {
-        const userID = this.$store.state.userData.userID
-        this.$store.dispatch('buyTransactions', userID)
-        this.$store.dispatch('sellTransactions', userID)
+        created() {
+            const userID = this.$store.state.userData.userID
+            this.$store.dispatch('buyTransactions', userID)
+            this.$store.dispatch('sellTransactions', userID)
+        }
     }
-}
 </script>
-
+  
 <style scoped>
 #profile {
-    height: 10rem;
-    width: 8rem;
+    max-height: 20rem;
+    width: 20rem;
     border-radius: 50%;
     object-fit: cover;
 }
-
+.container{
+    padding:5rem;
+}
+.btn-danger{
+    background: transparent !important;
+    border:1px solid white;
+    cursor: pointer !important;
+}
+.btn-danger:hover{
+    color:#040309;
+    background:red !important;
+    border:1px solid #040309 !important;
+}
 .data {
+    text-align: start;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    margin-bottom:50px;    
+}
+#special:hover{
+    background-color: white !important;
+    color:#040309 !important;
+}
+.btn{
+    border:1px solid white !important;
+}
+.data {
+    text-align: start;
+    margin-bottom: 20px;
+}
+
+.btn-warning {
+    margin-right: 10px;
+    background:transparent !important;
+    color:white;
+    border:1px solid white;
+    margin-top:10px;
+    cursor:pointer !important;
+}
+
+.btn-warning:hover{
+    color:#040309;
+    background:red !important;
+    border:1px solid #040309 !important;
 }
 </style>

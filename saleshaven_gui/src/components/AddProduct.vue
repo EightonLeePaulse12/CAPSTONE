@@ -122,6 +122,11 @@
     border: 1px solid #f7f4f1;
     background:transparent;
     color: rgb(255, 255, 255);
+    cursor:pointer !important;
+}
+.btn:hover{
+  background:white;
+  color:rgb(2,2,5) !important;
 }
 .main{
   display:flex;

@@ -47,13 +47,14 @@
                 v-model="model.user.lastName"
               />
               <label for="gender">Gender:</label>
-              <input
-                required
-                id="gender"
-                type="text"
-                placeholder="gender"
-                v-model="model.user.gender"
-              />
+              <div class="dropdown">
+                <select class="btn btn-secondary dropdown-toggle" v-model="model.user.gender">
+                    <option>Male</option>
+                    <option>Female</option>
+
+                </select>
+            
+              </div>
               <label for="userRole">Role:</label>
               <input
                 required
@@ -125,11 +126,28 @@
     background:transparent;
     color: rgb(255, 255, 255);
 }
-
+.dropdown-toggle{
+  border:1px solid black !important;
+  color:black !important;
+}
 .btn{
+  
+}
+.btn:hover{
+  background:white;
+  color:rgb(2,2,5) !important;
+}
+.btn {
   margin-bottom:10px;
   cursor:pointer !important;
   height:100% !important;
+  border: 2px solid #f7f4f1;
+  background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
+  color: rgb(255, 255, 255);
+  cursor:pointer !important;
+}
+select{
+  background:white !important;
 }
 .btn:hover{
   background:white;
