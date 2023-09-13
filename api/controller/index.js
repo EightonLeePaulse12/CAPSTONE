@@ -33,6 +33,7 @@ routes.delete("/user/:id", (req, res) => {
 routes.use("/products", decToken);
 routes.use("/product/:prodID", decToken);
 routes.use("/product/:seller_id", decToken);
+routes.use("/ownProd/:id", decToken);
 
 routes.get("/products", (req, res) => {
   products.fetchProducts(req, res);
