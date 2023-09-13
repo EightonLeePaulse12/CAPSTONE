@@ -39,6 +39,29 @@ class Products {
       }
     });
   }
+  fetchOwnProducts(req, res){
+    const query = `
+      SELECT * FROM Products WHERE seller_id = ${req.params.id}
+    `
+    db.query(query, (err, results)=>{
+      if(err){
+        res.json({
+          status: res.statusCode,
+          err
+        })
+      } else if(results){
+          res.json({
+            status: res.statusCode,
+            results
+          })
+      } else{
+        res.json({
+          status: res.statusCode,
+          msg: "Unknown error occured"
+        })
+      }
+    })
+  }
   addProduct(req, res) {
     const query = `
             INSERT INTO Products (prodName, prodDesc, category, price, prodURL, seller_id) VALUES (?, ?, ?, ?, ?, ?);
