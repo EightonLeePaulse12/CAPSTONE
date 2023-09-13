@@ -76,7 +76,7 @@ export default {
 .yes {
     padding: 20px;
     padding-top: 20px;
-    margin-top:50px !important;
+    margin-top:25px !important;
     border-top: 1px solid white;
 }
 

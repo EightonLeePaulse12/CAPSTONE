@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
       <!-- Button trigger modal -->
       <button
         type="button"
@@ -126,6 +126,18 @@
     color: rgb(255, 255, 255);
 }
 
+.btn{
+  margin-bottom:10px;
+  cursor:pointer !important;
+  height:100% !important;
+}
+.btn:hover{
+  background:white;
+  color:rgb(2,2,5) !important;
+}
+.modal-content{
+  color: black !important;
+}
 input {
     width: 100%;
     height: 3rem;

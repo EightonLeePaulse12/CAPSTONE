@@ -91,12 +91,13 @@ export default {
   
 <style scoped>
 .btn {
-    border: 1px solid #f7f4f1;
-    background:transparent;
-    padding:0 !important;
+    border: 2px solid #f7f4f1;
+    background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
 }
-
+.modal-content{
+    color: black !important;
+}
 input {
     width: 100%;
     height: 3rem;
