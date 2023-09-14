@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <div class="container shadow-lg" id="contact">
             <figure class="text-center">
                 <blockquote class="blockquote">
@@ -68,5 +68,19 @@ export default {
     padding: 25rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
+}
+@media (width < 701px){
+    #contact{
+        padding:5rem !important;
+    }
+    .main{
+        padding:20px;
+    }
+}
+@media (width < 301px){
+    #contact{
+        padding:1rem !important;
+    }
+    
 }
 </style>

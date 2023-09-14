@@ -167,4 +167,31 @@ export default {
     color: #040309;
     background: red !important;
     border: 1px solid #040309 !important;
-}</style>
+}
+@media (width < 701px){
+    .data{
+        flex-wrap: wrap !important;
+        align-content: center !important;
+    }
+    strong{
+        margin-right:6px;
+    }
+    #special{
+        margin-bottom:0;
+    }
+    .btn-warning{
+        margin-bottom:7px;
+    }
+}
+@media (width < 301px){
+    h6{
+        font-size:.82rem;
+    }
+    input{
+        margin-top:20px !important;
+    }
+    .modal-body{
+        padding:10px;
+    }
+}
+</style>

@@ -120,12 +120,13 @@ export default {
 }
 
 .img-01 {
-  height: 81.5vh;
+  height: 100%;
   width: 100%;
 }
 
 .container-fluid {
   height: 100%;
+  padding:50px;
 }
 
 input {
@@ -238,15 +239,17 @@ input {
 form {
   background: 1px solid red !important;
 }
-
-/*
-.back::before {
-  content: '';
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: .7;
-} */
+@media (width < 710px){
+  .back{
+    display:none;
+  }
+}
+@media (width < 301px){
+  input{
+    width:108%;
+  }
+  .container-fluid{
+    padding:40px;
+  }
+}
 </style>

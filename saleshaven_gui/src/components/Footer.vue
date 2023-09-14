@@ -71,7 +71,6 @@ export default {
     background: transparent;
     color: #fff;
     border-top: 1px solid white;
-    padding: 50px 0;
     text-align: center;
 }
 
@@ -201,4 +200,12 @@ p{
     background: transparent;
     text-align: center;
     padding: 10px 0;
-}</style>
+}
+@media (width < 301px){
+    .butto{
+        display:flex;
+        justify-content: center;
+    }
+}
+
+</style>

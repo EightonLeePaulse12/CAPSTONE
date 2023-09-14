@@ -128,4 +128,14 @@ export default {
   background-color: #ffffff;
   color: #040404;
 }
+@media(width< 701px){
+  .checkout-container{
+    margin-bottom:30px;
+  }
+}
+@media (width < 301px){
+  .checkout-container{
+    padding:20px;
+  }
+}
 </style>

@@ -88,4 +88,10 @@ input {
     height: 3rem;
     margin-bottom: 2rem;
 }
+@media (width < 701px){
+    input{
+        margin:0 !important;
+        border:3px solid black;
+    }
+}
 </style>

@@ -136,7 +136,32 @@ export default {
   height: 100% !important;
   object-fit: contain;
 }
-
+@media (width < 301px){
+  .card[data-v-4cebd208]{
+    width:16em !important;
+  }
+  #cont[data-v-4cebd208]{
+    padding:10px !important;
+  }
+  .txt1, .txt2, .txt3, .txt4{
+    padding:5px !important;
+  }
+}
+@media (width < 701px){
+  .MEET{
+    flex-direction: column;
+  }
+  .card{
+    margin:0 !important;
+    width:23em !important;
+  }
+  .info{
+    font-size:19px !important;
+  }
+  span{
+    font-size:27px !important;
+  }
+}
 .img {
   background: transparent !important;
 }

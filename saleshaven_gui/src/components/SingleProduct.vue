@@ -67,7 +67,14 @@ export default {
     background: white !important;
     color: #040309 !important;
 }
-
+@media (width < 701px){
+    .col-md-6{
+        padding:10px;
+    }
+    .mt-4{
+        
+    }
+}
 h2 {
     margin-top: 0;
 }

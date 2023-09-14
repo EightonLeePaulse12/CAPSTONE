@@ -92,7 +92,7 @@ button:active {
 }
 
 .img-01 {
-  height: 78.6vh;
+  height: 96%;
   width: 100%;
 }
 
@@ -215,5 +215,14 @@ input {
 .brr {
   height: 74vh;
   width: 55%;
+}
+
+@media (width < 701px){
+  .brr{
+    display:none;
+  }
+  .div{
+    border:1px solid white;
+  }
 }
 </style>
