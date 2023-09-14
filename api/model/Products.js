@@ -41,7 +41,7 @@ class Products {
   }
   fetchOwnProducts(req, res){
     const query = `
-      SELECT * FROM Products WHERE seller_id = ${req.params.id}
+      SELECT prodID, prodName, prodDesc, category, price, stock, prodURL FROM Products WHERE seller_id = ${req.params.id}
     `
     db.query(query, (err, results)=>{
       if(err){
