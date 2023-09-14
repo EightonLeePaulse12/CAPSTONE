@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullNav fixed-top">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="nav">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/"><img id="logo"
@@ -44,10 +44,9 @@
           </ul>
           <div class="navbar-nav" v-else-if="userRole === 'Admin' || userRole === 'Owner' || userRole === 'User'">
             <div class="cart" v-if="cart.length > 0">
-              <font-awesome-icon icon="cart-shopping" style="color: #ffffff;" />
-              <router-link to="/cart">Cart</router-link>
+              <router-link class="cartt" to="/cart"><font-awesome-icon icon="cart-shopping"
+                  style="color: #ffffff;" /></router-link>
             </div>
-            <button id="log" @click="logout">Log out</button>
             <div class="point">
               <router-link to="/profile">
                 <img id="prof" to="/profile" :src="userData.userProfile">
@@ -82,12 +81,6 @@ export default {
   components: {
     FontAwesomeIcon
   },
-  methods: {
-    logout() {
-      this.$store.dispatch("logout")
-      this.$router.push("/login")
-    }
-  }
 }
 </script>
 
@@ -95,21 +88,27 @@ export default {
 #logo {
   width: 100%;
   height: 5.5rem;
-  cursor:pointer !important;
+  cursor: pointer !important;
   object-fit: contain !important;
 }
 
-.navbar-nav{
-  display:flex;
+
+.navbar-nav {
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cartt {
+  margin-right: 30px;
+  cursor: pointer !important;
 }
 
 #navItem {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left:15px;
+  margin-left: 15px;
 }
 
 #log {
@@ -117,7 +116,7 @@ export default {
   background: transparent;
   color: white;
   padding: 3px;
-  height:2.7rem;
+  height: 2.7rem;
   cursor: pointer !important;
   border: 1px solid white;
 }
@@ -138,7 +137,8 @@ export default {
 }
 
 .nav-link:hover {
-  color: purple !important;
+  color: white !important;
+  text-shadow: 3px 1px 5px rgba(255, 255, 255, 0.92);
 }
 
 #nav {

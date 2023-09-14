@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="userRole === 'User' || userRole === 'Admin' || userRole === 'Owner'"
-  >
+  <div v-if="userRole === 'User' || userRole === 'Admin' || userRole === 'Owner'">
     <div class="home">
       <div class="rel">
         <div>
@@ -13,36 +11,19 @@
         </div>
       </div>
     </div>
-    <div v-if="getRandom">
-      <h2>Featured Products</h2>
+    <div class="container" v-if="getRandom">
+      <h2 class="head">Featured Products</h2>
       <div class="featuredProd">
-        <div class="card mb-3 each" v-for="product in getRandom" :key="product.prodID" @mouseover="highlightProduct(product.prodID)" @mouseleave="resetHighlight()">
-          <img :src="product.prodURL" id="prodd" class="card-img-top" alt="">
+        <div class="card each" v-for="product in getRandom" :key="product.prodID"
+          @mouseover="highlightProduct(product.prodID)" @mouseleave="resetHighlight()">
+          <img :src="product.prodURL" class="card-img-top" alt="Product Image">
           <div class="card-body">
             <h5 class="card-title">{{ product.prodName }}</h5>
             <p class="card-text it">{{ product.prodDesc }}</p>
-            <p class="card-text"><small class="text-body-secondary"><button id="buttonn" @click="toProd">View Catalog</button></small></p>
+            <router-link class="btn btn-primary btn-sm" id="buttonn" to="/products">View Catalog</router-link>
           </div>
         </div>
-        <!-- <div
-          class="each"
-          v-for="product in getRandom"
-          :key="product.prodID"
-          @mouseover="highlightProduct(product.prodID)"
-          @mouseleave="resetHighlight()"
-        >
-          <h3>{{ product.prodName }}</h3>
-          <p>{{ product.prodDesc }}</p>
-          <img
-            id="feat"
-            :src="product.prodURL"
-            :class="{ highlighted: highlightedProduct === product.prodID }"
-            alt=""
-          />
-        </div>
       </div>
-    </div> -->
-    </div>
     </div>
     <div v-else id="else">
       <div class="spinner-border" role="status">
@@ -82,54 +63,93 @@
   justify-content: center !important;
   align-items: center !important;
 }
-.card-title{
-  color:white;
+
+.card-title {
+  color: white;
 }
 
-
-#else{
-  display:flex;
-  height:70vh;
-  width:100%;
-  justify-content: center;
+.featuredProd {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
 }
-.spinner-border{
-  height:9rem;
-  width:9rem;
+
+.each {
+  flex-basis: calc(33.33% - 1rem);
+  margin-bottom: 1rem;
+  border: 1px solid white;
+  background: rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.card-text{
-  padding:10px;
+.each:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.it{
-  color:white;
+
+.card-title,
+.card-text {
+  color: white;
+}
+
+.card-body {
+  background: transparent;
+  padding: 1rem;
+}
+
+.card-img-top {
+  height: auto;
+  max-height: 200px;
+  width: 100%;
+  object-fit: contain;
+  padding-top: 20px;
+}
+
+
+.spinner-border {
+  height: 9rem;
+  width: 9rem;
+}
+
+.card-text {
+  padding: 10px;
+}
+
+.it {
+  color: white;
 
   text-shadow: none;
 }
-#buttonn{
-  padding:10px !important;
-  border:1px solid rgb(255, 255, 255);
+
+#buttonn {
+  padding: 10px !important;
+  border: 1px solid rgb(255, 255, 255);
   background: transparent;
   cursor: pointer !important;
-  color:white;
+  color: white;
   transition: .4s;
 }
-#buttonn:hover{
+
+#buttonn:hover {
   background: white;
-  color:rgb(5,4,15);
+  color: rgb(5, 4, 15);
 }
-.card-body{
+
+.card-body {
   background: transparent !important;
 }
-.mb-3{
-  width:70%;
+
+.mb-3 {
+  width: 70%;
 }
-#prodd{
-  height:40rem;
-  width:100%;
+
+#prodd {
+  height: 40rem;
+  width: 100%;
   aspect-ratio: 1/9;
 }
+
 .home::before {
   content: "";
   position: absolute;
@@ -171,6 +191,7 @@ h4 {
   border: none;
   cursor: pointer;
 }
+
 .login button:hover {
   background-color: #45a049;
 }
@@ -180,13 +201,13 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-top:20px;
+  margin-top: 20px;
   background: transparent !important;
 }
 
-h2{
+h2 {
   text-align: center;
-  padding:20px;
+  padding: 20px;
 }
 
 p {
@@ -198,11 +219,12 @@ p {
   flex-direction: column;
   text-align: center;
   margin: 1rem;
-  border:1px solid white;
+  border: 1px solid white;
   background: transparent !important;
   transition: transform 0.3s ease;
-  width:80% !important;
+  width: 80% !important;
 }
+
 .each:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -266,7 +288,7 @@ export default {
     pushToLog() {
       this.$router.push("/login");
     },
-    toProd(){
+    toProd() {
       this.$router.push('/products')
     },
     highlightProduct(prodID) {

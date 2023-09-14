@@ -33,6 +33,7 @@
                     <button class="pressMe" type="submit">Submit</button>
                 </div>
             </form>
+
         </div>
     </div>
 </template>
@@ -46,6 +47,7 @@ export default {
 <style scoped>
 .shadow-lg {
     box-shadow: 0 1rem 3rem rgba(255, 255, 255, 0.175) !important;
+    padding: 10rem !important;
 }
 
 .pressMe {
@@ -66,4 +68,5 @@ export default {
     padding: 25rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-}</style>
+}
+</style>

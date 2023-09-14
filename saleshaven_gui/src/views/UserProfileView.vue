@@ -52,11 +52,11 @@ export default {
             this.$store.dispatch("logout")
             this.$router.push("/login")
         },
-        manage(){
+        manage() {
             this.$router.push('manage')
         },
         async deactivate() {
-             await Swal.fire({
+            await Swal.fire({
                 title: "Are you sure?",
                 text: "You are about to deactivate your account.",
                 icon: "warning",
@@ -78,12 +78,12 @@ export default {
             })
         }
     },
-        created() {
-            const userID = this.$store.state.userData.userID
-            this.$store.dispatch('buyTransactions', userID)
-            this.$store.dispatch('sellTransactions', userID)
-        }
+    created() {
+        const userID = this.$store.state.userData.userID
+        this.$store.dispatch('buyTransactions', userID)
+        this.$store.dispatch('sellTransactions', userID)
     }
+}
 </script>
   
 <style scoped>
@@ -93,32 +93,39 @@ export default {
     border-radius: 50%;
     object-fit: cover;
 }
-.container{
-    padding:5rem;
+
+.container {
+    padding: 5rem;
 }
-.btn-danger{
+
+.btn-danger {
     background: transparent !important;
-    border:1px solid white;
+    border: 1px solid white;
     cursor: pointer !important;
 }
-.btn-danger:hover{
-    color:#040309;
-    background:red !important;
-    border:1px solid #040309 !important;
+
+.btn-danger:hover {
+    color: #040309;
+    background: red !important;
+    border: 1px solid #040309 !important;
 }
+
 .data {
     text-align: start;
     display: flex;
     flex-direction: column;
-    margin-bottom:50px;    
+    margin-bottom: 50px;
 }
-#special:hover{
+
+#special:hover {
     background-color: white !important;
-    color:#040309 !important;
+    color: #040309 !important;
 }
-.btn{
-    border:1px solid white !important;
+
+.btn {
+    border: 1px solid white !important;
 }
+
 .data {
     text-align: start;
     margin-bottom: 20px;
@@ -126,16 +133,15 @@ export default {
 
 .btn-warning {
     margin-right: 10px;
-    background:transparent !important;
-    color:white;
-    border:1px solid white;
-    margin-top:10px;
-    cursor:pointer !important;
+    background: transparent !important;
+    color: white;
+    border: 1px solid white;
+    margin-top: 10px;
+    cursor: pointer !important;
 }
 
-.btn-warning:hover{
-    color:#040309;
-    background:red !important;
-    border:1px solid #040309 !important;
-}
-</style>
+.btn-warning:hover {
+    color: #040309;
+    background: red !important;
+    border: 1px solid #040309 !important;
+}</style>

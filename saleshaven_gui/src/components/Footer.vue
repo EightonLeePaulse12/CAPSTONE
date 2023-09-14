@@ -44,8 +44,8 @@
                         </div>
                         <div>
                             <label for="message" id="lab">Message</label>
-                            <input type="text" id="mes" class="message" name="message" placeholder="Tell us something..." required
-                                oninvalid="this.setCustomValidity('Tell us something...')"
+                            <input type="text" id="mes" class="message" name="message" placeholder="Tell us something..."
+                                required oninvalid="this.setCustomValidity('Tell us something...')"
                                 oninput="this.setCustomValidity('')">
                         </div>
                         <div class="butto">
@@ -76,7 +76,7 @@ export default {
 .yes {
     padding: 20px;
     padding-top: 20px;
-    margin-top:25px !important;
+    margin-top: 25px !important;
     border-top: 1px solid white;
 }
 
@@ -91,49 +91,57 @@ form {
 
 #mes {
     height: 100% !important;
-    border:1px solid white;
+    border: 1px solid white;
 }
-#lab{
-    padding:0 0 10px 0 !important;
+
+#lab {
+    padding: 0 0 10px 0 !important;
 }
+
 #mail {
     height: 100% !important;
 }
-input{
-    width:100%;
-    border:transparent;
-    margin-top:7px;
+
+input {
+    width: 100%;
+    border: transparent;
+    margin-top: 7px;
 }
-#em{
+
+#em {
     background: transparent;
-    border:1px solid white;
-    padding:5px !important;
+    border: 1px solid white;
+    padding: 5px !important;
 }
-#mes{
+
+#mes {
     background: transparent;
-    padding:20px !important;
+    padding: 20px !important;
 }
-.butto{
+
+.butto {
     display: flex;
     justify-content: center;
-    padding:9px;
-    border:transparent !important;
+    padding: 9px;
+    border: transparent !important;
     background: transparent !important;
-    color:white;
+    color: white;
 }
-.butto button{
+
+.butto button {
     background: transparent;
     border: transparent;
-    color:white ;
+    color: white;
     font-weight: bold;
-    border:1px solid white;
-    padding:5px;
-    border-radius:3px;
-    cursor:pointer !important;
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer !important;
 }
-.butto button:hover{
-    background:white;
-    color:rgb(5,3,16) !important;
+
+.butto button:hover {
+    background: white;
+    color: rgb(5, 3, 16) !important;
 }
 
 .footer {
@@ -179,5 +187,4 @@ p {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-}
-</style>
+}</style>

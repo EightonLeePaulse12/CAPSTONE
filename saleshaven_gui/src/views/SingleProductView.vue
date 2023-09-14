@@ -1,18 +1,16 @@
 <template>
     <div>
-        <SingleProduct/>
+        <SingleProduct />
     </div>
 </template>
 
 <script>
 import SingleProduct from '@/components/SingleProduct.vue'
-    export default {
-        components:{
-            SingleProduct
-        }
+export default {
+    components: {
+        SingleProduct
     }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
