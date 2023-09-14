@@ -19,15 +19,23 @@
                     </div>
                     <div class="modal-body">
                         <label>User name:</label>
-                        <input placeholder="name" type="text" v-model="editingUser.firstName" />
+                        <input placeholder="name" type="text"
+                            oninvalid="this.setCustomValidity('Please provide a first name')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.firstName" />
                         <label>User lastname:</label>
-                        <input placeholder="quantity" type="text" v-model="editingUser.lastName" />
+                        <input placeholder="quantity" oninvalid="this.setCustomValidity('Please provide a last name')"
+                            oninput="this.setCustomValidity('')" type="text" v-model="editingUser.lastName" />
                         <label>User gender:</label>
-                        <input placeholder="description" type="text" v-model="editingUser.gender" />
+                        <input placeholder="gender" oninvalid="this.setCustomValidity('Please provide a gender')"
+                            oninput="this.setCustomValidity('')" type="text" v-model="editingUser.gender" />
                         <label>User email:</label>
-                        <input placeholder="price" type="text" v-model="editingUser.email" />
+                        <input placeholder="email" type="text"
+                            oninvalid="this.setCustomValidity('Please provide an email address')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.email" />
                         <label>User category:</label>
-                        <input placeholder="category" type="text" v-model="editingUser.userRole" />
+                        <input placeholder="category" type="text"
+                            oninvalid="this.setCustomValidity('Please provide this user's role')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.userRole" />
                         <label>User image (links only):</label>
                         <input placeholder="image" type="text" v-model="editingUser.userProfile" />
                     </div>
@@ -95,16 +103,19 @@ export default {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
-    cursor:pointer !important;
+    cursor: pointer !important;
 }
-.btn:hover{
-    background:white;
-    color:rgb(2,2,5) !important;
-  }
-.modal-content{
+
+.btn:hover {
+    background: white;
+    color: rgb(2, 2, 5) !important;
+}
+
+.modal-content {
     color: black !important;
 }
-.btn:hover{
+
+.btn:hover {
     color: rgb(4, 3, 10) !important;
     background: white;
 }
@@ -113,5 +124,4 @@ input {
     width: 100%;
     height: 3rem;
     margin-bottom: 2rem;
-}
-</style>
+}</style>

@@ -1,164 +1,128 @@
 <template>
-    <div class="main">
-      <!-- Button trigger modal -->
-      <button
-        type="button"
-        class="btn"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal3"
-      >
-        add user
-      </button>
-  
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="exampleModal3"
-        tabindex="-1"
-        aria-labelledby="exampleModal3Label"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel1">New User</h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <label for="firstName">First Name:</label>
-              <input
-                required
-                id="firstName"
-                type="text"
-                placeholder="first name"
-                v-model="model.user.firstName"
-              />
-              <label for="lastName">Last Name:</label>
-              <input
-                required
-                id="lastName"
-                type="text"
-                placeholder="last name"
-                v-model="model.user.lastName"
-              />
-              <label for="gender">Gender:</label>
-              <div class="dropdown">
-                <select class="btn btn-secondary dropdown-toggle" v-model="model.user.gender">
-                    <option>Male</option>
-                    <option>Female</option>
+  <div class="main">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+      add user
+    </button>
 
-                </select>
-            
-              </div>
-              <label for="userRole">Role:</label>
-              <input
-                required
-                id="userRole"
-                type="text"
-                placeholder="role"
-                v-model="model.user.userRole"
-              />
-              <label for="email">Email Address</label>
-              <input
-                required
-                id="email"
-                type="text"
-                placeholder="email address"
-                v-model="model.user.email"
-              />
-              <label for="password">Password:</label>
-              <input
-                required
-                id="password"
-                type="text"
-                placeholder="password"
-                v-model="model.user.userPass"
-              />
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModal3Label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel1">New User</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label for="firstName">First Name:</label>
+            <input required oninvalid="this.setCustomValidity('Please provide a first name')"
+              oninput="this.setCustomValidity('')" id="firstName" type="text" placeholder="first name"
+              v-model="model.user.firstName" />
+            <label for="lastName">Last Name:</label>
+            <input required id="lastName" oninvalid="this.setCustomValidity('Please provide a last name')"
+              oninput="this.setCustomValidity('')" type="text" placeholder="last name" v-model="model.user.lastName" />
+            <label for="gender">Gender:</label>
+            <div class="dropdown">
+              <select class="btn btn-secondary dropdown-toggle" v-model="model.user.gender">
+                <option>Male</option>
+                <option>Female</option>
+
+              </select>
+
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn" data-bs-dismiss="modal">
-                Close
-              </button>
-              <button type="button" class="btn" @click="createUser">
-                Save changes
-              </button>
-            </div>
+            <label for="userRole">Role:</label>
+            <input required id="userRole" type="text" oninvalid="this.setCustomValidity('Please enter this user's role')"
+              oninput="this.setCustomValidity('')" placeholder="role" v-model="model.user.userRole" />
+            <label for="email">Email Address</label>
+            <input required id="email" type="text" oninvalid="this.setCustomValidity('Please provide an email address')"
+              oninput="this.setCustomValidity('')" placeholder="email address" v-model="model.user.email" />
+            <label for="password">Password:</label>
+            <input required id="password" type="text" oninvalid="this.setCustomValidity('Please provide a password')"
+              oninput="this.setCustomValidity('')" placeholder="password" v-model="model.user.userPass" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn" @click="createUser">
+              Save changes
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        addingUserID: null,
-        model: {
-          user: {
-            firstName: "",
-            lastName: "",
-            gender: "",
-            email: "",
-            userPass: "",
-            userProfile: "",
-          },
+<script>
+export default {
+  data() {
+    return {
+      addingUserID: null,
+      model: {
+        user: {
+          firstName: "",
+          lastName: "",
+          gender: "",
+          email: "",
+          userPass: "",
+          userProfile: "",
         },
-      };
-    },
-    methods: {
-      createUser() {
-        this.$store.dispatch("register", this.model.user);
-        console.log(this.model.user);
       },
+    };
+  },
+  methods: {
+    createUser() {
+      this.$store.dispatch("register", this.model.user);
+      console.log(this.model.user);
     },
-  };
-  </script>
+  },
+};
+</script>
   
-  <style scoped>
-  .btn {
-    border: 1px solid #f7f4f1;
-    background:transparent;
-    color: rgb(255, 255, 255);
-}
-.dropdown-toggle{
-  border:1px solid black !important;
-  color:black !important;
-}
-.btn{
-  
-}
-.btn:hover{
-  background:white;
-  color:rgb(2,2,5) !important;
-}
+<style scoped>
 .btn {
-  margin-bottom:10px;
-  cursor:pointer !important;
-  height:100% !important;
+  border: 1px solid #f7f4f1;
+  background: transparent;
+  color: rgb(255, 255, 255);
+}
+
+.dropdown-toggle {
+  border: 1px solid black !important;
+  color: black !important;
+}
+
+.btn:hover {
+  background: white;
+  color: rgb(2, 2, 5) !important;
+}
+
+.btn {
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  height: 100% !important;
   border: 2px solid #f7f4f1;
   background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
   color: rgb(255, 255, 255);
-  cursor:pointer !important;
+  cursor: pointer !important;
 }
-select{
-  background:white !important;
+
+select {
+  background: white !important;
 }
-.btn:hover{
-  background:white;
-  color:rgb(2,2,5) !important;
+
+.btn:hover {
+  background: white;
+  color: rgb(2, 2, 5) !important;
 }
-.modal-content{
+
+.modal-content {
   color: black !important;
 }
+
 input {
-    width: 100%;
-    height: 3rem;
-    margin-bottom: 2rem;
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 2rem;
 }
-  </style>
+</style>

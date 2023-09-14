@@ -11,29 +11,41 @@
             <form @submit.prevent="register" id="form">
               <div id="check">
                 <label for="firstName">First Name:</label>
-                <input type="text" placeholder="First Name" id="firstName" v-model="firstName" required />
+                <input type="text" oninvalid="this.setCustomValidity('Please enter your first name')"
+                  oninput="this.setCustomValidity('')" placeholder="First Name" id="firstName" v-model="firstName"
+                  required />
               </div>
               <div id="check">
                 <label for="lastName">Last Name:</label>
-                <input type="text" placeholder="First Name" id="lastName" v-model="lastName" required />
+                <input type="text" placeholder="First Name"
+                  oninvalid="this.setCustomValidity('Please enter your last name')" oninput="this.setCustomValidity('')"
+                  id="lastName" v-model="lastName" required />
               </div>
               <div id="check">
                 <label for="gender">Gender:</label>
-                <input type="text" placeholder="Last Name" id="gender" v-model="gender" required />
+                <input type="text" placeholder="Last Name" id="gender"
+                  oninvalid="this.setCustomValidity('Please provide your gender')" oninput="this.setCustomValidity('')"
+                  v-model="gender" required />
               </div>
               <div id="check">
                 <label for="email">Email:</label>
-                <input type="email" placeholder="Email" id="email" v-model="email" required />
+                <input type="email" placeholder="Email" id="email"
+                  oninvalid="this.setCustomValidity('Please enter your email address')"
+                  oninput="this.setCustomValidity('')" v-model="email" required />
               </div>
               <div id="check">
                 <label for="password">Password:</label>
-                <input type="password" placeholder="password" id="password" v-model="password" required />
+                <input type="password" placeholder="password"
+                  oninvalid="this.setCustomValidity('Please enter a password')" oninput="this.setCustomValidity('')"
+                  id="password" v-model="password" required />
               </div>
               <div class="button">
                 <button class="button1" type="submit" id="submit">
                   Register Now
                   <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-                    <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                    <path clip-rule="evenodd"
+                      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                      fill-rule="evenodd"></path>
                   </svg>
                 </button>
               </div>
@@ -111,20 +123,23 @@ export default {
   height: 81.5vh;
   width: 100%;
 }
+
 .container-fluid {
   height: 100%;
 }
 
-input{
-  width:20rem;
-  padding:5px;
-  border-radius:10px;
+input {
+  width: 20rem;
+  padding: 5px;
+  border-radius: 10px;
 }
+
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .button1 {
   position: relative;
   transition: all 0.3s ease-in-out;
@@ -169,12 +184,10 @@ input{
   position: absolute;
   width: 100px;
   height: 100%;
-  background-image: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0) 30%,
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0) 70%
-  );
+  background-image: linear-gradient(120deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0) 70%);
   top: 0;
   left: -100px;
   opacity: 0.6;
@@ -195,14 +208,15 @@ input{
 }
 
 #submit {
-  padding:7px;
-  background:transparent;
-  color:white;
-  border:1px solid white;
-  cursor:pointer !important;
+  padding: 7px;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer !important;
 }
-#submit:hover{
-  color:rgb(4,3,10) !important;
+
+#submit:hover {
+  color: rgb(4, 3, 10) !important;
   background: white;
 }
 
@@ -216,11 +230,12 @@ input{
   width: 100% !important;
   height: 100% !important;
   display: flex;
-  margin:0 !important;
+  margin: 0 !important;
   justify-content: center;
   align-items: center;
 }
-form{
+
+form {
   background: 1px solid red !important;
 }
 

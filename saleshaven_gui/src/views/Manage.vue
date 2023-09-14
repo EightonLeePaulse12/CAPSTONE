@@ -136,18 +136,18 @@ table {
     text-align: center;
     margin-top: 7px;
     padding: 0.6rem;
-    padding-right:1rem;
+    padding-right: 1rem;
     font-weight: bolder;
     border-radius: 5px;
     border: 1px solid black;
     background: white;
-    cursor:pointer !important;
+    cursor: pointer !important;
     color: black;
 }
 
-#ban:hover{
+#ban:hover {
     background: rgb(255, 0, 0);
-    color:white;
+    color: white;
 }
 
 .name {

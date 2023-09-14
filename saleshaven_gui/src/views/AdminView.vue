@@ -5,11 +5,12 @@
         You are not authorized to be here
       </div>
     </div>
-    <div v-else-if="userRole === 'Admin'" class="table-responsive table-container">
-      <h4>Users</h4>
-      <AddUser/>
+    <div v-else-if="userRole === 'Admin'" class="table-responsive table-container pt-6">
+      <h2 class="pt-3">Welcome Admin.</h2>
+      <h4 class="p-6">Users</h4>
+      <AddUser />
       <div class="table-responsive">
-        <table class="table" >
+        <table class="table">
           <thead>
             <tr>
               <th class="name">ID</th>
@@ -29,17 +30,18 @@
               <td class="name">{{ user.gender }}</td>
               <td class="name">{{ user.userRole }}</td>
               <td><img id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
-  
+
               <td class="actions">
                 <updareUser :user="user" />
-                <button id="ban" @click="banUser(user.userID)">Ban</button></td>
+                <button id="ban" @click="banUser(user.userID)">Ban</button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="table-responsive">
         <h4>Products</h4>
-        <AddProduct/>
+        <AddProduct />
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -71,74 +73,75 @@
             </tbody>
           </table>
         </div>
-    </div>
+      </div>
     </div>
     <div v-else-if="userRole === 'Owner'" class="table-responsive table-container">
       <h4>Users</h4>
-      <AddUser/>
+      <AddUser />
       <div class="table-responsive">
-      <table class="table" >
-        <thead>
-          <tr>
-            <th class="name">ID</th>
-            <th class="name">First Name</th>
-            <th class="name">Last Name</th>
-            <th class="name">Gender</th>
-            <th class="name">Role</th>
-            <th>Profile Pic</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" class="tr" :key="user.userID">
-            <td class="name">{{ user.userID }}</td>
-            <td class="name">{{ user.firstName }}</td>
-            <td class="name">{{ user.lastName }}</td>
-            <td class="name">{{ user.gender }}</td>
-            <td class="name">{{ user.userRole }}</td>
-            <td><img id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
-
-            <td class="actions">
-              <updareUser :user="user" />
-              <button id="ban" @click="banUser(user.userID)">Ban</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-      <div class="table-responsive">
-        <h4>Products</h4>
-        <AddProduct/>
-        <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
               <th class="name">ID</th>
-              <th class="name">Name</th>
-              <th class="name">Description</th>
-              <th class="name">Category</th>
-              <th class="name">Price</th>
-              <th class="name">Stock</th>
-              <th>Product image</th>
-              <th>Actions</th>
+              <th class="name">First Name</th>
+              <th class="name">Last Name</th>
+              <th class="name">Gender</th>
+              <th class="name">Role</th>
+              <th>Profile Pic</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="product in products" :key="product.prodID">
-              <td class="name">{{ product.prodID }}</td>
-              <td class="name">{{ product.prodName }}</td>
-              <td class="name" id="proddd">{{ product.prodDesc }}</td>
-              <td class="name">{{ product.category }}</td>
-              <td class="name">{{ product.price }}</td>
-              <td class="name">{{ product.stock }}</td>
-              <td><img :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
+            <tr v-for="user in users" class="tr" :key="user.userID">
+              <td class="name">{{ user.userID }}</td>
+              <td class="name">{{ user.firstName }}</td>
+              <td class="name">{{ user.lastName }}</td>
+              <td class="name">{{ user.gender }}</td>
+              <td class="name">{{ user.userRole }}</td>
+              <td><img id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
+
               <td class="actions">
-                <updateProduct :product="product" />
-                <button @click="deleteProduct(product.prodID)" id="ban">Delete</button>
+                <updareUser :user="user" />
+                <button id="ban" @click="banUser(user.userID)">Ban</button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div class="table-responsive">
+        <h4>Products</h4>
+        <AddProduct />
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="name">ID</th>
+                <th class="name">Name</th>
+                <th class="name">Description</th>
+                <th class="name">Category</th>
+                <th class="name">Price</th>
+                <th class="name">Stock</th>
+                <th>Product image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="product in products" :key="product.prodID">
+                <td class="name">{{ product.prodID }}</td>
+                <td class="name">{{ product.prodName }}</td>
+                <td class="name" id="proddd">{{ product.prodDesc }}</td>
+                <td class="name">{{ product.category }}</td>
+                <td class="name">{{ product.price }}</td>
+                <td class="name">{{ product.stock }}</td>
+                <td><img :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
+                <td class="actions">
+                  <updateProduct :product="product" />
+                  <button @click="deleteProduct(product.prodID)" id="ban">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -262,48 +265,54 @@ table {
   border: 1px solid white;
   background: transparent !important;
 }
-#proddd{
-  width:10rem !important;
+
+#proddd {
+  width: 10rem !important;
 }
-.product-image{
+
+.product-image {
   width: 4rem !important;
   height: 4rem !important;
-  margin-top:0.7rem;
+  margin-top: 0.7rem;
   border-radius: 50% !important;
   object-fit: cover !important;
 }
-.tr{
-  height:100%;
+
+.tr {
+  height: 100%;
 }
 
-#else{
-  display:flex;
-  height:70vh;
-  width:100%;
+#else {
+  display: flex;
+  height: 70vh;
+  width: 100%;
   justify-content: center;
   align-items: center;
 }
-.spinner-border{
-  height:9rem;
-  width:9rem;
+
+.spinner-border {
+  height: 9rem;
+  width: 9rem;
 }
-#ban{
-  width:3.4rem;
-  margin-top:7px;
-  padding:0.7rem;
-  font-weight:bolder;
+
+#ban {
+  width: 3.4rem;
+  margin-top: 7px;
+  padding: 0.7rem;
+  font-weight: bolder;
   border-radius: 5px;
-  border:1px solid black;
+  border: 1px solid black;
   background: white;
-  color:black;
+  color: black;
 }
+
 .name {
   width: 8rem;
 }
 
 th,
 td {
-  color:white;
+  color: white;
   text-align: center;
   background: transparent !important;
   border: 2px solid white;
@@ -317,13 +326,15 @@ td {
 #pic {
   aspect-ratio: 1/1;
   width: 4rem;
-  height:4rem;
+  height: 4rem;
   border-radius: 5.5rem;
   object-fit: cover;
 }
-td{
-  font-size:.7rem !important;
+
+td {
+  font-size: .7rem !important;
 }
+
 .table-responsive {
   width: 100%;
 }
@@ -333,5 +344,4 @@ td{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-</style>
+}</style>

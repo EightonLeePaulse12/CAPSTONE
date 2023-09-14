@@ -1,14 +1,14 @@
 <template>
     <div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn" @click="openEditModal(userData.userID)" data-bs-toggle="modal"
-            :data-bs-target="'#texampleModal' + userData.userID">
+        <button type="button" class="btn" @click="openEditModal(thisUser.userID)" data-bs-toggle="modal"
+            :data-bs-target="'#texampleModal' + thisUser.userID">
             edit
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" :id="'texampleModal' + userData.userID" tabindex="-1"
-            :aria-labelledby="'texampleModalLabel' + userData.userID" aria-hidden="true">
+        <div class="modal fade" :id="'texampleModal' + thisUser.userID" tabindex="-1"
+            :aria-labelledby="'texampleModalLabel' + thisUser.userID" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -19,13 +19,21 @@
                     </div>
                     <div class="modal-body">
                         <label>First name:</label>
-                        <input type="text" placeholder="first name" v-model="editingUser.firstName" />
+                        <input type="text" placeholder="first name"
+                            oninvalid="this.setCustomValidity('Please provide your first name')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.firstName" />
                         <label>Last name:</label>
-                        <input type="text" placeholder="last name" v-model="editingUser.lastName" />
+                        <input type="text" placeholder="last name"
+                            oninvalid="this.setCustomValidity('Please provide your last name')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.lastName" />
                         <label>Gender:</label>
-                        <input type="text" placeholder="gender" v-model="editingUser.gender" />
+                        <input type="text" placeholder="gender"
+                            oninvalid="this.setCustomValidity('Please provide your gender')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.gender" />
                         <label>eEmail address:</label>
-                        <input type="text" placeholder="email address" v-model="editingUser.email" />
+                        <input type="text" placeholder="email address"
+                            oninvalid="this.setCustomValidity('Please enter your email address')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.email" />
                         <label>User profile (links only):</label>
                         <input type="text" placeholder="profile image" v-model="editingUser.userProfile" />
                     </div>
@@ -52,15 +60,6 @@ export default {
                 ...this.userData,
             },
             editingUserID: null,
-            model: {
-                user: {
-                    firstName: "",
-                    lastName: "",
-                    gender: "",
-                    email: "",
-                    userProfile: "",
-                },
-            },
         };
     },
     computed: {
@@ -74,10 +73,16 @@ export default {
         },
         async updateUser(id) {
             try {
-                await this.$store.dispatch("updateDetails", {
-                        userID: id,
-                        data: { ...this.editingUser },
-                    })
+                const payload = {
+                    userID: id,
+                    firstName: this.editingUser.firstName,
+                    lastName: this.editingUser.lastName,
+                    gender: this.editingUser.gender,
+                    email: this.editingUser.email,
+                    userRole: this.editingUser.userRole,
+                    userProfile: this.editingUser.userProfile
+                }
+                await this.$store.dispatch("updateDetails", payload)
             } catch (e) {
                 console.log(e)
             }
@@ -91,18 +96,20 @@ export default {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
-    cursor:pointer !important;
+    cursor: pointer !important;
 }
-.btn:hover{
-    background:white;
-    color:rgb(2,2,5) !important;
-  }
-.modal-content{
+
+.btn:hover {
+    background: white;
+    color: rgb(2, 2, 5) !important;
+}
+
+.modal-content {
     color: black !important;
 }
+
 input {
     width: 100%;
     height: 3rem;
     margin-bottom: 2rem;
-}
-</style>
+}</style>

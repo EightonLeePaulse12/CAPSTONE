@@ -51,26 +51,31 @@ export default {
     justify-content: center;
     align-items: center;
 }
-.container{
-    padding:6rem;
+
+.container {
+    padding: 6rem;
 }
-.btn-primary{
-    background:transparent !important;
-    color:white !important;
-    border:1px solid white;
+
+.btn-primary {
+    background: transparent !important;
+    color: white !important;
+    border: 1px solid white;
     cursor: pointer !important;
 }
-#prim:hover{
-    background:white !important;
+
+#prim:hover {
+    background: white !important;
     color: #040309 !important;
 }
+
 h2 {
     margin-top: 0;
 }
-.text-muted{
-    color:white !important;
+
+.text-muted {
+    color: white !important;
 }
+
 .btn-primary {
     margin-top: 20px;
-}
-</style>
+}</style>

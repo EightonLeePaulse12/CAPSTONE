@@ -126,6 +126,9 @@ export default createStore({
         state.cart[itemIndex].quantity = updatedItem.quantity;
       }
     },
+    clearCart(state){
+      state.cart = []
+    },
     setBuyTransactions(state, count) {
       state.buyTransactions = count;
     },
@@ -504,8 +507,8 @@ export default createStore({
           context.commit("setError", err);
         }
         if (msg) {
-          console.log(payload.data);
-          context.commit("setUserData", payload.data);
+          console.log(payload);
+          context.commit("setUserData", payload);
           context.commit("setMsg", "Successfully updated profile");
         } else {
           console.log("User data is not ready yet");

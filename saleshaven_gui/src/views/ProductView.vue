@@ -1,8 +1,34 @@
 <template>
     <div class="products" v-if="products">
-        <div class="container-fluid">
+        <div class="container-fluid p-3">
+            <div class="row text-center pb-3">
+                <h2>Our Catalog</h2><br>
+                <p>Make yourself at home.</p>
+
+                <form class="d-flex mb-2 searchBTN" role="search">
+                    <input class="form-control" type="search" id="search" placeholder="Search" aria-label="Search"
+                        v-model="searchTerm" />
+                </form>
+                <div class="sort-dropdown">
+                    <label for="sort" id="sort2">Sort by: </label>
+                    <select id="sort" v-model="sortBy">
+                        <option value="default">Default</option>
+                        <option value="price">Price</option>
+                        <option value="category">Category</option>
+                        <option value="alphabetical">Alphabetical</option>
+                    </select>
+                    <button class="btn" @click="toggleSortDirection">
+                        {{ sort === 'asc' ? 'ascending' : 'descending' }}
+                    </button>
+                </div>
+                <div class="reset">
+                    <button class="btn" @click="resetFilters">
+                        Reset
+                    </button>
+                </div>
+            </div>
             <div class="row card-group row-cols-1 row-cols-sm-2 row-cols-lg-3 mx-auto g-4">
-                <div class="col" v-for="product in products" :key="product.prodID">
+                <div class="col" v-for="product in filteredProducts" :key="product.prodID">
                     <div class="card">
                         <img id="product" :src="product.prodURL">
                         <div class="card-body">
@@ -32,13 +58,38 @@
 
 <script>
 export default {
+    data() {
+        return {
+            searchTerm: '',
+            sortBy: "",
+            sort: ""
+        }
+    },
     computed: {
         product() {
             return this.$store.state.product
         },
         products() {
             return this.$store.state.products
-        }
+        },
+        filteredProducts() {
+            let filtered = this.products
+            if (this.searchTerm !== '') {
+                filtered = filtered.filter(product => product.prodName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                    product.category.toLowerCase().includes(this.searchTerm.toLowerCase()))
+            }
+            if (this.sortBy === 'price') {
+                filtered = filtered.sort((a, b) => (this.sort === 'asc' ? a.price - b.price : b.price - a.price))
+            } else if (this.sortBy === 'category') {
+                filtered = filtered.sort((a, b) => a.category.localeCompare(b.category) * (this.sort === 'asc' ? 1 : -1))
+            } else if (this.sortBy === 'alphabetical') {
+                filtered = filtered.sort((a, b) => a.prodName.localeCompare(b.prodName) * (this.sort === 'asc' ? 1 : -1))
+            } else if (this.sortBy === 'default') {
+                filtered = filtered.sort((a, b) => (this.sort === 'asc' ? a.prodID - b.prodID : b.prodID - a.prodID))
+            }
+
+            return filtered
+        },
     },
     mounted() {
         this.$store.dispatch("fetchProducts")
@@ -54,7 +105,23 @@ export default {
                 this.$store.commit("setSelectedProduct", chosenProd)
                 this.$router.push({ name: "ProductView", params: { prodID: chosenProd.prodID } })
             }
-        }
+        },
+        searchProducts(e) {
+            console.log(this.searchTerm)
+            e.preventDefault()
+            this.searchTerm = this.searchTerm.trim()
+        },
+        toggleSortDirection() {
+            this.sort = this.sort === 'asc' ? 'desc' : 'asc'
+        },
+        resetFilters() {
+            this.sortBy = "default"
+            this.sort = ''
+            this.searchTerm = ''
+        },
+        clearSearch() {
+            this.searchTerm = ''
+        },
     }
 }
 </script>
@@ -84,8 +151,41 @@ export default {
     height: 20%;
 }
 
+#sort {
+    border-radius: 10px;
+    background: transparent;
+    color: white;
+}
+
+option {
+    background: transparent !important;
+    color: rgb(0, 0, 0) !important;
+    border: 1px solid black;
+}
+
+#sort option:hover {
+    background: rgb(1, 1, 1) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+#search {
+    width: 100%;
+    height: 3rem !important;
+    color: white;
+    background: transparent;
+}
+
+#search::placeholder {
+    color: white;
+}
+
 .buttons {
     display: flex !important;
+}
+
+#sort2 {
+    margin-right: 10px;
+    font-weight: bold;
 }
 
 #else {

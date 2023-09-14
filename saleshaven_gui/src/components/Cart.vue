@@ -31,7 +31,7 @@ export default {
       return cart
     },
     cartTotal() {
-      return this.$store.state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+      return this.$store.state.cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
     },
   },
   methods: {
@@ -53,12 +53,12 @@ export default {
 
 <style scoped>
 .cart-container {
-  max-width: 400px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
-  color:black !important;
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
+  color: rgb(255, 255, 255) !important;
+  background: transparent;
+  border: 1px solid #ffffff;
   border-radius: 5px;
 }
 
@@ -73,9 +73,13 @@ export default {
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+  background: transparent;
+  border: 1px solid #ffffff;
   border-radius: 5px;
+}
+
+.item-price {
+  margin-right: 20px;
 }
 
 .item-info {
@@ -84,6 +88,7 @@ export default {
 
 .product-name {
   font-weight: bold;
+  margin-right: 20px;
 }
 
 .item-actions {
@@ -95,16 +100,17 @@ export default {
 .quantity-button {
   margin-left: 10px;
   padding: 5px 10px;
-  background-color: #e74c3c;
+  background: transparent;
   color: #fff;
-  border: none;
+  border: 1px solid white;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .remove-button:hover,
 .quantity-button:hover {
-  background-color: #c0392b;
+  background-color: white;
+  color: #040404;
 }
 
 .cart-total {
@@ -117,14 +123,17 @@ export default {
   display: block;
   text-align: center;
   padding: 10px;
-  background-color: #3498db;
-  color: #fff;
+  background: transparent;
+  border: 1px solid white;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 5px;
+  cursor: pointer !important;
   margin-top: 20px;
 }
 
 .checkout-link:hover {
-  background-color: #2980b9;
+  background-color: #ffffff;
+  color: #040404;
 }
 </style>

@@ -19,17 +19,28 @@
                     </div>
                     <div class="modal-body">
                         <label>Product name:</label>
-                        <input placeholder="name" type="text" v-model="editingProduct.prodName" />
+                        <input placeholder="name" type="text"
+                            oninvalid="this.setCustomValidity('Please give this product a name')"
+                            oninput="this.setCustomValidity('')" v-model="editingProduct.prodName" />
                         <label>Product Stock:</label>
-                        <input placeholder="quantity" type="number" v-model="editingProduct.stock" />
+                        <input placeholder="stock" oninvalid="this.setCustomValidity('Please give this product's stock')"
+                            oninput="this.setCustomValidity('')" type="number" v-model="editingProduct.stock" />
                         <label>Product description:</label>
-                        <input placeholder="description" type="text" v-model="editingProduct.prodDesc" />
+                        <input placeholder="description"
+                            oninvalid="this.setCustomValidity('Please give this product a description')"
+                            oninput="this.setCustomValidity('')" type="text" v-model="editingProduct.prodDesc" />
                         <label>Product price:</label>
-                        <input placeholder="price" type="number" v-model="editingProduct.price" />
+                        <input placeholder="price" type="number"
+                            oninvalid="this.setCustomValidity('Please give this product a price')"
+                            oninput="this.setCustomValidity('')" v-model="editingProduct.price" />
                         <label>Product category:</label>
-                        <input placeholder="category" type="text" v-model="editingProduct.category" />
+                        <input placeholder="category" type="text"
+                            oninvalid="this.setCustomValidity('Please give this product a category')"
+                            oninput="this.setCustomValidity('')" v-model="editingProduct.category" />
                         <label>Product image (links only):</label>
-                        <input placeholder="image" type="text" v-model="editingProduct.prodURL" />
+                        <input placeholder="image" type="text"
+                            oninvalid="this.setCustomValidity('Please provide an image for this picture')"
+                            oninput="this.setCustomValidity('')" v-model="editingProduct.prodURL" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -94,18 +105,20 @@ export default {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
-    cursor:pointer !important;
+    cursor: pointer !important;
 }
-.btn:hover{
-    background:white;
-    color:rgb(2,2,5) !important;
-  }
-.modal-content{
+
+.btn:hover {
+    background: white;
+    color: rgb(2, 2, 5) !important;
+}
+
+.modal-content {
     color: black !important;
 }
+
 input {
     width: 100%;
     height: 3rem;
     margin-bottom: 2rem;
-}
-</style>
+}</style>
