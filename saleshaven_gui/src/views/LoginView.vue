@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="col brr">
-          <img src="https://i.postimg.cc/XNmCTxnH/pexels-anni-roenkae-3110509.jpg" alt="" class="img-01">
+          <img loading="lazy" src="https://i.postimg.cc/XNmCTxnH/pexels-anni-roenkae-3110509.jpg" alt="" class="img-01">
         </div>
       </div>
     </div>
@@ -215,4 +215,5 @@ input {
 .brr {
   height: 74vh;
   width: 55%;
-}</style>
+}
+</style>

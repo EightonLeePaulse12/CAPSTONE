@@ -26,6 +26,7 @@ export default createStore({
     buyTransactions: 0,
     sellTransactions: 0,
     points: 0,
+    upd: null,
   },
   getters: {
     getError(state) {
@@ -36,6 +37,9 @@ export default createStore({
     },
   },
   mutations: {
+    setUpd(state, payload) {
+      state.userData.userPass = payload.userPass;
+    },
     setUsers(state, users) {
       state.users = users;
     },
@@ -103,6 +107,7 @@ export default createStore({
         Swal.fire({
           icon: "success",
           title: "Item is already in cart",
+          text: `${productToAdd.prodName} is already in cart.`,
         });
         exists.quantity += 1;
       } else {
@@ -126,8 +131,8 @@ export default createStore({
         state.cart[itemIndex].quantity = updatedItem.quantity;
       }
     },
-    clearCart(state){
-      state.cart = []
+    clearCart(state) {
+      state.cart = [];
     },
     setBuyTransactions(state, count) {
       state.buyTransactions = count;
@@ -310,6 +315,26 @@ export default createStore({
         return { success: false, error: "Network error" };
       }
     },
+    async changePass(context, payload) {
+      try {
+        const userID = context.state.userData.userID;
+        const res = await axios.patch(`${api}user/${userID}`, payload, {
+          headers: {
+            Authorization: context.state.token,
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(res);
+        const { err, msg } = res.data;
+        if (err) {
+          context.commit("setError", err);
+        }
+        if (msg === "User record updated successfully") {
+          context.commit("setUpd", payload.userPass);
+          context.commit("setMsg", "Successfully updated password");
+        }
+      } catch (e) {}
+    },
     cookieCheck(context) {
       const token = Cookies.get("userToken");
       if (token) {
@@ -383,15 +408,18 @@ export default createStore({
     async updateCartItem(context, updatedItem) {
       context.commit("updateCartItem", updatedItem);
     },
-    async deactivate(context){
-      try{  
-        const res = await axios.delete(`${api}user/${context.state.userData.userID}`, {
-          headers:{
-            Authorization: context.state.token,
-            "Content-Type": "application/json",
+    async deactivate(context) {
+      try {
+        const res = await axios.delete(
+          `${api}user/${context.state.userData.userID}`,
+          {
+            headers: {
+              Authorization: context.state.token,
+              "Content-Type": "application/json",
+            },
           }
-        })
-        const { err, msg } = res.data
+        );
+        const { err, msg } = res.data;
         if (err) {
           context.commit("setError", err);
         }
@@ -399,7 +427,7 @@ export default createStore({
           context.commit("setUser", msg);
           console.log("User deleted successfully");
         }
-      } catch(e){
+      } catch (e) {
         console.log("An error occured: ", e);
       }
     },
@@ -434,8 +462,8 @@ export default createStore({
         });
         const { msg, err } = res.data;
         if (msg) {
-          context.dispatch("fetchProducts")
-          context.dispatch("fetchOwnProd")
+          context.dispatch("fetchProducts");
+          context.dispatch("fetchOwnProd");
           context.commit("setProduct", msg);
         }
         if (err) {
@@ -463,7 +491,7 @@ export default createStore({
           context.commit("setError", err);
         }
         if (msg) {
-          context.dispatch("fetchOwnProd")
+          context.dispatch("fetchOwnProd");
           context.dispatch("fetchProducts");
           context.commit("setProduct", msg);
           context.commit("setMsg", "Successfully updated product");
@@ -571,7 +599,7 @@ export default createStore({
           context.commit("setError", err);
         }
         if (msg === "Product added successfully") {
-          context.dispatch("fetchOwnProd")
+          context.dispatch("fetchOwnProd");
           context.dispatch("fetchProducts");
           context.commit("setProduct", msg);
         }

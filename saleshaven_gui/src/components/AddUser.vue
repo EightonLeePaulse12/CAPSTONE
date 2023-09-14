@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <!-- Button trigger modal -->
     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3">
       add user
     </button>
@@ -81,40 +80,28 @@ export default {
 </script>
   
 <style scoped>
-.btn {
-  border: 1px solid #f7f4f1;
-  background: transparent;
-  color: rgb(255, 255, 255);
-}
-
 .dropdown-toggle {
   border: 1px solid black !important;
   color: black !important;
 }
 
-.btn:hover {
-  background: white;
-  color: rgb(2, 2, 5) !important;
-}
-
 .btn {
-  margin-bottom: 10px;
-  cursor: pointer !important;
-  height: 100% !important;
   border: 2px solid #f7f4f1;
   background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
   color: rgb(255, 255, 255);
   cursor: pointer !important;
+  margin-bottom: 10px !important;
+}
+
+.btn:hover {
+  background: white;
+  color: rgb(2, 2, 5) !important;
 }
 
 select {
   background: white !important;
 }
 
-.btn:hover {
-  background: white;
-  color: rgb(2, 2, 5) !important;
-}
 
 .modal-content {
   color: black !important;

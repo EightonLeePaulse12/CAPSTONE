@@ -14,9 +14,9 @@
     <div class="container" v-if="getRandom">
       <h2 class="head">Featured Products</h2>
       <div class="featuredProd">
-        <div class="card each" v-for="product in getRandom" :key="product.prodID"
+        <div class="card each" data-aos="fade-right" v-for="product in getRandom" :key="product.prodID"
           @mouseover="highlightProduct(product.prodID)" @mouseleave="resetHighlight()">
-          <img :src="product.prodURL" class="card-img-top" alt="Product Image">
+          <img loading="lazy" :src="product.prodURL" class="card-img-top" alt="Product Image">
           <div class="card-body">
             <h5 class="card-title">{{ product.prodName }}</h5>
             <p class="card-text it">{{ product.prodDesc }}</p>
@@ -44,7 +44,6 @@
       </div>
       <div class="login">
         <h4>You need to Log in to get the full experience</h4>
-        <button @click="pushToLog">Click here to Log in</button>
       </div>
     </div>
   </div>
@@ -186,10 +185,10 @@ h4 {
 
 .login button {
   padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
+  background: transparent;
+  border: 1px solid white;
+  color: rgb(0, 0, 0);
+  cursor: pointer !important;
 }
 
 .login button:hover {

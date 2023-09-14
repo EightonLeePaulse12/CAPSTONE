@@ -2,7 +2,9 @@
   <div v-if="users && products">
     <div v-if="userRole === 'User' || userRole === '' || userRole === undefined || userRole === null">
       <div class="container">
-        You are not authorized to be here
+        <h2>
+          You are not authorized to be here
+        </h2>
       </div>
     </div>
     <div v-else-if="userRole === 'Admin'" class="table-responsive table-container pt-6">
@@ -29,7 +31,7 @@
               <td class="name">{{ user.lastName }}</td>
               <td class="name">{{ user.gender }}</td>
               <td class="name">{{ user.userRole }}</td>
-              <td><img id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
+              <td><img loading="lazy" id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
 
               <td class="actions">
                 <updareUser :user="user" />
@@ -64,7 +66,7 @@
                 <td class="name">{{ product.category }}</td>
                 <td class="name">{{ product.price }}</td>
                 <td class="name">{{ product.stock }}</td>
-                <td><img :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
+                <td><img loading="lazy" :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
                 <td class="actions">
                   <updateProduct :product="product" />
                   <button @click="deleteProduct(product.prodID)" id="ban">Delete</button>
@@ -76,7 +78,8 @@
       </div>
     </div>
     <div v-else-if="userRole === 'Owner'" class="table-responsive table-container">
-      <h4>Users</h4>
+      <h2 class="pt-3">Welcome Admin.</h2>
+      <h4 class="p-6">Users</h4>
       <AddUser />
       <div class="table-responsive">
         <table class="table">
@@ -98,7 +101,7 @@
               <td class="name">{{ user.lastName }}</td>
               <td class="name">{{ user.gender }}</td>
               <td class="name">{{ user.userRole }}</td>
-              <td><img id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
+              <td><img loading="lazy" id="pic" class="product-image" :src="user.userProfile" :alt="user.firstName"></td>
 
               <td class="actions">
                 <updareUser :user="user" />
@@ -133,7 +136,7 @@
                 <td class="name">{{ product.category }}</td>
                 <td class="name">{{ product.price }}</td>
                 <td class="name">{{ product.stock }}</td>
-                <td><img :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
+                <td><img loading="lazy" :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
                 <td class="actions">
                   <updateProduct :product="product" />
                   <button @click="deleteProduct(product.prodID)" id="ban">Delete</button>
@@ -304,6 +307,7 @@ table {
   border: 1px solid black;
   background: white;
   color: black;
+  cursor: pointer !important;
 }
 
 .name {
@@ -344,4 +348,5 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}</style>
+}
+</style>

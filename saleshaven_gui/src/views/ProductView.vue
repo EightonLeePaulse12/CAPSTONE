@@ -1,51 +1,58 @@
 <template>
-    <div class="products" v-if="products">
-        <div class="container-fluid p-3">
-            <div class="row text-center pb-3">
-                <h2>Our Catalog</h2><br>
-                <p>Make yourself at home.</p>
+    <div v-if="role === 'User' || role === 'Admin' || role === 'Owner'">
+        <div class="products" v-if="products">
+            <div class="container-fluid p-3">
+                <div class="row text-center pb-3">
+                    <h2>Our Catalog</h2><br>
+                    <p>Make yourself at home.</p>
 
-                <form class="d-flex mb-2 searchBTN" role="search">
-                    <input class="form-control" type="search" id="search" placeholder="Search" aria-label="Search"
-                        v-model="searchTerm" />
-                </form>
-                <div class="sort-dropdown">
-                    <label for="sort" id="sort2">Sort by: </label>
-                    <select id="sort" v-model="sortBy">
-                        <option value="default">Default</option>
-                        <option value="price">Price</option>
-                        <option value="category">Category</option>
-                        <option value="alphabetical">Alphabetical</option>
-                    </select>
-                    <button class="btn" @click="toggleSortDirection">
-                        {{ sort === 'asc' ? 'ascending' : 'descending' }}
-                    </button>
+                    <form class="d-flex mb-2 searchBTN" role="search">
+                        <input class="form-control" type="search" id="search" placeholder="Search" aria-label="Search"
+                            v-model="searchTerm" />
+                    </form>
+                    <div class="sort-dropdown">
+                        <label for="sort" id="sort2">Sort by: </label>
+                        <select id="sort" v-model="sortBy">
+                            <option value="default">Default</option>
+                            <option value="price">Price</option>
+                            <option value="category">Category</option>
+                            <option value="alphabetical">Alphabetical</option>
+                        </select>
+                        <button class="btn" @click="toggleSortDirection">
+                            {{ sort === 'asc' ? 'ascending' : 'descending' }}
+                        </button>
+                    </div>
+                    <div class="reset">
+                        <button class="btn" @click="resetFilters">
+                            Reset
+                        </button>
+                    </div>
                 </div>
-                <div class="reset">
-                    <button class="btn" @click="resetFilters">
-                        Reset
-                    </button>
-                </div>
-            </div>
-            <div class="row card-group row-cols-1 row-cols-sm-2 row-cols-lg-3 mx-auto g-4">
-                <div class="col" v-for="product in filteredProducts" :key="product.prodID">
-                    <div class="card">
-                        <img id="product" :src="product.prodURL">
-                        <div class="card-body">
-                            <h6 id="name">{{ product.prodName }}</h6>
-                            <p id="description"> Description: {{ product.prodDesc }} </p>
-                            <p id="category"> Category: {{ product.category }} </p>
-                            <p id="price"> Price: {{ product.price }} </p>
-                            <p id="stock"> Stock: {{ product.stock }} </p>
-                            <center>
-                                <div class="buttons" id="button">
-                                    <button @click="singleProduct(product.prodID)">View More</button>
-                                    <button @click="addToCart(product)">Add To Cart</button>
-                                </div>
-                            </center>
+                <div class="row card-group row-cols-1 row-cols-sm-2 row-cols-lg-3 mx-auto g-4">
+                    <div class="col" v-for="product in filteredProducts" :key="product.prodID">
+                        <div class="card" data-aos="fade-up">
+                            <img loading="lazy" id="product" :src="product.prodURL">
+                            <div class="card-body">
+                                <h6 id="name">{{ product.prodName }}</h6>
+                                <p id="description"> Description: {{ product.prodDesc }} </p>
+                                <p id="category"> Category: {{ product.category }} </p>
+                                <p id="price"> Price: {{ product.price }} </p>
+                                <p id="stock"> Stock: {{ product.stock }} </p>
+                                <center>
+                                    <div class="buttons" id="button">
+                                        <button @click="singleProduct(product.prodID)">View More</button>
+                                        <button @click="addToCart(product)">Add To Cart</button>
+                                    </div>
+                                </center>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div v-else id="else">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
     </div>
@@ -58,6 +65,9 @@
 
 <script>
 export default {
+    mounted() {
+        this.$store.dispatch("fetchProducts")
+    },
     data() {
         return {
             searchTerm: '',
@@ -68,6 +78,9 @@ export default {
     computed: {
         product() {
             return this.$store.state.product
+        },
+        role() {
+            return this.$store.state.userRole
         },
         products() {
             return this.$store.state.products
@@ -90,9 +103,6 @@ export default {
 
             return filtered
         },
-    },
-    mounted() {
-        this.$store.dispatch("fetchProducts")
     },
     methods: {
         addToCart(product) {
@@ -153,8 +163,13 @@ export default {
 
 #sort {
     border-radius: 10px;
+    height: 3rem;
     background: transparent;
     color: white;
+}
+
+.btn {
+    margin: 10px !important;
 }
 
 option {
@@ -192,6 +207,13 @@ option {
     display: flex;
     height: 70vh;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort-dropdown {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -234,4 +256,5 @@ button:hover {
     color: white;
     border: 1px solid white;
     height: 20rem !important;
-}</style>
+}
+</style>
