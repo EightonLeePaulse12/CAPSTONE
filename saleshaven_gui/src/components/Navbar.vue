@@ -1,10 +1,10 @@
 <template>
   <div class="fullNav fixed-top">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" id="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-body-tertiary" id="nav">
       <div class="container-fluid">
-        <router-link class="navbar-brand" to="/"><img id="logo"
+        <router-link class="navbar-brand" to="/"><img id="logo" loading="lazy"
             src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png"></router-link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,9 +30,6 @@
               <font-awesome-icon icon="user-secret" style="color: #ffffff;" />
               <router-link class="nav-link active" aria-disabled="true" to="/admin">Admin</router-link>
             </li>
-            <!-- <li class="nav-item" id="navItem" v-if="userRole === 'Admin' || userRole === 'Owner' || userRole === 'User'">
-              <router-link class="nav-link active" aria-disabled="true" to="/cart">Cart</router-link>
-            </li> -->
           </ul>
           <ul class="navbar-nav" v-if="userRole === '' || userRole === undefined || userRole === null">
             <li class="nav-item" id="navItem">
@@ -48,8 +45,8 @@
                   style="color: #ffffff;" /></router-link>
             </div>
             <div class="point">
-              <router-link to="/profile">
-                <img id="prof" to="/profile" :src="userData.userProfile">
+              <router-link id="proff" to="/profile">
+                <img id="prof" loading="lazy" to="/profile" :src="userData.userProfile">
               </router-link>
             </div>
           </div>
@@ -92,6 +89,9 @@ export default {
   object-fit: contain !important;
 }
 
+#proff {
+  margin-right: 27px;
+}
 
 .navbar-nav {
   display: flex;
@@ -160,4 +160,5 @@ nav {
 
 #navbarNav {
   justify-content: space-between;
-}</style>
+}
+</style>

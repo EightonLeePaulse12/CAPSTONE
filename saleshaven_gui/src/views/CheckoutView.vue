@@ -5,23 +5,26 @@
         <h2>Checkout</h2>
       </div>
       <div class="checkout-form">
-        <div class="form-group">
-          <label for="card-number">Card Number:</label>
-          <input required type="text" id="card-number"
-            oninvalid="this.setCustomValidity('Please provide your card number')" oninput="this.setCustomValidity('')"
-            placeholder="Enter card number" v-model="cardNumber" />
-        </div>
-        <div class="form-group">
-          <label for="expiry-date">Expiry Date:</label>
-          <input required type="text" oninvalid="this.setCustomValidity('Please provide your card's expire date')"
-            oninput="this.setCustomValidity('')" id="expiry-date" placeholder="MM/YY" v-model="expiryDate" />
-        </div>
-        <div class="form-group">
-          <label for="cvv">CVV:</label>
-          <input required type="text" id="cvv" oninvalid="this.setCustomValidity('Please enter your CCV number')"
-            oninput="this.setCustomValidity('')" placeholder="Enter CVV" v-model="cvv" />
-        </div>
-        <button @click="completePurchase">Complete Purchase</button>
+        <form @submit.prevent="completePurchase">
+          <div class="form-group">
+
+            <label for="card-number">Card Number:</label>
+            <input required type="text" id="card-number"
+              oninvalid="this.setCustomValidity('Please provide your card number')" oninput="this.setCustomValidity('')"
+              placeholder="Enter card number" v-model="cardNumber" />
+          </div>
+          <div class="form-group">
+            <label for="expiry-date">Expiry Date:</label>
+            <input required type="text" oninvalid="this.setCustomValidity('Please provide your card's expire date')"
+              oninput="this.setCustomValidity('')" id="expiry-date" placeholder="MM/YY" v-model="expiryDate" />
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV:</label>
+            <input required type="text" id="cvv" oninvalid="this.setCustomValidity('Please enter your CCV number')"
+              oninput="this.setCustomValidity('')" placeholder="Enter CVV" v-model="cvv" />
+          </div>
+          <button type="submit">Complete Purchase</button>
+        </form>
       </div>
     </div>
   </div>

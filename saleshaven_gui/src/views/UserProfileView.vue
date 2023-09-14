@@ -1,8 +1,8 @@
 <template>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-4 text-center">
-                <img id="profile" :src="userData ? userData.userProfile : 'false'"
+                <img loading="lazy" id="profile" :src="userData ? userData.userProfile : 'false'"
                     :alt="userData ? userData.firstName : 'User Profile'" class="img-fluid rounded-circle" />
             </div>
             <div class="col-md-8">
@@ -21,7 +21,8 @@
                 </div>
                 <div class="mt-4">
                     <EditProfile :userData="userData" />
-                    <button class="btn btn-warning" id="special" @click="manage">Create & Manage products</button> <br>
+                    <button class="btn btn-warning" id="special" @click="manage">Create & Manage products</button>
+                    <ChangePassword />
                     <button @click="deactivate" class="btn btn-warning">Deactivate Account</button>
                 </div>
             </div>
@@ -32,9 +33,12 @@
 <script>
 import Swal from 'sweetalert2'
 import EditProfile from '@/components/UpdateUser.vue'
+import ChangePassword from '@/components/ChangePassword.vue'
+
 export default {
     components: {
-        EditProfile
+        EditProfile,
+        ChangePassword
     },
     computed: {
         userData() {
@@ -117,13 +121,32 @@ export default {
     margin-bottom: 50px;
 }
 
+#special {
+    color: white !important;
+}
+
 #special:hover {
     background-color: white !important;
     color: #040309 !important;
 }
 
 .btn {
-    border: 1px solid white !important;
+    border: 2px solid #f7f4f1;
+    background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
+    color: rgb(255, 255, 255) !important;
+    cursor: pointer !important;
+}
+
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.btn:hover {
+    background: white;
+    color: rgb(2, 2, 5) !important;
 }
 
 .data {

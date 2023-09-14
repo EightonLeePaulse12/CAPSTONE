@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="role === null || role === '' || role === undefined">
         <div class="container-fluid">
             <AddProduct />
             <div class="table-responsive">
@@ -24,7 +24,8 @@
                             <td class="name">{{ product.category }}</td>
                             <td class="name">{{ product.price }}</td>
                             <td class="name">{{ product.stock }}</td>
-                            <td><img :src="product.prodURL" class="product-image" :alt="product.prodName"></td>
+                            <td><img loading="lazy" :src="product.prodURL" class="product-image" :alt="product.prodName">
+                            </td>
                             <td class="actions">
                                 <UpdateSingleProd :product="product" />
                                 <button @click="deleteProduct(product.prodID)" id="ban">Delete</button>
@@ -34,6 +35,9 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div v-else>
+        You are not authorized to be here
     </div>
 </template>
 
@@ -52,6 +56,9 @@ export default {
     computed: {
         products() {
             return this.$store.state.myprod
+        },
+        role() {
+            return this.$store.state.userRole
         }
     },
     methods: {

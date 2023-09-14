@@ -9,7 +9,7 @@
 <style>
 nav a.router-link-exact-active,
 .li.active {
-  text-shadow: 3px 1px 5px rgba(253, 253, 255, 0.92) !important;
+  text-shadow: 3px 1px 5px rgba(18, 18, 21, 0.92) !important;
 }
 </style>
 

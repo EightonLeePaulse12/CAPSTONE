@@ -2,7 +2,7 @@
     <div class="container mt-4" v-if="product">
         <div class="row">
             <div class="col-md-6">
-                <img :src="product.prodURL" :alt="product.prodName" class="img-fluid" />
+                <img :src="product.prodURL" :alt="product.prodName" class="img-fluid" loading="lazy" />
             </div>
             <div class="col-md-6">
                 <h2>{{ product.prodName }}</h2>
@@ -78,4 +78,5 @@ h2 {
 
 .btn-primary {
     margin-top: 20px;
-}</style>
+}
+</style>

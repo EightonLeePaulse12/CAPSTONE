@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- Button trigger modal -->
         <button type="button" class="btn" @click="openEditModal(user.userID)" data-bs-toggle="modal"
             :data-bs-target="'#mexampleModal' + user.userID">
             Edit
@@ -115,13 +114,11 @@ export default {
     color: black !important;
 }
 
-.btn:hover {
-    color: rgb(4, 3, 10) !important;
-    background: white;
-}
+
 
 input {
     width: 100%;
     height: 3rem;
     margin-bottom: 2rem;
-}</style>
+}
+</style>

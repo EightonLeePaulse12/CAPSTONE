@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col back">
-          <img src="https://i.postimg.cc/Y91CZNRV/pexels-dids-3527795.jpg" alt="" class="img-01">
+          <img loading="lazy" src="https://i.postimg.cc/Y91CZNRV/pexels-dids-3527795.jpg" alt="" class="img-01">
         </div>
         <div class="col form">
           <h2 class="text-center h-02">Register</h2>
@@ -248,4 +248,5 @@ form {
   top: 0;
   left: 0;
   opacity: .7;
-} */</style>
+} */
+</style>
