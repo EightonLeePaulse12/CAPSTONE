@@ -1,5 +1,5 @@
 <template>
-    <div v-if="role === null || role === '' || role === undefined">
+    <div v-if="role === 'User' || role === 'Admin' || role === 'Owner'">
         <div class="container-fluid">
             <AddProduct />
             <div class="table-responsive">

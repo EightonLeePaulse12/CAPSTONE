@@ -1,6 +1,6 @@
 <template>
   <div class="fullNav fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-body-tertiary" id="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-body-tertiary static-top" id="nav">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/"><img id="logo" loading="lazy"
             src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png"></router-link>
@@ -146,7 +146,28 @@ export default {
   background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%) !important;
   height: 9rem;
 }
-
+@media (width < 992px){
+  #nav{
+    height: auto;
+  }
+  .svg-inline--fa{
+    margin-right:7px;
+  }
+  .point{
+    width:100%;
+    display:flex;
+    justify-content: start;
+  }
+  .cart{
+    margin-left:15px;
+  }
+  .navbar-nav{
+    align-items: flex-start;
+  }
+  #prof{
+    margin-left:15px;
+  }
+}
 nav {
   background: transparent !important;
 }

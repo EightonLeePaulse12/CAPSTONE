@@ -349,4 +349,9 @@ td {
   align-items: center;
   justify-content: center;
 }
+@media (width < 301px){
+  #proddd{
+    font-size:.6rem !important;
+  }
+}
 </style>

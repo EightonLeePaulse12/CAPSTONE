@@ -1,4 +1,5 @@
 <template>
+<div class="table-responsive">
   <div class="cart-container">
     <h2>Cart</h2>
     <ul class="cart-list">
@@ -19,6 +20,7 @@
     <router-link :to="{ name: 'checkout' }" class="checkout-link">
       Proceed to Checkout
     </router-link>
+  </div>
   </div>
 </template>
 
@@ -135,5 +137,33 @@ export default {
 .checkout-link:hover {
   background-color: #ffffff;
   color: #040404;
+}
+@media (width < 710px){
+  .item-price{
+    width:100% !important;
+  }
+  .cart-item{
+    flex-direction: column;
+  }
+}
+@media (width < 301px){
+  .cart-container{
+    padding:0 !important;
+  }
+  .cart-container{
+    width:100% !important;
+  }
+  .checkout-link{
+    margin-bottom:8px;
+  }
+  .cart-total{
+    padding:5px;
+  }
+  h2{
+    text-align: center;
+  }
+  .cart-item{
+    padding:7px !important;
+  }
 }
 </style>
