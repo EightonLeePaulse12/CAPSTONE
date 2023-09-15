@@ -42,7 +42,7 @@
                         <div v-if="userRole === 'Owner'">
                             <label>Role:</label>
                             <input type="text" placeholder="Role"
-                                oninvalid="this.setCustomValidity('Please enter your email address')"
+                                oninvalid="this.setCustomValidity('Please enter the use rrole')"
                                 oninput="this.setCustomValidity('')" v-model="editingUser.email" />
                         </div>
                         <label>User profile (links only):</label>

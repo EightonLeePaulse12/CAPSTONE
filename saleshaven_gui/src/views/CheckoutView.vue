@@ -15,7 +15,7 @@
           </div>
           <div class="form-group">
             <label for="expiry-date">Expiry Date:</label>
-            <input required type="text" oninvalid="this.setCustomValidity('Please provide your card's expire date')"
+            <input required type="text" oninvalid="this.setCustomValidity('Please provide your card\'s expire date')"
               oninput="this.setCustomValidity('')" id="expiry-date" placeholder="MM/YY" v-model="expiryDate" />
           </div>
           <div class="form-group">

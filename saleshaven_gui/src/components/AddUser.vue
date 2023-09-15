@@ -30,7 +30,7 @@
             <div v-if="userRole === 'Owner'">
               <label for="userRole">Role:</label>
               <input required id="userRole" type="text"
-                oninvalid="this.setCustomValidity('Please enter this user's role')" oninput="this.setCustomValidity('')"
+                oninvalid="this.setCustomValidity('Please enter this user\'s role')" oninput="this.setCustomValidity('')"
                 placeholder="role" v-model="model.user.userRole" />
             </div>
             <label for="email">Email Address</label>

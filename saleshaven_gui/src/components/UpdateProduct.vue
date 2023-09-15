@@ -23,7 +23,7 @@
                             oninvalid="this.setCustomValidity('Please give this product a name')"
                             oninput="this.setCustomValidity('')" v-model="editingProduct.prodName" />
                         <label>Product Stock:</label>
-                        <input placeholder="stock" oninvalid="this.setCustomValidity('Please give this product's stock')"
+                        <input placeholder="stock" oninvalid="this.setCustomValidity('Please give this product\'s stock')"
                             oninput="this.setCustomValidity('')" type="number" v-model="editingProduct.stock" />
                         <label>Product description:</label>
                         <input placeholder="description"

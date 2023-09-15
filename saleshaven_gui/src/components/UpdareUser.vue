@@ -42,7 +42,7 @@
                         <div v-if="userRole === 'Owner'">
                             <label>User role:</label>
                             <input placeholder="Role" type="text"
-                                oninvalid="this.setCustomValidity('Please provide this user's role')"
+                                oninvalid="this.setCustomValidity('Please provide this user\'s role')"
                                 oninput="this.setCustomValidity('')" v-model="editingUser.userRole" />
                         </div>
                         <label>User image (links only):</label>
