@@ -19,9 +19,9 @@
                     <h6><strong>Role:</strong> {{ userData ? userData.userRole : 'N/A' }}</h6>
                     <h6><strong>Points:</strong> {{ points }}</h6>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4 d-flex flex-column" style="width: 24%;">
                     <EditProfile :userData="userData" />
-                    <button class="btn btn-warning" id="special" @click="manage">Create & Manage products</button>
+                    <button class="btn btn-warning fs-7" id="special" @click="manage">Create & Manage products</button>
                     <ChangePassword />
                     <button @click="deactivate" class="btn btn-warning">Deactivate Account</button>
                 </div>

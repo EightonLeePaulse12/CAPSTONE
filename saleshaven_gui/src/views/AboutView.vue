@@ -180,7 +180,9 @@ export default {
   text-align: center;
   padding: 20px;
 }
-
+.txt3sub{
+  font-size:2px !important;
+}
 .abthd2 {
   padding-left: 3.4rem;
   font-weight: 200;
