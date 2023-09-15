@@ -69,18 +69,20 @@ export default {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-@media (width < 701px){
-    #contact{
-        padding:5rem !important;
+
+@media (width < 701px) {
+    #contact {
+        padding: 5rem !important;
     }
-    .main{
-        padding:20px;
+
+    .main {
+        padding: 20px;
     }
 }
-@media (width < 301px){
-    #contact{
-        padding:1rem !important;
+
+@media (width < 301px) {
+    #contact {
+        padding: 1rem !important;
     }
-    
-}
-</style>
+
+}</style>

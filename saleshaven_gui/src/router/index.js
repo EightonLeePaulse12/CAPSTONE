@@ -13,9 +13,6 @@ const routes = [
     path: "/about",
     name: "about",
     meta: { title: "About - SalesHaven" },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
@@ -23,10 +20,6 @@ const routes = [
     path: "/register",
     name: "register",
     meta: { title: "Register - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/RegisterView.vue"),
   },
@@ -34,10 +27,6 @@ const routes = [
     path: "/login",
     name: "login",
     meta: { title: "Login - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/LoginView.vue"),
   },
@@ -45,10 +34,6 @@ const routes = [
     path: "/products",
     name: "products",
     meta: { title: "Catalog - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ProductView.vue"),
   },
@@ -56,10 +41,6 @@ const routes = [
     path: "/admin",
     name: "admin",
     meta: { title: "Admin - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AdminView.vue"),
   },
@@ -67,10 +48,6 @@ const routes = [
     path: "/cart",
     name: "cart",
     meta: { title: "Cart - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CartView.vue"),
   },
@@ -78,11 +55,7 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     meta: { title: "Checkout - SalesHaven" },
-
     props: true,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CheckoutView.vue"),
   },
@@ -90,10 +63,6 @@ const routes = [
     path: "/profile",
     name: "profile",
     meta: { title: "Profile - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/UserProfileView.vue"),
   },
@@ -101,10 +70,6 @@ const routes = [
     path: "/contact",
     name: "contact",
     meta: { title: "Contact - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ContactView.vue"),
   },
@@ -112,10 +77,6 @@ const routes = [
     path: "/product/:prodID",
     name: "ProductView",
     meta: { title: "Product - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/SingleProductView.vue"),
   },
@@ -123,10 +84,6 @@ const routes = [
     path: "/success",
     name: "success",
     meta: { title: "Purchase Complete - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/SuccessView.vue"),
   },
@@ -135,10 +92,6 @@ const routes = [
     path: "/manage",
     name: "manage",
     meta: { title: "Manage Your Products - SalesHaven" },
-
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Manage.vue"),
   },

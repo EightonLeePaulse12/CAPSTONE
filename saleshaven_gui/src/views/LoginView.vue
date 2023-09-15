@@ -217,12 +217,13 @@ input {
   width: 55%;
 }
 
-@media (width < 701px){
-  .brr{
-    display:none;
+@media (width < 701px) {
+  .brr {
+    display: none;
   }
-  .div{
-    border:1px solid white;
+
+  .div {
+    border: 1px solid white;
   }
 }
 </style>

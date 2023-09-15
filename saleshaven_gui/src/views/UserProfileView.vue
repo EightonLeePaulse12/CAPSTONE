@@ -154,16 +154,18 @@ export default {
     text-align: start;
     margin-bottom: 20px;
 }
-#special{
-    margin-bottom:0 !important;
+
+#special {
+    margin-bottom: 0 !important;
 }
+
 .btn-warning {
     margin-right: 10px;
     background: transparent !important;
     color: white;
     border: 1px solid white;
     margin-top: 10px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     cursor: pointer !important;
 }
 
@@ -172,30 +174,36 @@ export default {
     background: red !important;
     border: 1px solid #040309 !important;
 }
-@media (width < 701px){
-    .data{
+
+@media (width < 701px) {
+    .data {
         flex-wrap: wrap !important;
         align-content: center !important;
     }
-    strong{
-        margin-right:6px;
+
+    strong {
+        margin-right: 6px;
     }
-    #special{
-        margin-bottom:0;
+
+    #special {
+        margin-bottom: 0;
     }
-    .btn-warning{
-        margin-bottom:7px;
-    }
-}
-@media (width < 301px){
-    h6{
-        font-size:.82rem;
-    }
-    input{
-        margin-top:20px !important;
-    }
-    .modal-body{
-        padding:10px;
+
+    .btn-warning {
+        margin-bottom: 7px;
     }
 }
-</style>
+
+@media (width < 301px) {
+    h6 {
+        font-size: .82rem;
+    }
+
+    input {
+        margin-top: 20px !important;
+    }
+
+    .modal-body {
+        padding: 10px;
+    }
+}</style>

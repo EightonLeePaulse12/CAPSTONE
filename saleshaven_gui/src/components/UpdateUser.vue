@@ -39,11 +39,11 @@
                         <input type="text" placeholder="email address"
                             oninvalid="this.setCustomValidity('Please enter your email address')"
                             oninput="this.setCustomValidity('')" v-model="editingUser.email" />
-                            <div v-if="userRole === 'Owner'">
+                        <div v-if="userRole === 'Owner'">
                             <label>Role:</label>
-                        <input type="text" placeholder="Role"
-                            oninvalid="this.setCustomValidity('Please enter your email address')"
-                            oninput="this.setCustomValidity('')" v-model="editingUser.email" />
+                            <input type="text" placeholder="Role"
+                                oninvalid="this.setCustomValidity('Please enter your email address')"
+                                oninput="this.setCustomValidity('')" v-model="editingUser.email" />
                         </div>
                         <label>User profile (links only):</label>
                         <input type="text" placeholder="profile image" v-model="editingUser.userProfile" />

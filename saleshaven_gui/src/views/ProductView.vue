@@ -257,12 +257,14 @@ button:hover {
     border: 1px solid white;
     height: 20rem !important;
 }
-@media (width < 301px){
-    #name{
-        font-size:15px;
+
+@media (width < 301px) {
+    #name {
+        font-size: 15px;
     }
-    #description{
-        font-size:11px;
+
+    #description {
+        font-size: 11px;
     }
 }
 </style>

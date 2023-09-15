@@ -26,23 +26,24 @@
                             oninput="this.setCustomValidity('')" type="text" v-model="editingUser.lastName" />
                         <label>User gender:</label>
                         <div class="dropdown">
-                            <select class="btn btn-secondary dropdown-toggle" v-model="editingUser.gender" required oninvalid="this.setCustomValidity('Please provide a gender')"
-                            oninput="this.setCustomValidity('')">
-                              <option>Male</option>
-                              <option>Female</option>
-              
+                            <select class="btn btn-secondary dropdown-toggle" v-model="editingUser.gender" required
+                                oninvalid="this.setCustomValidity('Please provide a gender')"
+                                oninput="this.setCustomValidity('')">
+                                <option>Male</option>
+                                <option>Female</option>
+
                             </select>
-              
-                          </div>
+
+                        </div>
                         <label>User email:</label>
                         <input placeholder="email" type="text"
                             oninvalid="this.setCustomValidity('Please provide an email address')"
                             oninput="this.setCustomValidity('')" v-model="editingUser.email" />
-                            <div v-if="userRole === 'Owner'">
-                        <label>User role:</label>
-                        <input placeholder="Role" type="text"
-                            oninvalid="this.setCustomValidity('Please provide this user's role')"
-                            oninput="this.setCustomValidity('')" v-model="editingUser.userRole" />
+                        <div v-if="userRole === 'Owner'">
+                            <label>User role:</label>
+                            <input placeholder="Role" type="text"
+                                oninvalid="this.setCustomValidity('Please provide this user's role')"
+                                oninput="this.setCustomValidity('')" v-model="editingUser.userRole" />
                         </div>
                         <label>User image (links only):</label>
                         <input placeholder="image" type="text" v-model="editingUser.userProfile" />
@@ -76,7 +77,7 @@ export default {
         currentUser() {
             return this.$store.state.users;
         },
-        userRole(){
+        userRole() {
             return this.$store.state.userRole
         }
     },
@@ -113,33 +114,33 @@ export default {
 .dropdown-toggle {
     border: 1px solid black !important;
     color: black !important;
-  }
-  
-  .btn {
+}
+
+.btn {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
     color: rgb(255, 255, 255);
     cursor: pointer !important;
     margin-bottom: 10px !important;
-  }
-  
-  .btn:hover {
+}
+
+.btn:hover {
     background: white;
     color: rgb(2, 2, 5) !important;
-  }
-  
-  select {
+}
+
+select {
     background: white !important;
-  }
-  
-  
-  .modal-content {
+}
+
+
+.modal-content {
     color: black !important;
-  }
-  
-  input {
+}
+
+input {
     width: 100%;
     height: 3rem;
     margin-bottom: 2rem;
-  }
+}
 </style>

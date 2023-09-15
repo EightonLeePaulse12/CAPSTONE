@@ -116,11 +116,12 @@ export default {
 .modal-content {
     color: black !important;
 }
+
 .dropdown-toggle {
     border: 1px solid black !important;
     color: black !important;
-  }
-  
+}
+
 input {
     width: 100%;
     height: 3rem;

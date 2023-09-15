@@ -89,35 +89,35 @@
         </div>
       </div>
       <h5 class="text-center fs-2 meethd">Meet our team</h5>
-    <div class="row card-group row-cols-1 row-cols-sm-1 row-cols-lg-3 mx-auto g-4">
-      <div class="col">
+      <div class="row card-group row-cols-1 row-cols-sm-1 row-cols-lg-3 mx-auto g-4">
+        <div class="col">
           <div class="card" data-aos="fade-up">
-              <img loading="lazy" id="product" src="https://i.postimg.cc/WbpYMtW3/Mish-Al-Taliep.jpg">
-              <div class="card-body">
-                  <h6 id="name">Mish-Al Taliep</h6>
-                  <p id="description"> COO of SalesHaven </p>
-              </div>
+            <img loading="lazy" id="product" src="https://i.postimg.cc/WbpYMtW3/Mish-Al-Taliep.jpg">
+            <div class="card-body">
+              <h6 id="name">Mish-Al Taliep</h6>
+              <p id="description"> COO of SalesHaven </p>
+            </div>
           </div>
-      </div>
-      <div class="col">
-        <div class="card" data-aos="fade-up">
+        </div>
+        <div class="col">
+          <div class="card" data-aos="fade-up">
             <img loading="lazy" id="product" src="https://i.postimg.cc/9XNK88tH/Nuraan.jpg">
             <div class="card-body">
-                <h6 id="name">Nuraan Samodien</h6>
-                <p id="description"> Executive Director of SalesHaven </p>
+              <h6 id="name">Nuraan Samodien</h6>
+              <p id="description"> Executive Director of SalesHaven </p>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="col">
-      <div class="card" data-aos="fade-up">
-          <img loading="lazy" id="product" src="https://i.postimg.cc/Gp1FhgH6/C12-Laiquah-Cotie-2.jpg">
-          <div class="card-body">
+        <div class="col">
+          <div class="card" data-aos="fade-up">
+            <img loading="lazy" id="product" src="https://i.postimg.cc/Gp1FhgH6/C12-Laiquah-Cotie-2.jpg">
+            <div class="card-body">
               <h6 id="name">Laiquah Cotie</h6>
               <p id="description"> CEO of SalesHaven </p>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
-  </div>
     </div>
   </div>
 </template>
@@ -146,32 +146,43 @@ export default {
   height: 100% !important;
   object-fit: contain;
 }
-@media (width < 301px){
-  .card[data-v-4cebd208]{
-    width:100% !important;
+
+@media (width < 301px) {
+  .card[data-v-4cebd208] {
+    width: 100% !important;
   }
-  #cont[data-v-4cebd208]{
-    padding:10px !important;
+
+  #cont[data-v-4cebd208] {
+    padding: 10px !important;
   }
-  .txt1, .txt2, .txt3, .txt4{
-    padding:5px !important;
+
+  .txt1,
+  .txt2,
+  .txt3,
+  .txt4 {
+    padding: 5px !important;
   }
 }
-@media (width < 701px){
-  .MEET{
+
+@media (width < 701px) {
+  .MEET {
     flex-direction: column;
   }
-  .card{
-    margin:0 !important;
-    width:100% !important;
+
+  .card {
+    margin: 0 !important;
+    width: 100% !important;
   }
-  .info{
-    font-size:19px !important;
+
+  .info {
+    font-size: 19px !important;
   }
-  span{
-    font-size:27px !important;
+
+  span {
+    font-size: 27px !important;
   }
 }
+
 .img {
   background: transparent !important;
 }
@@ -180,9 +191,11 @@ export default {
   text-align: center;
   padding: 20px;
 }
-.txt3sub{
-  font-size:2px !important;
+
+.txt3sub {
+  font-size: 2px !important;
 }
+
 .abthd2 {
   padding-left: 3.4rem;
   font-weight: 200;
@@ -193,23 +206,28 @@ export default {
   aspect-ratio: 1/1;
   height: 40rem !important;
 }
+
 .card {
   background: transparent !important;
   font-size: 0.7rem;
 }
+
 #product {
   aspect-ratio: 1/1;
   object-fit: cover;
 }
+
 #product {
   height: 20%;
   object-position: center top;
 }
+
 .card-body {
   color: white;
   border: 1px solid white;
   height: 12rem !important;
 }
+
 p {
   padding: 4px 20px;
   text-align: center;
@@ -325,11 +343,14 @@ p {
 #cont {
   padding: 60px !important;
 }
-.card{
-  margin: 0 !important;;
+
+.card {
+  margin: 0 !important;
+  ;
 }
-#product{
-  width:100%;
+
+#product {
+  width: 100%;
 }
 
 
@@ -351,9 +372,11 @@ p {
   .img-04 {
     display: none;
   }
-  .card{
-    padding:20px;
+
+  .card {
+    padding: 20px;
   }
+
   .etst,
   .etst2,
   .etst3,
@@ -385,7 +408,7 @@ p {
     padding: 0 !important;
   }
 
-  #cont{
+  #cont {
     padding-top: 2rem !important;
   }
 

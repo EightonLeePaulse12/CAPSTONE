@@ -239,20 +239,24 @@ p {
     0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
     0 20px 20px rgba(0, 0, 0, 0.15);
 }
-@media (width < 301px){
-  .head{
-    font-size:2rem;
+
+@media (width < 301px) {
+  .head {
+    font-size: 2rem;
     text-align: center;
   }
-  p{
+
+  p {
     text-align: center;
   }
-  h4{
-    font-size:13px;
+
+  h4 {
+    font-size: 13px;
     text-align: center;
   }
-  .container{
-    padding:0;
+
+  .container {
+    padding: 0;
   }
 }
 </style>

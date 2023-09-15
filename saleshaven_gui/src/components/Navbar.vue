@@ -48,7 +48,8 @@
             </div>
             <div class="point">
               <router-link id="proff" to="/profile">
-                <img id="prof" loading="lazy" to="/profile" :src="userData.userProfile" style="object-position: center top !important;">
+                <img id="prof" loading="lazy" to="/profile" :src="userData.userProfile"
+                  style="object-position: center top !important;">
               </router-link>
             </div>
           </div>
@@ -148,28 +149,35 @@ export default {
   background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%) !important;
   height: 9rem;
 }
-@media (width < 992px){
-  #nav{
+
+@media (width < 992px) {
+  #nav {
     height: auto;
   }
-  .svg-inline--fa{
-    margin-right:7px;
+
+  .svg-inline--fa {
+    margin-right: 7px;
   }
-  .point{
-    width:100%;
-    display:flex;
+
+  .point {
+    width: 100%;
+    display: flex;
     justify-content: start;
   }
-  .cart{
-    margin-left:15px;
+
+  .cart {
+    margin-left: 15px;
   }
-  .navbar-nav{
+
+  .navbar-nav {
     align-items: flex-start;
   }
-  #prof{
-    margin-left:15px;
+
+  #prof {
+    margin-left: 15px;
   }
 }
+
 nav {
   background: transparent !important;
 }
@@ -184,5 +192,4 @@ nav {
 
 #navbarNav {
   justify-content: space-between;
-}
-</style>
+}</style>

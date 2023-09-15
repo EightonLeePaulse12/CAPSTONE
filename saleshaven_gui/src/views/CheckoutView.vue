@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     async completePurchase() {
-      // Here you can use this.cardNumber, this.expiryDate, and this.cvv to get the banking details.
       const userID = this.$store.state.userData.userID
       for (const item of this.cart) {
         const now = new Date();
@@ -71,7 +70,6 @@ export default {
       }
 
       this.$store.commit("clearCart")
-      // Clear banking details after purchase
       this.cardNumber = "";
       this.expiryDate = "";
       this.cvv = "";
@@ -84,7 +82,7 @@ export default {
 <style scoped>
 .checkout-container {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 60px;
   background: transparent;
   border-radius: 5px;
@@ -128,14 +126,16 @@ export default {
   background-color: #ffffff;
   color: #040404;
 }
-@media(width< 701px){
-  .checkout-container{
-    margin-bottom:30px;
+
+@media(width< 701px) {
+  .checkout-container {
+    margin-bottom: 30px;
   }
 }
-@media (width < 301px){
-  .checkout-container{
-    padding:20px;
+
+@media (width < 301px) {
+  .checkout-container {
+    padding: 20px;
   }
 }
 </style>

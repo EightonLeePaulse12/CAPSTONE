@@ -4,7 +4,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="footer-section logo-section">
-                        <img src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png" alt="SalesHaven Logo" class="footer-logo">
+                        <img src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png"
+                            alt="SalesHaven Logo" class="footer-logo">
                         <p>Providing high-quality products since 2023.</p>
                     </div>
                 </div>
@@ -72,9 +73,11 @@ export default {
     border-top: 1px solid white;
     text-align: center;
 }
-#lab{
+
+#lab {
     margin: 0 !important;
 }
+
 .footer-section {
     margin-bottom: 30px;
     text-align: left;
@@ -89,9 +92,11 @@ export default {
     font-size: 18px;
     margin-bottom: 20px;
 }
-.five{
+
+.five {
     text-align: center;
 }
+
 .footer-section ul {
     list-style: none;
     padding: 0;
@@ -106,14 +111,14 @@ export default {
     text-decoration: none;
 }
 
-address{
+address {
     text-align: start;
 }
-h5{
+
+h5 {
     text-align: start;
 }
-.contact-us-section{
-}
+
 .footer-bottom {
     background: transparent;
     padding: 10px 0;
@@ -154,9 +159,11 @@ h5{
 .contact-us-section h5 {
     margin-top: 20px;
 }
-li{
-    margin:20px 0 !important;
+
+li {
+    margin: 20px 0 !important;
 }
+
 .contact-form {
     text-align: left;
 }
@@ -196,30 +203,33 @@ h5 {
 }
 
 .contact-form button:hover {
-    background:white;
-    color:black;
+    background: white;
+    color: black;
 }
-p{
-    margin-top:30px;
+
+p {
+    margin-top: 30px;
 }
+
 .footer-bottom {
     background: transparent;
     text-align: center;
     padding: 10px 0;
 }
-@media (width < 701px){
-    address{
+
+@media (width < 701px) {
+    address {
         text-align: center;
     }
-    h5{
+
+    h5 {
         text-align: center;
-    }
-}
-@media (width < 301px){
-    .butto{
-        display:flex;
-        justify-content: center;
     }
 }
 
-</style>
+@media (width < 301px) {
+    .butto {
+        display: flex;
+        justify-content: center;
+    }
+}</style>

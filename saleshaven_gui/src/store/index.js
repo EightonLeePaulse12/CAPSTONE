@@ -97,25 +97,30 @@ export default createStore({
         localStorage.removeItem("userData");
       }
     },
-    addToCart(state, productToAdd) {
+    async addToCart(state, productToAdd) {
       console.log("Reached");
       const exists = state.cart.find(
         (item) => item.productID === productToAdd.prodID
       );
       console.error(exists);
       if (exists) {
-        Swal.fire({
+        exists.quantity += 1;
+        await Swal.fire({
           icon: "success",
           title: "Item is already in cart",
           text: `${productToAdd.prodName} is already in cart.`,
         });
-        exists.quantity += 1;
       } else {
         state.cart.push({
           productID: productToAdd.prodID,
           prodName: productToAdd.prodName,
           price: productToAdd.price,
           quantity: 1,
+        });
+        await Swal.fire({
+          icon: "success",
+          title: "Item added to cart",
+          text: `${productToAdd.prodName} was added to cart.`,
         });
       }
       console.log("Cart: ", state.cart);
@@ -156,7 +161,6 @@ export default createStore({
   actions: {
     async fetchUsers(context) {
       try {
-        // console.log(context.state.token);
         const res = await axios.get(`${api}users`, {
           headers: {
             Authorization: context.state.token,
@@ -191,7 +195,6 @@ export default createStore({
     },
     async fetchProducts(context) {
       try {
-        // console.log(context.state.token);
         const res = await axios.get(`${api}products`, {
           headers: {
             Authorization: context.state.token,
@@ -364,13 +367,6 @@ export default createStore({
         );
         if (response.data.msg === "Product added to cart successfully") {
           context.commit("addToCart", product);
-          Swal.fire({
-            icon: "success",
-            title: "Added to Cart",
-            text: `${product.prodName} has been added to your cart.`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
         } else {
           context.commit("setError", "Failed to add to cart");
         }
@@ -514,9 +510,9 @@ export default createStore({
           context.commit("setError", err);
         }
         if (msg === "User record updated successfully") {
-          if(payload.userID === context.state.userData.userID){
-            localStorage.setItem("userData", JSON.stringify(payload))
-            context.commit("setUserData", payload)
+          if (payload.userID === context.state.userData.userID) {
+            localStorage.setItem("userData", JSON.stringify(payload));
+            context.commit("setUserData", payload);
           }
           context.dispatch("fetchUsers");
           context.commit("setUser", msg);

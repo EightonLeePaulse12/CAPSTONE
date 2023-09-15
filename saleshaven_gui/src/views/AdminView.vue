@@ -280,20 +280,24 @@ table {
   border-radius: 50% !important;
   object-fit: cover !important;
 }
-.noUse{
-  height:100vh;
+
+.noUse {
+  height: 100vh;
   text-align: center;
-  width:100%;
-  display:flex;
+  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .tr {
   height: 100%;
 }
-h4{
+
+h4 {
   text-align: center;
 }
+
 #else {
   display: flex;
   height: 70vh;
@@ -359,9 +363,9 @@ td {
   align-items: center;
   justify-content: center;
 }
-@media (width < 301px){
-  #proddd{
-    font-size:.6rem !important;
+
+@media (width < 301px) {
+  #proddd {
+    font-size: .6rem !important;
   }
-}
-</style>
+}</style>

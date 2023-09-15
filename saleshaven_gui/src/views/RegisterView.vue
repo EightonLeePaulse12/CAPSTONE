@@ -126,7 +126,7 @@ export default {
 
 .container-fluid {
   height: 100%;
-  padding:50px;
+  padding: 50px;
 }
 
 input {
@@ -239,17 +239,19 @@ input {
 form {
   background: 1px solid red !important;
 }
-@media (width < 710px){
-  .back{
-    display:none;
+
+@media (width < 710px) {
+  .back {
+    display: none;
   }
 }
-@media (width < 301px){
-  input{
-    width:108%;
+
+@media (width < 301px) {
+  input {
+    width: 108%;
   }
-  .container-fluid{
-    padding:40px;
+
+  .container-fluid {
+    padding: 40px;
   }
-}
-</style>
+}</style>

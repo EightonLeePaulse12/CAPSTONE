@@ -1,26 +1,26 @@
 <template>
-<div class="table-responsive">
-  <div class="cart-container">
-    <h2>Cart</h2>
-    <ul class="cart-list">
-      <li v-for="item in cart" :key="item.productID" class="cart-item">
-        <div class="item-info">
-          <span class="product-name">{{ item.prodName }}</span>
-          <span class="item-price">Price: R{{ item.price }}</span>
-          <span class="item-quantity">Quantity: {{ item.quantity }}</span>
-        </div>
-        <div class="item-actions">
-          <button @click="removeFromCart(item.productID)" class="remove-button">Remove</button>
-          <button @click="decreaseQuantity(item)" class="quantity-button">-</button>
-          <button @click="increaseQuantity(item)" class="quantity-button">+</button>
-        </div>
-      </li>
-    </ul>
-    <p class="cart-total">Total: R{{ cartTotal }}</p>
-    <router-link :to="{ name: 'checkout' }" class="checkout-link">
-      Proceed to Checkout
-    </router-link>
-  </div>
+  <div class="table-responsive">
+    <div class="cart-container">
+      <h2>Cart</h2>
+      <ul class="cart-list">
+        <li v-for="item in cart" :key="item.productID" class="cart-item">
+          <div class="item-info">
+            <span class="product-name">{{ item.prodName }}</span>
+            <span class="item-price">Price: R{{ item.price }}</span>
+            <span class="item-quantity">Quantity: {{ item.quantity }}</span>
+          </div>
+          <div class="item-actions">
+            <button @click="removeFromCart(item.productID)" class="remove-button">Remove</button>
+            <button @click="decreaseQuantity(item)" class="quantity-button">-</button>
+            <button @click="increaseQuantity(item)" class="quantity-button">+</button>
+          </div>
+        </li>
+      </ul>
+      <p class="cart-total">Total: R{{ cartTotal }}</p>
+      <router-link :to="{ name: 'checkout' }" class="checkout-link">
+        Proceed to Checkout
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -48,7 +48,6 @@ export default {
       const updatedItem = { ...item, quantity: item.quantity + 1 }
       this.$store.dispatch("updateCartItem", updatedItem)
     },
-    // ... other methods
   },
 };
 </script>
@@ -138,32 +137,39 @@ export default {
   background-color: #ffffff;
   color: #040404;
 }
-@media (width < 710px){
-  .item-price{
-    width:100% !important;
+
+@media (width < 710px) {
+  .item-price {
+    width: 100% !important;
   }
-  .cart-item{
+
+  .cart-item {
     flex-direction: column;
   }
 }
-@media (width < 301px){
-  .cart-container{
-    padding:0 !important;
+
+@media (width < 301px) {
+  .cart-container {
+    padding: 0 !important;
   }
-  .cart-container{
-    width:100% !important;
+
+  .cart-container {
+    width: 100% !important;
   }
-  .checkout-link{
-    margin-bottom:8px;
+
+  .checkout-link {
+    margin-bottom: 8px;
   }
-  .cart-total{
-    padding:5px;
+
+  .cart-total {
+    padding: 5px;
   }
-  h2{
+
+  h2 {
     text-align: center;
   }
-  .cart-item{
-    padding:7px !important;
+
+  .cart-item {
+    padding: 7px !important;
   }
-}
-</style>
+}</style>
