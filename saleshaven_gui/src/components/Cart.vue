@@ -56,7 +56,7 @@ export default {
 <style scoped>
 .cart-container {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 20px;
   color: rgb(255, 255, 255) !important;
   background: transparent;

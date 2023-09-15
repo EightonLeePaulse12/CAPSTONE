@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div v-if="thisUser">
         <!-- Button trigger modal -->
         <button type="button" class="btn" @click="openEditModal(thisUser.userID)" data-bs-toggle="modal"
             :data-bs-target="'#texampleModal' + thisUser.userID">
-            edit
+            Edit
         </button>
 
         <!-- Modal -->
@@ -27,13 +27,24 @@
                             oninvalid="this.setCustomValidity('Please provide your last name')"
                             oninput="this.setCustomValidity('')" v-model="editingUser.lastName" />
                         <label>Gender:</label>
-                        <input type="text" placeholder="gender"
-                            oninvalid="this.setCustomValidity('Please provide your gender')"
-                            oninput="this.setCustomValidity('')" v-model="editingUser.gender" />
-                        <label>eEmail address:</label>
+                        <div class="dropdown">
+                            <select class="btn btn-secondary dropdown-toggle" v-model="editingUser.gender" required
+                                oninvalid="this.setCustomValidity('Please provide a gender')"
+                                oninput="this.setCustomValidity('')">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <label>Email address:</label>
                         <input type="text" placeholder="email address"
                             oninvalid="this.setCustomValidity('Please enter your email address')"
                             oninput="this.setCustomValidity('')" v-model="editingUser.email" />
+                            <div v-if="userRole === 'Owner'">
+                            <label>Role:</label>
+                        <input type="text" placeholder="Role"
+                            oninvalid="this.setCustomValidity('Please enter your email address')"
+                            oninput="this.setCustomValidity('')" v-model="editingUser.email" />
+                        </div>
                         <label>User profile (links only):</label>
                         <input type="text" placeholder="profile image" v-model="editingUser.userProfile" />
                     </div>
@@ -48,6 +59,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="else" v-else>
+        Loading
     </div>
 </template>
   
@@ -66,6 +80,9 @@ export default {
         thisUser() {
             return this.$store.state.userData;
         },
+        userRole() {
+            return this.$store.state.userRole
+        }
     },
     methods: {
         openEditModal(id) {
@@ -92,6 +109,11 @@ export default {
 </script>
   
 <style scoped>
+.dropdown-toggle {
+    border: 1px solid black !important;
+    color: black !important;
+}
+
 .btn {
     border: 2px solid #f7f4f1;
     background: linear-gradient(180deg, rgba(2, 2, 4, 1) 0%, rgba(6, 4, 17, 1) 100%);
@@ -103,6 +125,11 @@ export default {
     background: white;
     color: rgb(2, 2, 5) !important;
 }
+
+select {
+    background: white !important;
+}
+
 
 .modal-content {
     color: black !important;

@@ -24,6 +24,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 105vh;
+    margin:10px !important;
     background-color: transparent;
 }
 

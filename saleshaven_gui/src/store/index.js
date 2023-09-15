@@ -514,6 +514,10 @@ export default createStore({
           context.commit("setError", err);
         }
         if (msg === "User record updated successfully") {
+          if(payload.userID === context.state.userData.userID){
+            localStorage.setItem("userData", JSON.stringify(payload))
+            context.commit("setUserData", payload)
+          }
           context.dispatch("fetchUsers");
           context.commit("setUser", msg);
           context.commit("setMsg", "User profile updated successfully");

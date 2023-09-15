@@ -89,25 +89,35 @@
         </div>
       </div>
       <h5 class="text-center fs-2 meethd">Meet our team</h5>
-      <div class="container-fluid MEET">
-        <div class="card">
-          <div class="img"><img loading="lazy" src="https://i.postimg.cc/Gp1FhgH6/C12-Laiquah-Cotie-2.jpg" id="img"
-              alt=""></div>
-          <span>Laiquah Cotie</span>
-          <p class="info">CEO Of SalesHaven</p>
-        </div>
-        <div class="card">
-          <div class="img"><img loading="lazy" src="https://i.postimg.cc/WbpYMtW3/Mish-Al-Taliep.jpg" id="img" alt="">
+    <div class="row card-group row-cols-1 row-cols-sm-1 row-cols-lg-3 mx-auto g-4">
+      <div class="col">
+          <div class="card" data-aos="fade-up">
+              <img loading="lazy" id="product" src="https://i.postimg.cc/WbpYMtW3/Mish-Al-Taliep.jpg">
+              <div class="card-body">
+                  <h6 id="name">Mish-Al Taliep</h6>
+                  <p id="description"> COO of SalesHaven </p>
+              </div>
           </div>
-          <span>Mish-Al Taliep</span>
-          <p class="info">COO Of SalesHaven</p>
-        </div>
-        <div class="card">
-          <div class="img"><img loading="lazy" src="https://i.postimg.cc/9XNK88tH/Nuraan.jpg" id="img" alt=""></div>
-          <span>Nuraan Samodien</span>
-          <p class="info">Executive Director of SalesHaven</p>
-        </div>
       </div>
+      <div class="col">
+        <div class="card" data-aos="fade-up">
+            <img loading="lazy" id="product" src="https://i.postimg.cc/9XNK88tH/Nuraan.jpg">
+            <div class="card-body">
+                <h6 id="name">Nuraan Samodien</h6>
+                <p id="description"> Executive Director of SalesHaven </p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+      <div class="card" data-aos="fade-up">
+          <img loading="lazy" id="product" src="https://i.postimg.cc/Gp1FhgH6/C12-Laiquah-Cotie-2.jpg">
+          <div class="card-body">
+              <h6 id="name">Laiquah Cotie</h6>
+              <p id="description"> CEO of SalesHaven </p>
+          </div>
+      </div>
+  </div>
+  </div>
     </div>
   </div>
 </template>
@@ -138,7 +148,7 @@ export default {
 }
 @media (width < 301px){
   .card[data-v-4cebd208]{
-    width:16em !important;
+    width:100% !important;
   }
   #cont[data-v-4cebd208]{
     padding:10px !important;
@@ -153,7 +163,7 @@ export default {
   }
   .card{
     margin:0 !important;
-    width:23em !important;
+    width:100% !important;
   }
   .info{
     font-size:19px !important;
@@ -181,7 +191,23 @@ export default {
   aspect-ratio: 1/1;
   height: 40rem !important;
 }
-
+.card {
+  background: transparent !important;
+  font-size: 0.7rem;
+}
+#product {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+#product {
+  height: 20%;
+  object-position: center top;
+}
+.card-body {
+  color: white;
+  border: 1px solid white;
+  height: 12rem !important;
+}
 p {
   padding: 4px 20px;
   text-align: center;
@@ -297,80 +323,13 @@ p {
 #cont {
   padding: 60px !important;
 }
-
-.card {
-  margin-right: 4rem;
-  width: 17em;
-  height: 22.5em;
-  background: transparent;
-  border: 3px solid white;
-  transition: 1s ease-in-out;
-  clip-path: polygon(30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0% 30px);
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  display: flex;
-  flex-direction: column;
+.card{
+  margin: 0 !important;;
+}
+#product{
+  width:100%;
 }
 
-.card span {
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  display: block;
-  font-size: 1em;
-}
-
-.card .info {
-  font-weight: 400;
-  color: white;
-  display: block;
-  text-align: center;
-  font-size: 0.72em;
-  margin: 1em;
-}
-
-.card .img {
-  width: 4.8em;
-  height: 4.8em;
-  background: white;
-  border-radius: 15px;
-  margin: auto;
-}
-
-.card .share {
-  margin-top: 1em;
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-}
-
-.card a {
-  color: white;
-  transition: .4s ease-in-out;
-}
-
-.card a:hover {
-  color: red;
-}
-
-.card button {
-  padding: 0.8em 1.7em;
-  display: block;
-  margin: auto;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer !important;
-  font-weight: bold;
-  background: #ffffff;
-  color: rgb(0, 0, 0);
-  transition: .4s ease-in-out;
-}
-
-.card button:hover {
-  background: rgb(4, 3, 9);
-  color: rgb(255, 252, 252);
-  cursor: pointer;
-}
 
 .meethd {
   padding-bottom: 2rem;
@@ -390,7 +349,9 @@ p {
   .img-04 {
     display: none;
   }
-
+  .card{
+    padding:20px;
+  }
   .etst,
   .etst2,
   .etst3,
@@ -409,9 +370,6 @@ p {
     width: 100%;
   }
 
-  .card {
-    margin: 10px !important;
-  }
 
   .pt1,
   .pt2,
@@ -425,7 +383,7 @@ p {
     padding: 0 !important;
   }
 
-  #cont {
+  #cont{
     padding-top: 2rem !important;
   }
 

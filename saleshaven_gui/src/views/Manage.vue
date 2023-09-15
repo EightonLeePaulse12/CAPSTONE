@@ -1,5 +1,6 @@
 <template>
     <div v-if="role === 'User' || role === 'Admin' || role === 'Owner'">
+        <h2 class="text-center m-4">Create and manage your products</h2>
         <div class="container-fluid">
             <AddProduct />
             <div class="table-responsive">

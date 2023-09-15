@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="user">
         <!-- Button trigger modal -->
         <button type="button" class="btn" @click="openEditModal(user.userID)" data-bs-toggle="modal"
             :data-bs-target="'#lexampleModal' + user.userID">
@@ -33,9 +33,13 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        Loading...
+    </div>
 </template>
   
 <script>
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -57,6 +61,11 @@ export default {
                     userPass: this.userPass
                 }
                 await this.$store.dispatch("changePass", payload)
+                Swal.fire({
+                    icon: "success",
+                    title: "Password changed",
+                    text: "Password was changed successfully"
+                })
             } catch (e) {
                 console.log(e)
             }
