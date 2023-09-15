@@ -50,7 +50,7 @@ class Cart {
       console.error(e);
       res
         .status(500)
-        .json({ status: res.statusCode, msg: "Internal server error" });
+        .json({ status: res.statusCode, msg: "Internal server error", err: e });
     }
   }
   removeFromCart(userID, productID, res) {
