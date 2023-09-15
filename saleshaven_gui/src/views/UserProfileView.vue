@@ -53,8 +53,8 @@ export default {
     },
     methods: {
         logout() {
-            this.$store.dispatch("logout")
             this.$router.push("/login")
+            this.$store.dispatch("logout")
         },
         manage() {
             this.$router.push('manage')
@@ -96,6 +96,7 @@ export default {
     width: 20rem;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center top;
 }
 
 .container {
@@ -153,13 +154,16 @@ export default {
     text-align: start;
     margin-bottom: 20px;
 }
-
+#special{
+    margin-bottom:0 !important;
+}
 .btn-warning {
     margin-right: 10px;
     background: transparent !important;
     color: white;
     border: 1px solid white;
     margin-top: 10px;
+    margin-bottom:10px;
     cursor: pointer !important;
 }
 

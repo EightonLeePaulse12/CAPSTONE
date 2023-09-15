@@ -15,23 +15,23 @@
           <div class="modal-body">
             <label for="firstName">First Name:</label>
             <input required oninvalid="this.setCustomValidity('Please provide a first name')"
-              oninput="this.setCustomValidity('')" id="firstName" type="text" placeholder="first name"
+              oninput="this.setCustomValidity('')" id="firstName" type="text" placeholder="First Name"
               v-model="model.user.firstName" />
             <label for="lastName">Last Name:</label>
-            <input required id="lastName" oninvalid="this.setCustomValidity('Please provide a last name')"
+            <input required id="lastName" oninvalid="this.setCustomValidity('Please provide a Last Name')"
               oninput="this.setCustomValidity('')" type="text" placeholder="last name" v-model="model.user.lastName" />
             <label for="gender">Gender:</label>
             <div class="dropdown">
               <select class="btn btn-secondary dropdown-toggle" v-model="model.user.gender">
                 <option>Male</option>
                 <option>Female</option>
-
               </select>
-
             </div>
+            <div v-if="userRole === 'Owner'">
             <label for="userRole">Role:</label>
             <input required id="userRole" type="text" oninvalid="this.setCustomValidity('Please enter this user's role')"
               oninput="this.setCustomValidity('')" placeholder="role" v-model="model.user.userRole" />
+            </div>
             <label for="email">Email Address</label>
             <input required id="email" type="text" oninvalid="this.setCustomValidity('Please provide an email address')"
               oninput="this.setCustomValidity('')" placeholder="email address" v-model="model.user.email" />
@@ -76,6 +76,11 @@ export default {
       console.log(this.model.user);
     },
   },
+  computed:{
+    userRole(){
+      return this.$store.state.userRole
+    }
+  }
 };
 </script>
   

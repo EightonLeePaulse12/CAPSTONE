@@ -3,7 +3,7 @@
         <div class="container shadow-lg" id="contact">
             <figure class="text-center">
                 <blockquote class="blockquote">
-                    <h3 class="fs-1 fw-bold tc">Contact Us</h3>
+                    <h2 class="fs-1 fw-bold tc">Contact Us</h2>
                 </blockquote>
             </figure>
 

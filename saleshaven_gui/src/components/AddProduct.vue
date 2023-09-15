@@ -15,26 +15,26 @@
           </div>
           <div class="modal-body">
             <label for="productname">Product Name:</label>
-            <input required id="productname" placeholder="product Name" type="text"
+            <input required id="productname" placeholder="Product Name" type="text"
               oninvalid="this.setCustomValidity('Please enter a name for your product')"
               oninput="this.setCustomValidity('')" v-model="model.product.prodName" />
             <label for="description">Description:</label>
             <input required oninvalid="this.setCustomValidity('Please enter a description for your product')"
-              oninput="this.setCustomValidity('')" id="description" placeholder="product desc" type="text"
+              oninput="this.setCustomValidity('')" id="description" placeholder="Product Description" type="text"
               v-model="model.product.prodDesc" />
             <label for="price">Price:</label>
             <input required id="price" oninvalid="this.setCustomValidity('Please give your product a price')"
-              oninput="this.setCustomValidity('')" placeholder="price" type="number" v-model="model.product.price" />
+              oninput="this.setCustomValidity('')" placeholder="Price" type="number" v-model="model.product.price" />
             <label for="category">Category</label>
-            <input required id="category" placeholder="category"
+            <input required id="category" placeholder="Category"
               oninvalid="this.setCustomValidity('Please put your product in a category')"
               oninput="this.setCustomValidity('')" type="text" v-model="model.product.category" />
             <label for="category">Stock</label>
             <input required id="category" placeholder="Stock" type="text"
               oninvalid="this.setCustomValidity('Please enter the stock of your product')"
               oninput="this.setCustomValidity('')" v-model="model.product.stock" />
-            <label for="productUrl">Product Image:</label>
-            <input required id="productUrl" placeholder="product image"
+            <label for="productUrl">Product Image (links only):</label>
+            <input required id="productUrl" placeholder="Image of the product"
               oninvalid="this.setCustomValidity('Please enter a link for an image of your product')"
               oninput="this.setCustomValidity('')" type="text" v-model="model.product.prodURL" />
           </div>

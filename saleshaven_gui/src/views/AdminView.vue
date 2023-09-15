@@ -1,7 +1,7 @@
 <template>
   <div v-if="users && products">
     <div v-if="userRole === 'User' || userRole === '' || userRole === undefined || userRole === null">
-      <div class="container">
+      <div class="container noUse">
         <h2>
           You are not authorized to be here
         </h2>
@@ -280,11 +280,20 @@ table {
   border-radius: 50% !important;
   object-fit: cover !important;
 }
-
+.noUse{
+  height:100vh;
+  text-align: center;
+  width:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 .tr {
   height: 100%;
 }
-
+h4{
+  text-align: center;
+}
 #else {
   display: flex;
   height: 70vh;
@@ -329,6 +338,7 @@ td {
 
 #pic {
   aspect-ratio: 1/1;
+  object-position: center top;
   width: 4rem;
   height: 4rem;
   border-radius: 5.5rem;

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="footer-section quick-links-section">
-                        <h5><font-awesome-icon :icon="['fas', 'link']" /> Quick Links</h5>
+                        <h5 class="five"><font-awesome-icon :icon="['fas', 'link']" /> Quick Links</h5>
                         <ul>
                             <li><a href="#"><font-awesome-icon :icon="['fas', 'angle-right']" /> Terms of Service</a></li>
                             <li><a href="#"><font-awesome-icon :icon="['fas', 'angle-right']" /> Privacy Policy</a></li>
@@ -29,7 +29,6 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h5><font-awesome-icon :icon="['fas', 'phone']" /> Contact Us Today:</h5>
                     <form action="https://formspree.io/f/xgejygbv" method="POST" class="contact-form">
                         <div id="mail">
                             <label for="email" id="lab">Email Address</label>
@@ -73,7 +72,9 @@ export default {
     border-top: 1px solid white;
     text-align: center;
 }
-
+#lab{
+    margin: 0 !important;
+}
 .footer-section {
     margin-bottom: 30px;
     text-align: left;
@@ -88,7 +89,9 @@ export default {
     font-size: 18px;
     margin-bottom: 20px;
 }
-
+.five{
+    text-align: center;
+}
 .footer-section ul {
     list-style: none;
     padding: 0;
@@ -103,10 +106,14 @@ export default {
     text-decoration: none;
 }
 
-.address {
-    font-size: 14px;
+address{
+    text-align: start;
 }
-
+h5{
+    text-align: start;
+}
+.contact-us-section{
+}
 .footer-bottom {
     background: transparent;
     padding: 10px 0;
@@ -181,7 +188,6 @@ li{
 }
 
 address {
-    margin: 20px !important;
     line-height: 45px;
 }
 
@@ -200,6 +206,14 @@ p{
     background: transparent;
     text-align: center;
     padding: 10px 0;
+}
+@media (width < 701px){
+    address{
+        text-align: center;
+    }
+    h5{
+        text-align: center;
+    }
 }
 @media (width < 301px){
     .butto{

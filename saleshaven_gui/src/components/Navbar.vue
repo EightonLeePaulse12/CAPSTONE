@@ -33,9 +33,11 @@
           </ul>
           <ul class="navbar-nav" v-if="userRole === '' || userRole === undefined || userRole === null">
             <li class="nav-item" id="navItem">
+              <font-awesome-icon icon="registered" style="color: #ffffff;" />
               <router-link class="nav-link active" to="/register">Register</router-link>
             </li>
             <li class="nav-item" id="navItem">
+              <font-awesome-icon icon="right-to-bracket" style="color: #ffffff;" />
               <router-link class="nav-link active" to="/login">Login</router-link>
             </li>
           </ul>
@@ -46,7 +48,7 @@
             </div>
             <div class="point">
               <router-link id="proff" to="/profile">
-                <img id="prof" loading="lazy" to="/profile" :src="userData.userProfile">
+                <img id="prof" loading="lazy" to="/profile" :src="userData.userProfile" style="object-position: center top !important;">
               </router-link>
             </div>
           </div>
@@ -177,6 +179,7 @@ nav {
   clip-path: circle();
   width: 3rem;
   height: 100%;
+  object-position: center top !important;
 }
 
 #navbarNav {
