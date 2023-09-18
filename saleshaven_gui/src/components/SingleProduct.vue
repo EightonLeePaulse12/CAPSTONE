@@ -38,7 +38,6 @@ export default {
 </script>
   
 <style scoped>
-/* Add custom styles here */
 .img-fluid {
     max-height: 300px;
     width: auto;
