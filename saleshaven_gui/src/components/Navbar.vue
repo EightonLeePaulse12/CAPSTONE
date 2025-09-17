@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-body-tertiary static-top" id="nav">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/"><img id="logo" loading="lazy"
-            src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png"></router-link>
+            src="../assets/images/pngtree-vector-shopping-bag-icon-png-image_947021.jpg"></router-link>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

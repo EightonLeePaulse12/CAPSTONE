@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="footer-section logo-section">
-                        <img src="https://i.postimg.cc/qq6YzNyy/icons8-shopping-bag-100-removebg-preview.png"
+                        <img src="../assets/images/pngtree-vector-shopping-bag-icon-png-image_947021.jpg"
                             alt="SalesHaven Logo" class="footer-logo">
                         <p>Providing high-quality products since 2023.</p>
                     </div>

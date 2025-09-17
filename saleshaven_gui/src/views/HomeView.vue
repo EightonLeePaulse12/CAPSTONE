@@ -1,5 +1,7 @@
 <template>
-  <div v-if="userRole === 'User' || userRole === 'Admin' || userRole === 'Owner'">
+  <div
+    v-if="userRole === 'User' || userRole === 'Admin' || userRole === 'Owner'"
+  >
     <div class="home">
       <div class="rel">
         <div>
@@ -14,13 +16,29 @@
     <div class="container" v-if="getRandom">
       <h2 class="head">Featured Products</h2>
       <div class="featuredProd">
-        <div class="card each" data-aos="fade-right" v-for="product in getRandom" :key="product.prodID"
-          @mouseover="highlightProduct(product.prodID)" @mouseleave="resetHighlight()">
-          <img loading="lazy" :src="product.prodURL" class="card-img-top" alt="Product Image">
+        <div
+          class="card each"
+          data-aos="fade-right"
+          v-for="product in getRandom"
+          :key="product.prodID"
+          @mouseover="highlightProduct(product.prodID)"
+          @mouseleave="resetHighlight()"
+        >
+          <img
+            loading="lazy"
+            :src="product.prodURL"
+            class="card-img-top"
+            alt="Product Image"
+          />
           <div class="card-body">
             <h5 class="card-title">{{ product.prodName }}</h5>
             <p class="card-text it">{{ product.prodDesc }}</p>
-            <router-link class="btn btn-primary btn-sm" id="buttonn" to="/products">View Catalog</router-link>
+            <router-link
+              class="btn btn-primary btn-sm"
+              id="buttonn"
+              to="/products"
+              >View Catalog</router-link
+            >
           </div>
         </div>
       </div>
@@ -54,9 +72,10 @@
   position: relative;
   width: 100%;
   height: 110vh;
-  background-image: url(https://i.postimg.cc/QMz5bmFL/hd-3816045-1920.jpg);
+  background-image: url("../assets/images/aesthetic_sunset-wallpaper-3840x1600.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   display: flex !important;
   flex-direction: column;
   justify-content: center !important;
@@ -105,7 +124,6 @@
   padding-top: 20px;
 }
 
-
 .spinner-border {
   height: 9rem;
   width: 9rem;
@@ -127,7 +145,7 @@
   background: transparent;
   cursor: pointer !important;
   color: white;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 #buttonn:hover {
@@ -169,9 +187,6 @@ h4 {
   justify-content: center !important;
   align-items: center !important;
 }
-
-
-
 
 #feat {
   height: 4rem;
@@ -308,7 +323,7 @@ export default {
       this.$router.push("/login");
     },
     toProd() {
-      this.$router.push('/products')
+      this.$router.push("/products");
     },
     highlightProduct(prodID) {
       this.highlightedProduct = prodID;
